@@ -4,7 +4,7 @@ import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
-import io.github.izdwuut.yarl.Game;
+import io.github.izdwuut.yarl.YARL;
 
 /** Launches the desktop (LWJGL) application. */
 public class DesktopLauncher {
@@ -13,7 +13,7 @@ public class DesktopLauncher {
 	}
 
 	private static LwjglApplication createApplication() {
-		return new LwjglApplication(new Game(), getDefaultConfiguration());
+		return new LwjglApplication(new YARL(), getDefaultConfiguration());
 	}
 
 	private static LwjglApplicationConfiguration getDefaultConfiguration() {
