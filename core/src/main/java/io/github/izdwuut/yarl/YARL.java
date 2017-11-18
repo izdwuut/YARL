@@ -8,9 +8,6 @@ import io.github.izdwuut.yarl.controllers.GameController;
 
 public class YARL extends Game {
 	private SpriteBatch batch;
-	public YARL() {
-		
-	}
 	public void create() {
 		this.batch = new SpriteBatch();
 		new GameController(this);

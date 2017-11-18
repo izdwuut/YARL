@@ -9,7 +9,6 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import io.github.izdwuut.yarl.YARL;
-import io.github.izdwuut.yarl.model.components.DungeonComponent;
 import io.github.izdwuut.yarl.model.components.SizeComponent;
 import io.github.izdwuut.yarl.model.components.settings.CellSizeComponent;
 import io.github.izdwuut.yarl.model.entities.Settings;
@@ -22,9 +21,6 @@ public class GameScreen extends ScreenAdapter {
 	private YARL game;
 	private World world;
 	private Settings settings;
-	private CellSizeComponent cell;
-	private DungeonComponent dung;
-	private SizeComponent size;
 	private char[][] dungeon;
 	private int cellWidth, cellHeight, width, height;
 	private Viewport vp;
@@ -59,15 +55,14 @@ public class GameScreen extends ScreenAdapter {
 	}
 	
 	private void init() {
-		cell = Mappers.cellSize.get(settings);
-	    dung = Mappers.dungeon.get(world);
-	    size = Mappers.size.get(world);
+		CellSizeComponent cell = Mappers.cellSize.get(settings);
+		SizeComponent size = Mappers.size.get(world);
 	    
 	    cellWidth = cell.getWidth();
 	    cellHeight = cell.getHeight();
 		height = size.getHeight();
 		width = size.getWidth();
-		dungeon = dung.getDungeon();
+		dungeon = Mappers.dungeon.get(world).getDungeon();
 		
 		vp = new StretchViewport(width * cellWidth, height * cellHeight);
 		vp.setScreenBounds(0, 0, width * cellWidth, height * cellWidth);
