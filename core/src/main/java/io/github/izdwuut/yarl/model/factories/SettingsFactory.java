@@ -14,6 +14,7 @@ public class SettingsFactory {
 		return build();
 	}
 	private Settings build() {
-		return settings.setCellSize(10, 20).setRNG(rng);
+		return settings.setCellSize(10, 20)
+				.setRNG(rng);
 	}
 }

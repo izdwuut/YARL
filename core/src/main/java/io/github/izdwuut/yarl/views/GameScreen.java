@@ -8,7 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-import io.github.izdwuut.yarl.YARL;
 import io.github.izdwuut.yarl.model.components.SizeComponent;
 import io.github.izdwuut.yarl.model.components.settings.CellSizeComponent;
 import io.github.izdwuut.yarl.model.entities.Settings;
@@ -18,17 +17,15 @@ import squidpony.squidgrid.gui.gdx.SColor;
 import squidpony.squidgrid.gui.gdx.SparseLayers;
 
 public class GameScreen extends ScreenAdapter {
-	private YARL game;
 	private World world;
 	private Settings settings;
 	private char[][] dungeon;
 	private int cellWidth, cellHeight, width, height;
 	private Viewport vp;
-	private Stage stage;
+	public Stage stage;
 	private SparseLayers display;
 
-	public GameScreen(YARL game, World world, Settings settings) {
-		this.game = game;
+	public GameScreen(World world, Settings settings) {
 		this.world = world;
 		this.settings = settings;
 		init();
@@ -66,9 +63,9 @@ public class GameScreen extends ScreenAdapter {
 		
 		vp = new StretchViewport(width * cellWidth, height * cellHeight);
 		vp.setScreenBounds(0, 0, width * cellWidth, height * cellWidth);
-		stage = new Stage(vp, game.getBatch());
+		stage = new Stage(vp);
 		display = new SparseLayers(width, height, cellWidth, cellHeight);
 		display.setPosition(0f, 0f);
 		stage.addActor(display);
-	}
+	}	
 }		
