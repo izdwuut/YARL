@@ -6,11 +6,16 @@ import squidpony.squidmath.Coord;
 
 public class PositionComponent implements Component {
 	private Coord position;
-
+	public PositionComponent() {
+		this.position = Coord.get(0, 0);
+	}
 	public Coord getPosition() {
 		return position;
 	}
 
+	public void setPosition(int x, int y) {
+		this.position = Coord.get(x, y);
+	}
 	public void setPosition(Coord position) {
 		this.position = position;
 	}

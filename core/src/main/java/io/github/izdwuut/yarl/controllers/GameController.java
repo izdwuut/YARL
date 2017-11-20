@@ -41,6 +41,22 @@ public class GameController {
 		input = new SquidInput(new SquidInput.KeyHandler() {
 			@Override
 			public void handle(char key, boolean alt, boolean ctrl, boolean shift) {
+				System.out.print("handle");
+				MovementSystem mov = engine.getSystem(MovementSystem.class);
+				switch(key) {
+				case SquidInput.UP_ARROW:
+					mov.move(player, Direction.UP);
+				break;
+				case SquidInput.DOWN_ARROW:
+					mov.move(player, Direction.DOWN);
+				break;
+				case SquidInput.LEFT_ARROW:
+					mov.move(player, Direction.LEFT);
+				break;
+				case SquidInput.RIGHT_ARROW:
+					mov.move(player, Direction.RIGHT);
+				break;
+				}
 			}
 		});
 		Gdx.input.setInputProcessor(input);
@@ -49,6 +65,7 @@ public class GameController {
 	public void update() {
 		if(input.hasNext()) {
             input.next();
+            engine.update(1);
         }
 	}
 }

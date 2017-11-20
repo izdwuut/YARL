@@ -21,17 +21,21 @@ public class MovementSystem extends IteratingSystem {
 		mm = Mappers.movement;
 	}
 	
+	@Override
 	public void processEntity(Entity entity, float deltaTime) {
-		PositionComponent pos = pm.get(entity);
 		MovementComponent mov = mm.get(entity);
+		Direction dir = mov.getDirection();
 		
-		if(mov.getDirection() != null) {
-			Direction dir = mov.getDirection();
-			pos.getPosition().translate(dir.deltaX, dir.deltaY);
+		System.out.print("move");
+		if(dir != null) {
+			PositionComponent pos = pm.get(entity);
+			pos.setPosition(pos.getPosition().translate(dir.deltaX, dir.deltaY));
+			mov.removeDirection();
 		}
 	}
 	public void move(Entity entity, Direction direction) {
 		MovementComponent mov = mm.get(entity);
+		System.out.println(direction.deltaX + " " + direction.deltaY);
 		mov.setDirection(direction);
 	}
 }

@@ -14,4 +14,8 @@ public class MovementComponent implements Component {
 	public void setDirection(Direction direction) {
 		this.direction = direction;
 	}
+	
+	public void removeDirection() {
+		setDirection(null);
+	}
 }
