@@ -3,22 +3,32 @@ package io.github.izdwuut.yarl.model.systems;
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
+import com.badlogic.ashley.signals.Listener;
+import com.badlogic.ashley.signals.Signal;
 import com.badlogic.ashley.systems.IteratingSystem;
 
+import io.github.izdwuut.yarl.model.Event;
 import io.github.izdwuut.yarl.model.components.PositionComponent;
+import io.github.izdwuut.yarl.model.components.SizeComponent;
 import io.github.izdwuut.yarl.model.components.creatures.MovementComponent;
+import io.github.izdwuut.yarl.model.entities.World;
 import io.github.izdwuut.yarl.utils.Mappers;
 import squidpony.squidgrid.Direction;
+import squidpony.squidmath.Coord;
 
 public class MovementSystem extends IteratingSystem {
 	private ComponentMapper<PositionComponent> pm;
 	private ComponentMapper<MovementComponent> mm;
+	private Signal<Event> dispatcher;
+	private World world;
 	
-	public MovementSystem() {
+	public MovementSystem(World world) {
 		super(Family.all(PositionComponent.class, MovementComponent.class).get());
 		
-		pm = Mappers.position;
-		mm = Mappers.movement;
+		this.pm = Mappers.position;
+		this.mm = Mappers.movement;
+		this.dispatcher = new Signal<Event>();
+		this.world = world;
 	}
 	
 	@Override
@@ -29,13 +39,30 @@ public class MovementSystem extends IteratingSystem {
 		System.out.print("move");
 		if(dir != null) {
 			PositionComponent pos = pm.get(entity);
-			pos.setPosition(pos.getPosition().translate(dir.deltaX, dir.deltaY));
+			Coord target = pos.getPosition()
+					.translate(dir.deltaX, dir.deltaY);
+			//TODO: move to world/game system
+			SizeComponent size = Mappers.size.get(world);
+			if(target.x >= 0 && target.x <= size.getWidth() && target.y >= 0 && target.y <= size.getHeight()) {
+				pos.setPosition(target);
+			}
 			mov.removeDirection();
+			System.out.println("Player pos: (" + pos.getPosition().x + "," + pos.getPosition().y + ")");
 		}
 	}
 	public void move(Entity entity, Direction direction) {
 		MovementComponent mov = mm.get(entity);
 		System.out.println(direction.deltaX + " " + direction.deltaY);
 		mov.setDirection(direction);
+	}
+	
+	@Override
+	public void update(float deltaTime) {
+		super.update(deltaTime);
+		dispatcher.dispatch(Event.MOVEMENT_END);
+	}
+
+	public void addListener(Listener<Event> listener) {
+		dispatcher.add(listener);
 	}
 }
