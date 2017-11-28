@@ -25,15 +25,20 @@ public class GameController extends Controller {
 		this.engine = new Engine();
 		init();
 	}
+	//YARL class is probably a better place for adding systems to an engine.
+	//controllers should only be responsible for pausing and resuming them
 	private void init() {
 		Settings settings = new SettingsFactory().getSettings();
 		World world = new WorldFactory(settings).getWorld();
 		player = new CreatureFactory().getPlayer("izdwuut");
 		engine.addEntity(player);
 		
-		engine.addSystem(new MovementSystem());
-		//engine.addSystem(init)?
-		game.setScreen(new GameScreen(world, settings));
+		MovementSystem system = new MovementSystem(world);
+		engine.addSystem(system);
+		GameScreen screen = new GameScreen(world, settings, player);
+		system.addListener(screen);
+		
+		game.setScreen(screen);
 		handleInput();
 	}
 	//TODO: command pattern
@@ -65,7 +70,15 @@ public class GameController extends Controller {
 	public void update() {
 		if(input.hasNext()) {
             input.next();
-            engine.update(1);
+            engine.update(Gdx.graphics.getDeltaTime());
         }
+	}
+	
+	private void pause() {
+		engine.getSystem(MovementSystem.class).setProcessing(false);
+	}
+	
+	private void resume() {
+		engine.getSystem(MovementSystem.class).setProcessing(true);
 	}
 }
