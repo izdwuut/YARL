@@ -15,7 +15,7 @@ import io.github.izdwuut.yarl.views.GameScreen;
 import squidpony.squidgrid.Direction;
 import squidpony.squidgrid.gui.gdx.SquidInput;
 
-public class GameController {
+public class GameController extends Controller {
 	private YARL game;
 	private Engine engine;
 	private Creature player;
