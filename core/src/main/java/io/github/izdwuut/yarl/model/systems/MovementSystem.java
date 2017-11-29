@@ -43,11 +43,10 @@ public class MovementSystem extends IteratingSystem {
 					.translate(dir.deltaX, dir.deltaY);
 			//TODO: move to world/game system
 			SizeComponent size = Mappers.size.get(world);
-			if(target.x >= 0 && target.x <= size.getWidth() && target.y >= 0 && target.y <= size.getHeight()) {
+			if(target.x >= 0 && target.x < size.getWidth() && target.y >= 0 && target.y < size.getHeight()) {
 				pos.setPosition(target);
 			}
 			mov.removeDirection();
-			System.out.println("Player pos: (" + pos.getPosition().x + "," + pos.getPosition().y + ")");
 		}
 	}
 	public void move(Entity entity, Direction direction) {
