@@ -8,8 +8,6 @@ import io.github.izdwuut.yarl.model.entities.Creature;
 import io.github.izdwuut.yarl.model.entities.Settings;
 import io.github.izdwuut.yarl.model.entities.World;
 import io.github.izdwuut.yarl.model.factories.CreatureFactory;
-import io.github.izdwuut.yarl.model.factories.SettingsFactory;
-import io.github.izdwuut.yarl.model.factories.WorldFactory;
 import io.github.izdwuut.yarl.model.systems.MovementSystem;
 import io.github.izdwuut.yarl.views.GameScreen;
 import squidpony.squidgrid.Direction;
@@ -20,27 +18,31 @@ public class GameController extends Controller {
 	private Engine engine;
 	private Creature player;
 	private SquidInput input;
-	public GameController(YARL game) {
+	private Settings settings;
+	private World world;
+	
+	public GameController(YARL game, Engine engine, World world, Settings settings) {
 		this.game = game;
-		this.engine = new Engine();
+		this.engine = engine;
+		this.world = world;
+		this.settings = settings;
+		
 		init();
 	}
-	//YARL class is probably a better place for adding systems to an engine.
-	//controllers should only be responsible for pausing and resuming them
+
+	//TODO: controllers should be responsible for pausing and resuming systems 
 	private void init() {
-		Settings settings = new SettingsFactory().getSettings();
-		World world = new WorldFactory(settings).getWorld();
 		player = new CreatureFactory().getPlayer("izdwuut");
 		engine.addEntity(player);
 		
-		MovementSystem system = new MovementSystem(world);
-		engine.addSystem(system);
 		GameScreen screen = new GameScreen(world, settings, player);
-		system.addListener(screen);
-		
+		engine.getSystem(MovementSystem.class)
+			.addListener(screen);	
 		game.setScreen(screen);
+		
 		handleInput();
 	}
+	
 	//TODO: command pattern
 	public void handleInput() {
 		input = new SquidInput(new SquidInput.KeyHandler() {
