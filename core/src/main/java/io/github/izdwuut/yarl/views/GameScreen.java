@@ -30,6 +30,7 @@ public class GameScreen extends ScreenAdapter implements Listener<Event> {
 	private Creature player;
 	private TextCellFactory.Glyph glyph;
 
+	//TODO: generic screen (stuff like cell dimensions)
 	public GameScreen(World world, Settings settings, Creature player) {
 		this.player = player;
 		
@@ -71,7 +72,7 @@ public class GameScreen extends ScreenAdapter implements Listener<Event> {
 	}
 	
 	private void putMap() {
-		//TODO: templates
+		//TODO: template
 		float bg = SColor.DARK_SLATE_GRAY.toFloatBits();
 		for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
@@ -95,7 +96,7 @@ public class GameScreen extends ScreenAdapter implements Listener<Event> {
 		switch(e) {
 		case MOVEMENT_END:
 			putMap();
-			slide(); //put it elsewhere
+			slide();
 		break;
 		}
 	}

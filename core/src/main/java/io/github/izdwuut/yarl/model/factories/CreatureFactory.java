@@ -6,8 +6,8 @@ public class CreatureFactory {
 	public Creature getPlayer(String name) {
 		Creature player = new Creature(name);
 		player.setPlayer()
-		.setInv(10)
-		.setMov();
+			.setInv(10)
+			.setMov();
 		
 		return player;
 	}
