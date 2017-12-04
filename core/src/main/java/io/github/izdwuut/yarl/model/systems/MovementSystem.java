@@ -17,7 +17,7 @@ import io.github.izdwuut.yarl.utils.Mappers;
 import squidpony.squidgrid.Direction;
 import squidpony.squidmath.Coord;
 
-public class MovementSystem extends IteratingSystem {
+public class MovementSystem extends IteratingSystem implements Listenable<Event> {
 	private ComponentMapper<PositionComponent> pm;
 	private ComponentMapper<MovementComponent> mm;
 	private Signal<Event> dispatcher;
@@ -61,6 +61,7 @@ public class MovementSystem extends IteratingSystem {
 		dispatcher.dispatch(Event.MOVEMENT_END);
 	}
 
+	@Override
 	public void addListener(Listener<Event> listener) {
 		dispatcher.add(listener);
 	}
