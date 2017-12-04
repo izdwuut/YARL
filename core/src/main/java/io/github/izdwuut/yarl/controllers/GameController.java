@@ -65,18 +65,13 @@ public class GameController extends Controller {
 		Gdx.input.setInputProcessor(input);
 	}
 	
-	public void update() {
-		if(input.hasNext()) {
-            input.next();
-            engine.update(Gdx.graphics.getDeltaTime());
-        }
-	}
-	
-	private void pause() {
+	@Override
+	protected void pause() {
 		engine.getSystem(MovementSystem.class).setProcessing(false);
 	}
 	
-	private void resume() {
+	@Override
+	protected void resume() {
 		engine.getSystem(MovementSystem.class).setProcessing(true);
 	}
 }
