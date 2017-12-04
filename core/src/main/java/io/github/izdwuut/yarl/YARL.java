@@ -16,17 +16,23 @@ public class YARL extends Game {
 	private Controller controller;
 	private Engine engine;
 	
-	//TODO: put factories in systems
-	public void create() {
+	public YARL() {
+		super();
 		this.engine = new Engine();
-		Settings settings = new SettingsFactory().getSettings();
-		World world = new WorldFactory(settings).getWorld();
-		this.controller = new GameController(this, engine, world, settings);
-		
-		MovementSystem system = new MovementSystem(world);
-		engine.addSystem(system);
 	}
 	
+	//TODO: put factories in systems
+	public void create() {
+		Settings settings = new SettingsFactory().getSettings();
+		World world = new WorldFactory(settings).getWorld();
+		
+		MovementSystem system = new MovementSystem(world);
+		engine.addSystem(system);		
+
+		this.controller = new GameController(this, engine, world, settings);
+	}
+	
+	//TODO: non-continuous rendering
 	@Override
 	public void render() {
 		super.render();

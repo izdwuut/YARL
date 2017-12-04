@@ -15,27 +15,24 @@ import squidpony.squidgrid.gui.gdx.SquidInput;
 
 public class GameController extends Controller {
 	private YARL game;
-	private Engine engine;
 	private Creature player;
-	private SquidInput input;
-	private Settings settings;
-	private World world;
+	private GameScreen screen;
 	
+	//TODO: GameController shouldn't be responsible for creating a player
 	public GameController(YARL game, Engine engine, World world, Settings settings) {
+		super(engine);
+		
 		this.game = game;
 		this.engine = engine;
-		this.world = world;
-		this.settings = settings;
+		this.player = new CreatureFactory().getPlayer("izdwuut");
+		this.screen = new GameScreen(world, settings, player);
 		
 		init();
 	}
 
-	//TODO: controllers should be responsible for pausing and resuming systems 
 	private void init() {
-		player = new CreatureFactory().getPlayer("izdwuut");
 		engine.addEntity(player);
 		
-		GameScreen screen = new GameScreen(world, settings, player);
 		engine.getSystem(MovementSystem.class)
 			.addListener(screen);	
 		game.setScreen(screen);
@@ -48,7 +45,6 @@ public class GameController extends Controller {
 		input = new SquidInput(new SquidInput.KeyHandler() {
 			@Override
 			public void handle(char key, boolean alt, boolean ctrl, boolean shift) {
-				System.out.print("handle");
 				MovementSystem mov = engine.getSystem(MovementSystem.class);
 				switch(key) {
 				case SquidInput.UP_ARROW:

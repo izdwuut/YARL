@@ -1,6 +1,7 @@
 package io.github.izdwuut.yarl.model.systems;
 
 import com.badlogic.ashley.core.ComponentMapper;
+
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.signals.Listener;
@@ -32,11 +33,10 @@ public class MovementSystem extends IteratingSystem {
 	}
 	
 	@Override
-	public void processEntity(Entity entity, float deltaTime) {
+	protected void processEntity(Entity entity, float deltaTime) {
 		MovementComponent mov = mm.get(entity);
 		Direction dir = mov.getDirection();
 		
-		System.out.print("move");
 		if(dir != null) {
 			PositionComponent pos = pm.get(entity);
 			Coord target = pos.getPosition()
@@ -49,9 +49,9 @@ public class MovementSystem extends IteratingSystem {
 			mov.removeDirection();
 		}
 	}
+	
 	public void move(Entity entity, Direction direction) {
 		MovementComponent mov = mm.get(entity);
-		System.out.println(direction.deltaX + " " + direction.deltaY);
 		mov.setDirection(direction);
 	}
 	
