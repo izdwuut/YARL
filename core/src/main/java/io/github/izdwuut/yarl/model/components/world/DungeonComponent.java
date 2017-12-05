@@ -1,4 +1,4 @@
-package io.github.izdwuut.yarl.model.components;
+package io.github.izdwuut.yarl.model.components.world;
 
 import com.badlogic.ashley.core.Component;
 
