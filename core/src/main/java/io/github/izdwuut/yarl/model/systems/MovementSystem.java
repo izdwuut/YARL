@@ -50,7 +50,7 @@ public class MovementSystem extends IteratingSystem implements Listenable<Event>
 	 * {@link io.github.izdwuut.yarl.model.components.creatures.MovementComponent MovementComponent}. 
 	 * Fired iteratively in an {@link #update(float deltaTime) update} method.
 	 * 
-	 * @param entity currently processed entity
+	 * @param entity a currently processed entity
 	 * @param deltaTime time that passed since last engine update
 	 */
 	@Override
@@ -78,7 +78,7 @@ public class MovementSystem extends IteratingSystem implements Listenable<Event>
 	/**
 	 * Used outside this class to set movement direction.
 	 * 
-	 * @param entity entity that moves
+	 * @param entity an entity that moves
 	 * @param direction movement direction
 	 */
 	public void move(Entity entity, Direction direction) {
