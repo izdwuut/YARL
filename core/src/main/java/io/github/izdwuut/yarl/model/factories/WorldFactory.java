@@ -11,6 +11,7 @@ public class WorldFactory {
 	private RNG rng;
 	IDungeonGenerator gen;
 	Settings settings;
+	//TODO: put all settings in a separate class
 	public WorldFactory(Settings settings) {
 		this.settings = settings;
 		this.rng = Mappers.rng.get(settings).getRng();

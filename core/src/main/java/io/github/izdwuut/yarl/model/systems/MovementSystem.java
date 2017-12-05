@@ -1,7 +1,6 @@
 package io.github.izdwuut.yarl.model.systems;
 
 import com.badlogic.ashley.core.ComponentMapper;
-
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.signals.Listener;
@@ -12,6 +11,7 @@ import io.github.izdwuut.yarl.model.Event;
 import io.github.izdwuut.yarl.model.components.PositionComponent;
 import io.github.izdwuut.yarl.model.components.SizeComponent;
 import io.github.izdwuut.yarl.model.components.creatures.MovementComponent;
+import io.github.izdwuut.yarl.model.components.world.FloorComponent;
 import io.github.izdwuut.yarl.model.entities.World;
 import io.github.izdwuut.yarl.utils.Mappers;
 import squidpony.squidgrid.Direction;
@@ -25,7 +25,6 @@ import squidpony.squidmath.Coord;
  * @since  2017-11-20
  */
 public class MovementSystem extends IteratingSystem implements Listenable<Event> {
-	private ComponentMapper<PositionComponent> pm;
 	private ComponentMapper<MovementComponent> mm;
 	private Signal<Event> dispatcher;
 	private World world;
@@ -41,7 +40,6 @@ public class MovementSystem extends IteratingSystem implements Listenable<Event>
 	public MovementSystem(World world) {
 		super(Family.all(PositionComponent.class, MovementComponent.class).get());
 		
-		this.pm = Mappers.position;
 		this.mm = Mappers.movement;
 		this.dispatcher = new Signal<Event>();
 		this.world = world;
@@ -52,21 +50,25 @@ public class MovementSystem extends IteratingSystem implements Listenable<Event>
 	 * {@link io.github.izdwuut.yarl.model.components.creatures.MovementComponent MovementComponent}. 
 	 * Fired iteratively in an {@link #update(float deltaTime) update} method.
 	 * 
-	 * @param entity currently processed entity
+	 * @param entity a currently processed entity
 	 * @param deltaTime time that passed since last engine update
 	 */
 	@Override
 	protected void processEntity(Entity entity, float deltaTime) {
 		MovementComponent mov = mm.get(entity);
-		Direction dir = mov.getDirection();
+		Direction direction = mov.getDirection();
 		
-		if(dir != null) {
-			PositionComponent pos = pm.get(entity);
+		if(direction != null) {
+			PositionComponent pos = Mappers.position.get(entity);
 			Coord target = pos.getPosition()
-					.translate(dir.deltaX, dir.deltaY);
+					.translate(direction.deltaX, direction.deltaY);
 			//TODO: move to world/game system
 			SizeComponent size = Mappers.size.get(world);
-			if(target.x >= 0 && target.x < size.getWidth() && target.y >= 0 && target.y < size.getHeight()) {
+			if(target.x >= 0 
+					&& target.x < size.getWidth() 
+					&& target.y >= 0 
+					&& target.y < size.getHeight() 
+					&& Mappers.floor.get(world).isFloor(target)) {
 				pos.setPosition(target);
 			}
 			mov.removeDirection();
@@ -76,7 +78,7 @@ public class MovementSystem extends IteratingSystem implements Listenable<Event>
 	/**
 	 * Used outside this class to set movement direction.
 	 * 
-	 * @param entity entity that moves
+	 * @param entity an entity that moves
 	 * @param direction movement direction
 	 */
 	public void move(Entity entity, Direction direction) {
