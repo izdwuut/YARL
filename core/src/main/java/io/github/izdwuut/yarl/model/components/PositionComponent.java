@@ -7,7 +7,7 @@ import squidpony.squidmath.Coord;
 public class PositionComponent implements Component {
 	private Coord position;
 	public PositionComponent() {
-		this.position = Coord.get(1, 1);
+		this.position = Coord.get(0, 0);
 	}
 	public Coord getPosition() {
 		return position;
