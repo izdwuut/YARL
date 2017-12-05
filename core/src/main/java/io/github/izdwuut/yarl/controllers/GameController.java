@@ -13,11 +13,29 @@ import io.github.izdwuut.yarl.views.GameScreen;
 import squidpony.squidgrid.Direction;
 import squidpony.squidgrid.gui.gdx.SquidInput;
 
+/**
+ * Main controller that handles input applicable to {@link io.github.izdwuut.yarl.views.GameScreen GameScreen},
+ * which is used to display map and message log.
+ * 
+ * @author Bartosz "izdwuut" Konikiewicz
+ * @since  2017-11-18
+ */
 public class GameController extends Controller {
 	private YARL game;
 	private Creature player;
 	private GameScreen screen;
 	
+	/**
+	 * Takes as parameters every entity needed to build a {@link io.github.izdwuut.yarl.views.GameScreen GameScreen}.
+	 * It also takes {@link io.github.izdwuut.yarl.YARL YARL} object (used in {@link #init() init} method to
+	 * set current screen) and ECS engine. When parameters are assigned to appropriate fields, an {@link #init() init} method is invoked
+	 * to perform further actions needed to build the GameController.
+	 * 
+	 * @param game a main game object
+	 * @param engine an Ashley engine
+	 * @param world a world entity
+	 * @param settings world settings
+	 */
 	//TODO: GameController shouldn't be responsible for creating a player
 	public GameController(YARL game, Engine engine, World world, Settings settings) {
 		super(engine);
@@ -30,6 +48,9 @@ public class GameController extends Controller {
 		init();
 	}
 
+	/**
+	 * Further actions needed to be done to build the GameController.
+	 */
 	private void init() {
 		engine.addEntity(player);
 		
@@ -40,6 +61,9 @@ public class GameController extends Controller {
 		handleInput();
 	}
 	
+	/**
+	 * Specifies controls and assigns them to actions.
+	 */
 	//TODO: command pattern
 	public void handleInput() {
 		input = new SquidInput(new SquidInput.KeyHandler() {
