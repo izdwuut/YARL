@@ -30,17 +30,6 @@ public class MovementSystem extends IteratingSystem implements Listenable<Event>
 		this.world = world;
 	}
 	
-<<<<<<< HEAD
-=======
-	/**
-	 * Translates entity position based on direction property obtained from
-	 * {@link io.github.izdwuut.yarl.model.components.creatures.MovementComponent MovementComponent}. 
-	 * Fired iteratively in an {@link #update(float deltaTime) update} method.
-	 * 
-	 * @param entity a currently processed entity
-	 * @param deltaTime time that passed since last engine update
-	 */
->>>>>>> 3771462... Obstacles (in progress)
 	@Override
 	protected void processEntity(Entity entity, float deltaTime) {
 		MovementComponent mov = mm.get(entity);
@@ -63,15 +52,6 @@ public class MovementSystem extends IteratingSystem implements Listenable<Event>
 		}
 	}
 	
-<<<<<<< HEAD
-=======
-	/**
-	 * Used outside this class to set movement direction.
-	 * 
-	 * @param entity an entity that moves
-	 * @param direction movement direction
-	 */
->>>>>>> 3771462... Obstacles (in progress)
 	public void move(Entity entity, Direction direction) {
 		MovementComponent mov = mm.get(entity);
 		mov.setDirection(direction);
