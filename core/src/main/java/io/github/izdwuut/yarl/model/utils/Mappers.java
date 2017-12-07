@@ -1,4 +1,4 @@
-package io.github.izdwuut.yarl.utils;
+package io.github.izdwuut.yarl.model.utils;
 
 import com.badlogic.ashley.core.ComponentMapper;
 

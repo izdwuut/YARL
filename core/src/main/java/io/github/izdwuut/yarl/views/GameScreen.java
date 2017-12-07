@@ -16,7 +16,7 @@ import io.github.izdwuut.yarl.model.components.settings.CellSizeComponent;
 import io.github.izdwuut.yarl.model.entities.Creature;
 import io.github.izdwuut.yarl.model.entities.Settings;
 import io.github.izdwuut.yarl.model.entities.World;
-import io.github.izdwuut.yarl.utils.Mappers;
+import io.github.izdwuut.yarl.model.utils.Mappers;
 import squidpony.squidgrid.gui.gdx.SColor;
 import squidpony.squidgrid.gui.gdx.SparseLayers;
 import squidpony.squidgrid.gui.gdx.TextCellFactory;
