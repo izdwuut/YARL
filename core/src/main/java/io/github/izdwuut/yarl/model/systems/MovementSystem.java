@@ -56,7 +56,6 @@ public class MovementSystem extends IteratingSystem implements Listenable<Event>
 	protected void processEntity(Entity entity, float deltaTime) {
 		MovementComponent mov = mm.get(entity);
 		Direction direction = mov.getDirection();
-		
 		if(direction != null) {
 			PositionComponent pos = Mappers.position.get(entity);
 			Coord target = pos.getPosition()

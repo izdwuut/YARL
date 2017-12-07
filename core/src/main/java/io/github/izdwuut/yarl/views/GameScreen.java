@@ -22,15 +22,56 @@ import squidpony.squidgrid.gui.gdx.SparseLayers;
 import squidpony.squidgrid.gui.gdx.TextCellFactory;
 import squidpony.squidmath.Coord;
 
+/**
+ * A main screen - the game screen. It displays a dungeon and message log.
+ * It listens to a {@link io.github.izdwuut.yarl.model.systems.MovementSystem MovementSystem} in order to update
+ * display based on a player input.
+ * 
+ * @author Bartosz "izdwuut" Konikiewicz
+ * @since  2017-11-18
+ */
 public class GameScreen extends ScreenAdapter implements Listener<Event> {
+	/** An ASCII dungeon provided by a {@link io.github.izdwuut.yarl.model.entities.World World}. */
 	private char[][] dungeon;
-	private int cellWidth, cellHeight, width, height;
+	
+	/** Cell width (in pixels). */
+	private int cellWidth;
+	
+	/** Cell height (in pixels). */
+	private int cellHeight;
+	
+	/** Dungeon width. */
+	private int width;
+	
+	/** Dungeon height. */
+	private int height;
+	
+	/** A stage that handles display. */
 	public Stage stage;
+	
+	/** A layer with a dungeon. */
 	private SparseLayers display;
+	
+	/** A player creature. */
 	private Creature player;
+	
+	/** A player glyph (@). */
+	//TODO: move elsewhere
 	private TextCellFactory.Glyph glyph;
 
+	/**
+	 * Constructs a game screen using provided parameters. Sets a {@link com.badlogic.gdx.utils.viewport.Viewport Viewport}, 
+	 * adds actors to a {@link com.badlogic.gdx.scenes.scene2d.Stage Stage} and calls for a {@link #putMap() putMap} to put a
+	 * dungeon on a {@link squidpony.squidgrid.gui.gdx.SparseLayers SparseLayers}.
+	 * .
+	 * 
+	 * @param world a {@link io.github.izdwuut.yarl.model.entities.World World} entity
+	 * @param settings {@link io.github.izdwuut.yarl.model.entities.Settings Settings} entity
+	 * @param player a player {@link io.github.izdwuut.yarl.model.entities.Creature Creature}
+	 */
 	//TODO: generic screen (stuff like cell dimensions)
+	//TODO: init()
+	//TODO: check if a creature is a player
 	public GameScreen(World world, Settings settings, Creature player) {
 		this.player = player;
 		
@@ -65,12 +106,18 @@ public class GameScreen extends ScreenAdapter implements Listener<Event> {
 		stage.draw();
 	}
 	
+	/**
+	 * Clears a screen.
+	 */
 	private void clear() {
 		Color bg = SColor.DARK_SLATE_GRAY;
 		Gdx.gl.glClearColor(bg.r / 255.0f, bg.g / 255.0f, bg.b / 255.0f, 1.0f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 	}
 	
+	/**
+	 * Puts a dungeon on a {@link squidpony.squidgrid.gui.gdx.SparseLayers SparseLayers}.
+	 */
 	private void putMap() {
 		//TODO: template
 		float bg = SColor.DARK_SLATE_GRAY.toFloatBits();
@@ -81,17 +128,30 @@ public class GameScreen extends ScreenAdapter implements Listener<Event> {
 		}	
 	}
 	
+	/**
+	 * Moves a player.
+	 */
 	private void slide() {
 		Coord pos = Mappers.position.get(player).getPosition();
 		setCamera(pos);	
 		display.slide(glyph, (int) glyph.getX(), (int) glyph.getY(), pos.x, pos.y, 0, null);
 	}
 	
+	/**
+	 * Sets camera position.
+	 * 
+	 * @param coord a position to set
+	 */
 	private void setCamera(Coord coord) {
 		stage.getCamera().position.x = coord.x * cellWidth;
 		stage.getCamera().position.y = (height - coord.y) * cellHeight;
 	}
 	
+	/**
+	 * Listens for an {@link io.github.izdwuut.yarl.model.Event Event} dispatched by
+	 * a {@link io.github.izdwuut.yarl.model.systems.MovementSystem MovementSystem}.
+	 */
+	@Override
 	public void receive(Signal<Event> signal, Event e) {
 		switch(e) {
 		case MOVEMENT_END:
