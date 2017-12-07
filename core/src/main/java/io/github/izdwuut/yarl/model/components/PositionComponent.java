@@ -18,7 +18,7 @@ public class PositionComponent implements Component {
 	 * Initiates a position field to a default (0, 0).
 	 */
 	public PositionComponent() {
-		this.position = Coord.get(0, 0);
+		this.position = Coord.get(1, 1);
 	}
 	
 	/**
