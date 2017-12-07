@@ -4,9 +4,9 @@ import com.badlogic.ashley.core.Entity;
 
 import io.github.izdwuut.yarl.model.components.BagComponent;
 import io.github.izdwuut.yarl.model.components.NameComponent;
-import io.github.izdwuut.yarl.model.components.PlayerComponent;
 import io.github.izdwuut.yarl.model.components.PositionComponent;
 import io.github.izdwuut.yarl.model.components.creatures.MovementComponent;
+import io.github.izdwuut.yarl.model.components.creatures.PlayerComponent;
 
 public class Creature extends Entity {
 	public Creature(String name) {

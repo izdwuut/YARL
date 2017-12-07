@@ -21,8 +21,14 @@ import squidpony.squidgrid.gui.gdx.SquidInput;
  * @since  2017-11-18
  */
 public class GameController extends Controller {
+	/** A game class */
 	private YARL game;
+	
+	/** A player entity. */
 	private Creature player;
+	
+	/** A screen that is used by {@link io.github.izdwuut.yarl.YARL YARL} to render stuff.
+	 *  GameController is only responsible for creating it. */
 	private GameScreen screen;
 	
 	/**

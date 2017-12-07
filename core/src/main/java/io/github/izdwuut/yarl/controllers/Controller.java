@@ -15,7 +15,10 @@ import squidpony.squidgrid.gui.gdx.SquidInput;
  * @since  2017-11-28
  */
 public abstract class Controller {
+	/** An input handler. */
 	protected SquidInput input;
+	
+	/** An Ashley engine. */
 	protected Engine engine;
 	
 	/**

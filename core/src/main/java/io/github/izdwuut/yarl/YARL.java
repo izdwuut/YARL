@@ -21,7 +21,10 @@ import io.github.izdwuut.yarl.model.systems.MovementSystem;
  */
 //TODO: populate system
 public class YARL extends Game {
+	/** A current controller */
 	private Controller controller;
+	
+	/** An Ashley engine */
 	private Engine engine;
 	
 	/**
