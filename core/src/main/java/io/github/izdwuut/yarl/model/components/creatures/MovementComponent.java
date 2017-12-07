@@ -5,7 +5,7 @@ import com.badlogic.ashley.core.Component;
 import squidpony.squidgrid.Direction;
 
 public class MovementComponent implements Component {
-	private Direction direction;
+	private Direction direction = null;
 
 	public Direction getDirection() {
 		return direction;
