@@ -4,17 +4,39 @@ import com.badlogic.ashley.core.Component;
 
 import squidpony.squidgrid.Direction;
 
+/**
+ * A component that describes movement. Every  that can move
+ * has it.
+ * 
+ * @author Bartosz "izdwuut" Konikiewicz
+ * @since 2017-11-20
+ */
 public class MovementComponent implements Component {
+	/** Movement direction. */
 	private Direction direction = null;
 
+	/**
+	 * Gets a direction.
+	 * 
+	 * @return direction field
+	 */
 	public Direction getDirection() {
 		return direction;
 	}
 
+	/**
+	 * Sets a direction to a provided value.
+	 * See {@link squidpony.squidgrid.Direction Direction} for details.
+	 * 
+	 * @param direction a direction to set
+	 */
 	public void setDirection(Direction direction) {
 		this.direction = direction;
 	}
 	
+	/**
+	 * Removes a direction.
+	 */
 	public void removeDirection() {
 		direction = null;
 	}

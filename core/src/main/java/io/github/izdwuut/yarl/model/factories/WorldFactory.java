@@ -2,7 +2,7 @@ package io.github.izdwuut.yarl.model.factories;
 
 import io.github.izdwuut.yarl.model.entities.Settings;
 import io.github.izdwuut.yarl.model.entities.World;
-import io.github.izdwuut.yarl.utils.Mappers;
+import io.github.izdwuut.yarl.model.utils.Mappers;
 import squidpony.squidgrid.mapping.DungeonGenerator;
 import squidpony.squidgrid.mapping.IDungeonGenerator;
 import squidpony.squidmath.RNG;

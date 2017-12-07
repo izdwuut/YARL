@@ -12,7 +12,7 @@ import io.github.izdwuut.yarl.model.components.PositionComponent;
 import io.github.izdwuut.yarl.model.components.SizeComponent;
 import io.github.izdwuut.yarl.model.components.creatures.MovementComponent;
 import io.github.izdwuut.yarl.model.entities.World;
-import io.github.izdwuut.yarl.utils.Mappers;
+import io.github.izdwuut.yarl.model.utils.Mappers;
 import squidpony.squidgrid.Direction;
 import squidpony.squidmath.Coord;
 
