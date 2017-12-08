@@ -2,17 +2,12 @@ package io.github.izdwuut.yarl.views;
 
 import com.badlogic.ashley.signals.Listener;
 import com.badlogic.ashley.signals.Signal;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import io.github.izdwuut.yarl.model.Event;
 import io.github.izdwuut.yarl.model.components.SizeComponent;
-import io.github.izdwuut.yarl.model.components.settings.CellSizeComponent;
 import io.github.izdwuut.yarl.model.entities.Creature;
 import io.github.izdwuut.yarl.model.entities.Settings;
 import io.github.izdwuut.yarl.model.entities.World;
@@ -30,15 +25,9 @@ import squidpony.squidmath.Coord;
  * @author Bartosz "izdwuut" Konikiewicz
  * @since  2017-11-18
  */
-public class GameScreen extends ScreenAdapter implements Listener<Event> {
+public class GameScreen extends Screen implements Listener<Event> {
 	/** An ASCII dungeon provided by {@link io.github.izdwuut.yarl.model.entities.World a World}. */
 	private char[][] dungeon;
-	
-	/** Cell width (in pixels). */
-	private int cellWidth;
-	
-	/** Cell height (in pixels). */
-	private int cellHeight;
 	
 	/** {@link #dungeon Dungeon} width. */
 	private int width;
@@ -68,19 +57,16 @@ public class GameScreen extends ScreenAdapter implements Listener<Event> {
 	 * @param settings {@link io.github.izdwuut.yarl.model.entities.Settings Settings} entity
 	 * @param player a player {@link io.github.izdwuut.yarl.model.entities.Creature Creature}
 	 */
-	//TODO: generic screen (stuff like cell dimensions)
 	//TODO: init()
-	//TODO: check if a creature is a player
 	public GameScreen(World world, Settings settings, Creature player) {
+		super(settings);
+		
 		this.player = player;
 		
-		CellSizeComponent cell = Mappers.cellSize.get(settings);
 		SizeComponent size = Mappers.size.get(world);
-	    
-	    cellWidth = cell.getWidth();
-	    cellHeight = cell.getHeight();
 		height = size.getHeight();
 		width = size.getWidth();
+		
 		dungeon = Mappers.dungeon.get(world).getDungeon();
 		
 		Viewport vp = new StretchViewport(width * cellWidth, height * cellHeight);
@@ -101,17 +87,9 @@ public class GameScreen extends ScreenAdapter implements Listener<Event> {
 	@Override
 	public void render(float deltaTime) {
         clear();
+        
 		stage.act();
 		stage.draw();
-	}
-	
-	/**
-	 * Clears a screen.
-	 */
-	private void clear() {
-		Color bg = SColor.DARK_SLATE_GRAY;
-		Gdx.gl.glClearColor(bg.r / 255.0f, bg.g / 255.0f, bg.b / 255.0f, 1.0f);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 	}
 	
 	/**
