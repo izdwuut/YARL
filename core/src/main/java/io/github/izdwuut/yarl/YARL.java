@@ -2,6 +2,7 @@ package io.github.izdwuut.yarl;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 
 import io.github.izdwuut.yarl.controllers.Controller;
 import io.github.izdwuut.yarl.controllers.GameController;
@@ -40,12 +41,15 @@ public class YARL extends Game {
 	}
 	
 	/**
+	 * Sets non continuous rendering.
 	 * Instantiates default {@link #controller controller} 
 	 * and creates systems which are then added to an Ashley
-	 * {@link #engine engine}.
+	 * {@link #engine engine}. 
 	 */
 	//TODO: put factories in systems
 	public void create() {
+		Gdx.graphics.setContinuousRendering(false);
+		
 		Settings settings = new SettingsFactory().getSettings();
 		World world = new WorldFactory(settings).getWorld();
 		
@@ -58,7 +62,6 @@ public class YARL extends Game {
 	/**
 	 * Renders a frame and passes control to a current {@link #controller controller}.
 	 */
-	//TODO: non-continuous rendering
 	@Override
 	public void render() {
 		super.render();
