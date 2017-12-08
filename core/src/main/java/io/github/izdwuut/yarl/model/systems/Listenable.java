@@ -10,7 +10,7 @@ import com.badlogic.ashley.signals.Listener;
  */
 public interface Listenable<T> {
 	/**
-	 * Registers {@link com.badlogic.ashley.signals.Listener<T> a Listener}.
+	 * Registers {@link com.badlogic.ashley.signals.Listener a Listener}.
 	 * 
 	 * @param listener a listener to register
 	 */

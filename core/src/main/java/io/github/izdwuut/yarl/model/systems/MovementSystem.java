@@ -27,7 +27,7 @@ import squidpony.squidmath.Coord;
  * @since  2017-11-20
  */
 public class MovementSystem extends IteratingSystem implements Listenable<Event> {
-	/** A movement {@link com.badlogic.ashley.core.ComponentMapper<T extends Component> Mapper}. */
+	/** A movement {@link com.badlogic.ashley.core.ComponentMapper Mapper}. */
 	private ComponentMapper<MovementComponent> mm;
 	
 	/** An {@link io.github.izdwuut.yarl.model.Event Event} dispatcher. */
@@ -56,7 +56,7 @@ public class MovementSystem extends IteratingSystem implements Listenable<Event>
 	/**
 	 * Translates {@link com.badlogic.ashley.core.Entity Entity} 
 	 * {@link io.github.izdwuut.yarl.model.components.PositionComponent#position position} based on 
-	 * {@link {@link io.github.izdwuut.yarl.model.components.creatures.MovementComponent#direction direction} 
+	 * {@link io.github.izdwuut.yarl.model.components.creatures.MovementComponent#direction direction} 
 	 * property obtained from {@link io.github.izdwuut.yarl.model.components.creatures.MovementComponent MovementComponent}. 
 	 * Fired iteratively in {@link #update(float deltaTime) an update} method.
 	 * 
@@ -86,7 +86,7 @@ public class MovementSystem extends IteratingSystem implements Listenable<Event>
 	
 	/**
 	 * Used outside this class to set movement 
-	 * {@link {@link io.github.izdwuut.yarl.model.components.creatures.MovementComponent#direction direction}.
+	 * {@link io.github.izdwuut.yarl.model.components.creatures.MovementComponent#direction direction}.
 	 * 
 	 * @param entity entity that moves
 	 * @param direction movement direction

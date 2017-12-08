@@ -35,6 +35,6 @@ public class Mappers {
 	/** {@link io.github.izdwuut.yarl.model.components.creatures.MovementComponent A movement} mapper. */
 	public static final ComponentMapper<MovementComponent> movement = ComponentMapper.getFor(MovementComponent.class);
 	
-	/** {@link io.github.izdwuut.yarl.model.components.world.Floor Floor} mapper. */
+	/** {@link io.github.izdwuut.yarl.model.components.world.FloorComponent Floor} mapper. */
 	public static final ComponentMapper<FloorComponent> floor = ComponentMapper.getFor(FloorComponent.class);
 }
