@@ -14,10 +14,11 @@ import squidpony.squidmath.RNG;
  */
 public class Settings extends Entity {
 	/**
-	 * Sets cell size using provided width and height.
+	 * Sets {@link io.github.izdwuut.yarl.model.components.settings.CellSizeComponent cell size} 
+	 * using provided width and height.
 	 * 
-	 * @param width
-	 * @param height
+	 * @param width cell width (in pixels)
+	 * @param height cell height (in pixels)
 	 * 
 	 * @return current instance of an object (chaining)
 	 */
@@ -28,7 +29,8 @@ public class Settings extends Entity {
 	}
 	
 	/**
-	 * Sets a random number generator using a provided one.
+	 * Sets {@link io.github.izdwuut.yarl.model.components.settings.RNGComponent a random number generator} 
+	 * using {@link squidpony.squidmath.RNG a provided one}.
 	 * 
 	 * @param rng a random number generator
 	 * 

@@ -15,7 +15,7 @@ public class PositionComponent implements Component {
 	private Coord position;
 	
 	/**
-	 * Initiates a position field to a default (0, 0).
+	 * Initiates a {@link #position position} field to a default (1, 1).
 	 */
 	public PositionComponent() {
 		this.position = Coord.get(1, 1);
@@ -41,7 +41,7 @@ public class PositionComponent implements Component {
 	}
 	
 	/**
-	 * Sets a position using a {@link squidpony.squidmath.Coord Coord} object.
+	 * Sets {@link #position a position} using {@link squidpony.squidmath.Coord a Coord} object.
 	 * 
 	 * @param position a position to set
 	 */

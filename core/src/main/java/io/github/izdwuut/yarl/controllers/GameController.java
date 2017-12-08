@@ -14,27 +14,31 @@ import squidpony.squidgrid.Direction;
 import squidpony.squidgrid.gui.gdx.SquidInput;
 
 /**
- * Main controller that handles input applicable to {@link io.github.izdwuut.yarl.views.GameScreen GameScreen},
+ * Main controller. Handles input applicable to {@link io.github.izdwuut.yarl.views.GameScreen GameScreen},
  * which is used to display map and message log.
  * 
  * @author Bartosz "izdwuut" Konikiewicz
  * @since  2017-11-18
  */
 public class GameController extends Controller {
-	/** A game class */
+	/** A game class. */
 	private YARL game;
 	
 	/** A player entity. */
 	private Creature player;
 	
-	/** A screen that is used by {@link io.github.izdwuut.yarl.YARL YARL} to render stuff.
-	 *  GameController is only responsible for creating it. */
+	/** 
+	 * A screen that is used by {@link io.github.izdwuut.yarl.YARL YARL} to 
+	 * {@link io.github.izdwuut.yarl.YARL#render() render} stuff. 
+	 * GameController is only responsible for 
+	 * {@link io.github.izdwuut.yarl.views.GameScreen#GameScreen(World, Settings, Creature) constructing} it. 
+	 * */
 	private GameScreen screen;
 	
 	/**
-	 * Takes as parameters every entity needed to build a {@link io.github.izdwuut.yarl.views.GameScreen GameScreen}.
+	 * Takes as parameters every {@link com.badlogic.ashley.core.Entity Entity} needed to build a {@link io.github.izdwuut.yarl.views.GameScreen GameScreen}.
 	 * It also takes {@link io.github.izdwuut.yarl.YARL YARL} object (used in {@link #init() init} method to
-	 * set current screen) and ECS engine. When parameters are assigned to appropriate fields, an {@link #init() init} method is invoked
+	 * set current screen) and an Ashley {@link com.badlogic.ashley.core.Engine Engine}. When parameters are assigned to appropriate fields, an {@link #init() init} method is invoked
 	 * to perform further actions needed to build the GameController.
 	 * 
 	 * @param game a main game object
@@ -55,7 +59,7 @@ public class GameController extends Controller {
 	}
 
 	/**
-	 * Further actions needed to be done to build the GameController.
+	 * Further actions needed to be done to build a GameController.
 	 */
 	private void init() {
 		engine.addEntity(player);

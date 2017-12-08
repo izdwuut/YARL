@@ -9,7 +9,7 @@ import io.github.izdwuut.yarl.model.entities.Item;
 
 /**
  * A container for {@link io.github.izdwuut.yarl.model.entities.Item Items}.
- * It specifies it's content and volume and can be used both as a 
+ * It specifies it's {@link #items content} and {@link #volume volume} and can be used both as a 
  * {@link io.github.izdwuut.yarl.model.entities.Creature Creature} inventory
  * and a container on a map.
  * 
@@ -24,9 +24,9 @@ public class BagComponent implements Component {
 	private int volume;
 	
 	/**
-	 * Creates items list based on provided volume.
+	 * Creates @link #items items list} based on provided volume.
 	 * 
-	 * @param volume an amount of items a bag can hold
+	 * @param volume amount of items a bag can hold
 	 */
 	public BagComponent(int volume) {
 		this.items = new ArrayList<Item>();
@@ -43,7 +43,7 @@ public class BagComponent implements Component {
 	}
 	
 	/**
-	 * Adds an item to a bag.
+	 * Adds {@link io.github.izdwuut.yarl.model.entities.Item an item} to a bag.
 	 * 
 	 * @param item an item to be added to the bag
 	 */
@@ -54,7 +54,7 @@ public class BagComponent implements Component {
 	}
 	
 	/**
-	 * Removes an item from a bag.
+	 * Removes {@link io.github.izdwuut.yarl.model.entities.Item an item} from a bag.
 	 * 
 	 * @param item an item to be removed from the bag
 	 */

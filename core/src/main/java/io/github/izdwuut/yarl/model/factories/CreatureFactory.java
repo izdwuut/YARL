@@ -6,7 +6,7 @@ import io.github.izdwuut.yarl.model.entities.Creature;
  * A factory that produces {@link io.github.izdwuut.yarl.model.entities.Creature Creatures}.
  * 
  * @author Bartosz "izdwuut" Konikiewicz
- * @since  
+ * @since  2017-11-20
  */
 public class CreatureFactory {
 	/**

@@ -17,7 +17,7 @@ public class FloorComponent implements Component {
 	
 	/**
 	 * Uses provided dungeon to create a {@link squidpony.squidmath.GreasedRegion GreasedRegion} 
-	 * of cells that are floors. 
+	 * of cells that are {@link #floors floors}. 
 	 * 
 	 * @param dungeon dungeon as a two-dimensional ASCII array
 	 */
@@ -27,7 +27,7 @@ public class FloorComponent implements Component {
 	}
 	
 	/**
-	 * Gets cells that are floors.
+	 * Gets cells that are {@link #floors floors}.
 	 * 
 	 * @return a {@link squidpony.squidmath.GreasedRegion GreasedRegion} object of cells that are floors
 	 */
@@ -35,6 +35,12 @@ public class FloorComponent implements Component {
 		return floors;
 	}
 	
+	/**
+	 * Checks if a provided {@link squidpony.squidmath.Coord Coord} corresponds to a floor.
+	 * 
+	 * @param coord
+	 * @return
+	 */
 	public boolean isFloor(Coord coord) {
 		return floors.contains(coord);
 	}

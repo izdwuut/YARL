@@ -13,16 +13,16 @@ public class SettingsFactory {
 	/** Settings that a factory produces. */
 	private Settings settings;
 	
-	/** A random number generator seed. */
+	/** A {@link #rng random number generator} seed. */
 	//TODO: random seed
 	String seed = "YARL";
 	
-	/** A seeded random number generator. */
+	/** A {@link #seed seeded} random number generator. */
 	RNG rng = new RNG(seed);
 	
 	/**
 	 * Constructs a factory and produces {@link io.github.izdwuut.yarl.model.entities.Settings Settings}
-	 * using hard-coded values specified in a {@link #build() build} method. 
+	 * using hard-coded values specified in {@link #build() a build} method. 
 	 */
 	public SettingsFactory() {
 		this.settings = new Settings();
@@ -31,7 +31,7 @@ public class SettingsFactory {
 	}
 	
 	/**
-	 * Gets settings.
+	 * Gets {@link #settings settings}.
 	 * 
 	 * @return produced {@link io.github.izdwuut.yarl.model.entities.Settings Settings}
 	 */
@@ -40,7 +40,7 @@ public class SettingsFactory {
 	}
 	
 	/**
-	 * Produces settings.
+	 * Produces {@link #settings settings}.
 	 */
 	private void build() {
 		settings.setCellSize(10, 20)

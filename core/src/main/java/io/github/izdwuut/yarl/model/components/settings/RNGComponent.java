@@ -5,7 +5,7 @@ import com.badlogic.ashley.core.Component;
 import squidpony.squidmath.RNG;
 
 /**
- * A RNG (Random Number Generator) component.
+ * An RNG (Random Number Generator) component.
  * One of {@link io.github.izdwuut.yarl.model.entities.World World}'s components.
  * 
  * @author Bartosz "izdwuut" Konikiewicz
@@ -16,7 +16,7 @@ public class RNGComponent implements Component {
 	private RNG rng;
 	
 	/**
-	 * Builds a RNGComponent using provided random number generator.
+	 * Builds a component using provided {@link squidpony.squidmath.RNG random number generator}.
 	 * 
 	 * @param rng a random number generator to set
 	 */
@@ -25,7 +25,7 @@ public class RNGComponent implements Component {
 	}
 	
 	/**
-	 * Gets a RNG.
+	 * Gets {@link #rng an RNG}.
 	 * 
 	 * @return random number generator
 	 */
@@ -34,7 +34,7 @@ public class RNGComponent implements Component {
 	}
 	
 	/**
-	 * Sets a RNG.
+	 * Sets {@link #rng an RNG}.
 	 * 
 	 * @param rng random number generator to set
 	 */

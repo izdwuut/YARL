@@ -15,7 +15,7 @@ import io.github.izdwuut.yarl.model.components.world.FloorComponent;
 public class World extends Entity {
 	/**
 	 * Constructs a world using a provided ASCII array.
-	 * It's dimensions are used to specify world size.
+	 * It's dimensions are used to specify world {@link io.github.izdwuut.yarl.model.components.SizeComponent size}.
 	 * 
 	 * @param dungeon two-dimensional ASCII array representing a dungeon
 	 */

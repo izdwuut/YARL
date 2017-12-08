@@ -8,7 +8,7 @@ import squidpony.squidgrid.mapping.IDungeonGenerator;
 import squidpony.squidmath.RNG;
 
 /**
- * A factory that produces a {@link io.github.izdwuut.yarl.model.entities.World World.}.
+ * A factory that produces {@link io.github.izdwuut.yarl.model.entities.World a World}.
  * 
  * @author Bartosz "izdwuut" Konikiewicz
  *
@@ -24,7 +24,8 @@ public class WorldFactory {
 	Settings settings;
 	
 	/**
-	 * Constructs a factory and produces a world using provided settings.
+	 * Constructs a factory and produces {@link io.github.izdwuut.yarl.model.entities.World a World} 
+	 * using provided {@link io.github.izdwuut.yarl.model.entities.Settings settings}.
 	 * 
 	 * @param settings world settings
 	 */
@@ -35,7 +36,7 @@ public class WorldFactory {
 	}
 	
 	/**
-	 * Gets a world.
+	 * Gets {@link io.github.izdwuut.yarl.model.entities.World a World}.
 	 * 
 	 * @return a produced {@link io.github.izdwuut.yarl.model.entities.World World.}
 	 */

@@ -1,5 +1,6 @@
 package io.github.izdwuut.yarl.model.systems;
 
+import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
@@ -17,22 +18,30 @@ import squidpony.squidgrid.Direction;
 import squidpony.squidmath.Coord;
 
 /**
- * A system that is responsible for entity movement.
- * Uses {@link com.badlogic.ashley.signals.Signal Signal} to dispatch events.
+ * {@link com.badlogic.ashley.core.EntitySystem A system} that is responsible for 
+ * {@link com.badlogic.ashley.core.Entity Entity} movement.
+ * Uses {@link com.badlogic.ashley.signals.Signal Signal} to dispatch 
+ * {@link io.github.izdwuut.yarl.model.Event Events}.
  * 
  * @author Bartosz "izdwuut" Konikiewicz
  * @since  2017-11-20
  */
 public class MovementSystem extends IteratingSystem implements Listenable<Event> {
+	/** A movement {@link com.badlogic.ashley.core.ComponentMapper<T extends Component> Mapper}. */
 	private ComponentMapper<MovementComponent> mm;
+	
+	/** An {@link io.github.izdwuut.yarl.model.Event Event} dispatcher. */
 	private Signal<Event> dispatcher;
+	
+	/** A world {@link com.badlogic.ashley.core.Entity Entity}. */
 	private World world;
 	
 	/**
-	 * Specifies a class of entities that are processed by the system, which is
-	 * every entity that can be moved (i.e. has {@link io.github.izdwuut.yarl.model.components.creatures.PositionComponent PositionComponent}
-	 * that can be manipulated and {@link io.github.izdwuut.yarl.model.components.creatures.MovementComponent MovementComponent} that
-	 * describes movement).
+	 * Specifies a class of {@link com.badlogic.ashley.core.Entity Entities} that are processed by the system, 
+	 * which is every {@link com.badlogic.ashley.core.Entity Entity} that can be moved 
+	 * (i.e. has {@link io.github.izdwuut.yarl.model.components.PositionComponent PositionComponent}
+	 * that can be manipulated and {@link io.github.izdwuut.yarl.model.components.creatures.MovementComponent MovementComponent} 
+	 * that describes movement).
 	 * 
 	 * @param world provides world's bounds
 	 */
@@ -45,9 +54,11 @@ public class MovementSystem extends IteratingSystem implements Listenable<Event>
 	}
 	
 	/**
-	 * Translates entity position based on direction property obtained from
-	 * {@link io.github.izdwuut.yarl.model.components.creatures.MovementComponent MovementComponent}. 
-	 * Fired iteratively in an {@link #update(float deltaTime) update} method.
+	 * Translates {@link com.badlogic.ashley.core.Entity Entity} 
+	 * {@link io.github.izdwuut.yarl.model.components.PositionComponent#position position} based on 
+	 * {@link {@link io.github.izdwuut.yarl.model.components.creatures.MovementComponent#direction direction} 
+	 * property obtained from {@link io.github.izdwuut.yarl.model.components.creatures.MovementComponent MovementComponent}. 
+	 * Fired iteratively in {@link #update(float deltaTime) an update} method.
 	 * 
 	 * @param entity currently processed entity
 	 * @param deltaTime time that passed since last engine update
@@ -74,7 +85,8 @@ public class MovementSystem extends IteratingSystem implements Listenable<Event>
 	}
 	
 	/**
-	 * Used outside this class to set movement direction.
+	 * Used outside this class to set movement 
+	 * {@link {@link io.github.izdwuut.yarl.model.components.creatures.MovementComponent#direction direction}.
 	 * 
 	 * @param entity entity that moves
 	 * @param direction movement direction
@@ -85,8 +97,9 @@ public class MovementSystem extends IteratingSystem implements Listenable<Event>
 	}
 	
 	/**
-	 * Applies movement to every entity specified in a {@link #MovementSystem(World world) constructor}
-	 * and dispatches a MOVEMENT_END event.
+	 * Applies movement to every entity specified in {@link #MovementSystem(World world) a Constructor}
+	 * and dispatches a {@link io.github.izdwuut.yarl.model.Event#MOVEMENT_END MOVEMENT_END} 
+	 * {@link io.github.izdwuut.yarl.model.Event Event}.
 	 * 
 	 * @param deltaTime time that passed since last engine update
 	 */

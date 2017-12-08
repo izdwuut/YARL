@@ -9,7 +9,8 @@ import io.github.izdwuut.yarl.model.components.creatures.MovementComponent;
 import io.github.izdwuut.yarl.model.components.creatures.PlayerComponent;
 
 /**
- * A creature entity. It covers every creature, they only differ in components.
+ * A creature {@link com.badlogic.ashley.core.Entity Entity}. It covers every creature, they only 
+ * differ in {@link com.badlogic.ashley.core.Component components}.
  * 
  * @author Bartosz "izdwuut" Konikiewicz
  * @since  2017-11-13
@@ -17,7 +18,8 @@ import io.github.izdwuut.yarl.model.components.creatures.PlayerComponent;
 public class Creature extends Entity {
 	/**
 	 * Constructs a creature using a provided name.
-	 * Base creature is composed of a name and a position.
+	 * Base creature is composed of {@link io.github.izdwuut.yarl.model.components.NameComponent name} 
+	 * and {@link io.github.izdwuut.yarl.model.components.PositionComponent a position}.
 	 * 
 	 * @param name a creature name
 	 */

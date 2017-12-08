@@ -5,8 +5,8 @@ import com.badlogic.ashley.core.Component;
 import squidpony.squidgrid.Direction;
 
 /**
- * A component that describes movement. Every  that can move
- * has it.
+ * A component that describes movement. Every {@link com.badlogic.ashley.core.Entity Entity} 
+ * that can move has it.
  * 
  * @author Bartosz "izdwuut" Konikiewicz
  * @since 2017-11-20
@@ -16,7 +16,7 @@ public class MovementComponent implements Component {
 	private Direction direction = null;
 
 	/**
-	 * Gets a direction.
+	 * Gets {@link #direction a direction}.
 	 * 
 	 * @return direction field
 	 */
@@ -25,7 +25,7 @@ public class MovementComponent implements Component {
 	}
 
 	/**
-	 * Sets a direction to a provided value.
+	 * {@link #direction a direction} to a provided value.
 	 * See {@link squidpony.squidgrid.Direction Direction} for details.
 	 * 
 	 * @param direction a direction to set
@@ -35,7 +35,8 @@ public class MovementComponent implements Component {
 	}
 	
 	/**
-	 * Removes a direction.
+	 * Removes {@link #direction a direction}.
+	 * Called after a move is done.
 	 */
 	public void removeDirection() {
 		direction = null;

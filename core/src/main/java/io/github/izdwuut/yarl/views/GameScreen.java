@@ -23,15 +23,15 @@ import squidpony.squidgrid.gui.gdx.TextCellFactory;
 import squidpony.squidmath.Coord;
 
 /**
- * A main screen - the game screen. It displays a dungeon and message log.
- * It listens to a {@link io.github.izdwuut.yarl.model.systems.MovementSystem MovementSystem} in order to update
- * display based on a player input.
+ * A main screen - the game screen. It displays {@link #dungeon a dungeon} and message log.
+ * It listens to {@link io.github.izdwuut.yarl.model.systems.MovementSystem a MovementSystem} in order to update
+ * display based on player input.
  * 
  * @author Bartosz "izdwuut" Konikiewicz
  * @since  2017-11-18
  */
 public class GameScreen extends ScreenAdapter implements Listener<Event> {
-	/** An ASCII dungeon provided by a {@link io.github.izdwuut.yarl.model.entities.World World}. */
+	/** An ASCII dungeon provided by {@link io.github.izdwuut.yarl.model.entities.World a World}. */
 	private char[][] dungeon;
 	
 	/** Cell width (in pixels). */
@@ -40,30 +40,29 @@ public class GameScreen extends ScreenAdapter implements Listener<Event> {
 	/** Cell height (in pixels). */
 	private int cellHeight;
 	
-	/** Dungeon width. */
+	/** {@link #dungeon Dungeon} width. */
 	private int width;
 	
-	/** Dungeon height. */
+	/** {@link #dungeon Dungeon} height. */
 	private int height;
 	
-	/** A stage that handles display. */
+	/** {@link com.badlogic.gdx.scenes.scene2d.Stage A stage} that handles display. */
 	public Stage stage;
 	
-	/** A layer with a dungeon. */
+	/** {@link squidpony.squidgrid.gui.gdx.SparseLayers A Layer} with a dungeon. */
 	private SparseLayers display;
 	
-	/** A player creature. */
+	/** A player {@link io.github.izdwuut.yarl.model.entities.Creature creature}. */
 	private Creature player;
 	
-	/** A player glyph (@). */
+	/** A player {@link squidpony.squidgrid.gui.gdx.TextCellFactory.Glyph Glyph} (@). */
 	//TODO: move elsewhere
 	private TextCellFactory.Glyph glyph;
 
 	/**
 	 * Constructs a game screen using provided parameters. Sets a {@link com.badlogic.gdx.utils.viewport.Viewport Viewport}, 
-	 * adds actors to a {@link com.badlogic.gdx.scenes.scene2d.Stage Stage} and calls for a {@link #putMap() putMap} to put a
-	 * dungeon on a {@link squidpony.squidgrid.gui.gdx.SparseLayers SparseLayers}.
-	 * .
+	 * adds actors to a {@link #stage Stage} and calls for {@link #putMap() putMap} to put 
+	 * {@link #dungeon a dungeon} on a {@link squidpony.squidgrid.gui.gdx.SparseLayers SparseLayers}.
 	 * 
 	 * @param world a {@link io.github.izdwuut.yarl.model.entities.World World} entity
 	 * @param settings {@link io.github.izdwuut.yarl.model.entities.Settings Settings} entity
@@ -116,7 +115,7 @@ public class GameScreen extends ScreenAdapter implements Listener<Event> {
 	}
 	
 	/**
-	 * Puts a dungeon on a {@link squidpony.squidgrid.gui.gdx.SparseLayers SparseLayers}.
+	 * Puts {@link #dungeon a dungeon} on a {@link squidpony.squidgrid.gui.gdx.SparseLayers SparseLayers}.
 	 */
 	private void putMap() {
 		//TODO: template
@@ -129,7 +128,7 @@ public class GameScreen extends ScreenAdapter implements Listener<Event> {
 	}
 	
 	/**
-	 * Moves a player.
+	 * Moves {@link #player a player}.
 	 */
 	private void slide() {
 		Coord pos = Mappers.position.get(player).getPosition();
@@ -149,7 +148,7 @@ public class GameScreen extends ScreenAdapter implements Listener<Event> {
 	
 	/**
 	 * Listens for an {@link io.github.izdwuut.yarl.model.Event Event} dispatched by
-	 * a {@link io.github.izdwuut.yarl.model.systems.MovementSystem MovementSystem}.
+	 * {@link io.github.izdwuut.yarl.model.systems.MovementSystem a MovementSystem}.
 	 */
 	@Override
 	public void receive(Signal<Event> signal, Event e) {

@@ -7,9 +7,10 @@ import squidpony.squidgrid.gui.gdx.SquidInput;
 
 /**
  * A generic controller. Provides a default {@link #update() update} method
- * fired after every frame is rendered. It also specifies common fields used
- * by every controller: {@link com.badlogic.ashley.core.Engine engine} (passed either by
- * {@link io.github.izdwuut.yarl.YARL YARL} or any controller) and {@link squidpony.squidgrid.gui.gdx.SquidInput input}.
+ * fired after every frame is {@link io.github.izdwuut.yarl.YARL#render() rendered}. 
+ * It also specifies common fields used by every controller: {@link #engine engine} 
+ * (passed either by {@link io.github.izdwuut.yarl.YARL YARL} or any controller) and 
+ * {@link #input input}.
  * 
  * @author Bartosz "izdwuut" Konikiewicz
  * @since  2017-11-28
@@ -22,8 +23,8 @@ public abstract class Controller {
 	protected Engine engine;
 	
 	/**
-	 * Stores an {@link com.badlogic.ashley.core.Engine engine} passed either by
-	 * {@link io.github.izdwuut.yarl.YARL YARL} or any controller.
+	 * Constructs a controller using an {@link com.badlogic.ashley.core.Engine Engine} 
+	 * passed either by {@link io.github.izdwuut.yarl.YARL YARL} or any controller.
 	 * 
 	 * @param engine an Ashley engine
 	 */
@@ -32,8 +33,8 @@ public abstract class Controller {
 	}
 	
 	/**
-	 * Fired after a frame is rendered. Reacts to user input 
-	 * and tells the {@link com.badlogic.ashley.core.Engine engine} to update entities accordingly.
+	 * Fired after a frame is {@link io.github.izdwuut.yarl.YARL#render() rendered}. Reacts to user input 
+	 * and tells the {@link #engine engine} to update entities accordingly.
 	 */
 	public void update() {
 		if(input.hasNext()) {
