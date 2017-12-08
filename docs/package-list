@@ -1,0 +1,13 @@
+io.github.izdwuut.yarl
+io.github.izdwuut.yarl.controllers
+io.github.izdwuut.yarl.model
+io.github.izdwuut.yarl.model.components
+io.github.izdwuut.yarl.model.components.creatures
+io.github.izdwuut.yarl.model.components.items
+io.github.izdwuut.yarl.model.components.settings
+io.github.izdwuut.yarl.model.components.world
+io.github.izdwuut.yarl.model.entities
+io.github.izdwuut.yarl.model.factories
+io.github.izdwuut.yarl.model.systems
+io.github.izdwuut.yarl.model.utils
+io.github.izdwuut.yarl.views
