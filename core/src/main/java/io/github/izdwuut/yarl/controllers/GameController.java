@@ -104,7 +104,6 @@ public class GameController extends Controller {
 	}
 	
 	@Override
-	//TODO: generic name
 	protected void resume() {
 		engine.getSystem(MovementSystem.class).setProcessing(true);
 	}
