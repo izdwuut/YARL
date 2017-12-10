@@ -7,7 +7,7 @@ import io.github.izdwuut.yarl.YARL;
 import io.github.izdwuut.yarl.model.entities.Creature;
 import io.github.izdwuut.yarl.model.entities.Settings;
 import io.github.izdwuut.yarl.model.entities.World;
-import io.github.izdwuut.yarl.model.factories.CreatureFactory;
+import io.github.izdwuut.yarl.model.systems.InitSystem;
 import io.github.izdwuut.yarl.model.systems.MovementSystem;
 import io.github.izdwuut.yarl.views.GameScreen;
 import squidpony.squidgrid.Direction;
@@ -36,24 +36,19 @@ public class GameController extends Controller {
 	private GameScreen screen;
 	
 	/**
-	 * Takes as parameters every {@link com.badlogic.ashley.core.Entity Entity} needed to build a {@link io.github.izdwuut.yarl.views.GameScreen GameScreen}.
-	 * It also takes {@link io.github.izdwuut.yarl.YARL YARL} object (used in {@link #init() init} method to
-	 * set current screen) and an Ashley {@link com.badlogic.ashley.core.Engine Engine}. When parameters are assigned to appropriate fields, an {@link #init() init} method is invoked
-	 * to perform further actions needed to build the GameController.
+	 * Takes as parameters {@link io.github.izdwuut.yarl.YARL YARL} object (used in {@link #init() init} method to
+	 * set current screen) and an Ashley {@link com.badlogic.ashley.core.Engine Engine}. When parameters are assigned to appropriate fields, 
+	 * an {@link #init() init} method is invoked to perform further actions 
+	 * needed to build the GameController.
 	 * 
 	 * @param game a main game object
 	 * @param engine an Ashley engine
-	 * @param world a world entity
-	 * @param settings world settings
 	 */
-	//TODO: GameController shouldn't be responsible for creating a player
-	public GameController(YARL game, Engine engine, World world, Settings settings) {
+	public GameController(YARL game, Engine engine) {
 		super(engine);
 		
 		this.game = game;
 		this.engine = engine;
-		this.player = new CreatureFactory().getPlayer("izdwuut");
-		this.screen = new GameScreen(world, settings, player);
 		
 		init();
 	}
@@ -62,13 +57,17 @@ public class GameController extends Controller {
 	 * Further actions needed to be done to build a GameController.
 	 */
 	private void init() {
-		engine.addEntity(player);
+		InitSystem init = engine.getSystem(InitSystem.class);
+		player = init.getPlayer();
+		screen = new GameScreen(init.getWorld(), init.getSettings(), player);
 		
 		engine.getSystem(MovementSystem.class)
 			.addListener(screen);	
 		game.setScreen(screen);
 		
 		handleInput();
+		
+		resume();
 	}
 	
 	/**
@@ -105,6 +104,7 @@ public class GameController extends Controller {
 	}
 	
 	@Override
+	//TODO: generic name
 	protected void resume() {
 		engine.getSystem(MovementSystem.class).setProcessing(true);
 	}
