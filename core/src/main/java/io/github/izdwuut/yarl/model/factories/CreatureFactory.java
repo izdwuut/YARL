@@ -20,7 +20,8 @@ public class CreatureFactory {
 		Creature player = new Creature(name);
 		player.setPlayer()
 			.setInv(10)
-			.setMov();
+			.setMov()
+			.setGlyph('@');
 		
 		return player;
 	}

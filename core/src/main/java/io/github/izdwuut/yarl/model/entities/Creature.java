@@ -3,6 +3,7 @@ package io.github.izdwuut.yarl.model.entities;
 import com.badlogic.ashley.core.Entity;
 
 import io.github.izdwuut.yarl.model.components.BagComponent;
+import io.github.izdwuut.yarl.model.components.GlyphComponent;
 import io.github.izdwuut.yarl.model.components.NameComponent;
 import io.github.izdwuut.yarl.model.components.PositionComponent;
 import io.github.izdwuut.yarl.model.components.creatures.MovementComponent;
@@ -59,6 +60,17 @@ public class Creature extends Entity {
 	 */
 	public Creature setMov() {
 		add(new MovementComponent());
+		
+		return this;
+	}
+	
+	/**
+	 * Sets a glyph (display character).
+	 * @param glyph
+	 * @return
+	 */
+	public Creature setGlyph(char glyph) {
+		add(new GlyphComponent(glyph));
 		
 		return this;
 	}

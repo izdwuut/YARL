@@ -45,8 +45,8 @@ public class GameScreen extends Screen implements Listener<Event> {
 	private Creature player;
 	
 	/** A player {@link squidpony.squidgrid.gui.gdx.TextCellFactory.Glyph Glyph} (@). */
-	//TODO: move elsewhere
-	private TextCellFactory.Glyph glyph;
+	//TODO: actors index. listen on display.glyphs
+	private TextCellFactory.Glyph playerGlyph;
 
 	/**
 	 * Constructs a game screen using provided parameters. Sets a {@link com.badlogic.gdx.utils.viewport.Viewport Viewport}, 
@@ -76,9 +76,8 @@ public class GameScreen extends Screen implements Listener<Event> {
 		
 		stage = new Stage(vp);
 		stage.addActor(display);
-		
 		Coord pos = Mappers.position.get(player).getPosition();
-		glyph = display.glyph('@', SColor.SAFETY_ORANGE.toFloatBits(), pos.x, pos.y);
+		playerGlyph = display.glyph(Mappers.glyph.get(player).getGlyph(), SColor.SAFETY_ORANGE.toFloatBits(), pos.x, pos.y);
 		setCamera(pos);
 		
 		putMap();
@@ -111,7 +110,7 @@ public class GameScreen extends Screen implements Listener<Event> {
 	private void slide() {
 		Coord pos = Mappers.position.get(player).getPosition();
 		setCamera(pos);	
-		display.slide(glyph, (int) glyph.getX(), (int) glyph.getY(), pos.x, pos.y, 0, null);
+		display.slide(playerGlyph, (int) playerGlyph.getX(), (int) playerGlyph.getY(), pos.x, pos.y, 0, null);
 	}
 	
 	/**

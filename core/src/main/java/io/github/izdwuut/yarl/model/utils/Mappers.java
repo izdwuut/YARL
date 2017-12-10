@@ -2,6 +2,7 @@ package io.github.izdwuut.yarl.model.utils;
 
 import com.badlogic.ashley.core.ComponentMapper;
 
+import io.github.izdwuut.yarl.model.components.GlyphComponent;
 import io.github.izdwuut.yarl.model.components.PositionComponent;
 import io.github.izdwuut.yarl.model.components.SizeComponent;
 import io.github.izdwuut.yarl.model.components.creatures.MovementComponent;
@@ -37,4 +38,7 @@ public class Mappers {
 	
 	/** {@link io.github.izdwuut.yarl.model.components.world.FloorComponent Floor} mapper. */
 	public static final ComponentMapper<FloorComponent> floor = ComponentMapper.getFor(FloorComponent.class);
+
+	/** {@link io.github.izdwuut.yarl.model.component.GlyphComponent A Glyph} mapper. */
+	public static final ComponentMapper<GlyphComponent> glyph = ComponentMapper.getFor(GlyphComponent.class);
 }
