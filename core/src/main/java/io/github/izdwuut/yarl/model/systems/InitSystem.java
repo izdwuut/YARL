@@ -53,9 +53,11 @@ public class InitSystem extends EntitySystem {
 	 * Creates and adds systems to an {@link #engine engine}.
 	 */
 	private void addSystems() {
-		MovementSystem mov = new MovementSystem(world);
+		MovementSystem movementSystem = new MovementSystem(engine);
+		WorldSystem worldSystem = new WorldSystem(world);
 		
-		engine.addSystem(mov);
+		engine.addSystem(movementSystem);
+		engine.addSystem(worldSystem);
 		
 		pause();
 	}

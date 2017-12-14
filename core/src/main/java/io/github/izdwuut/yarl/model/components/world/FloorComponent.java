@@ -34,15 +34,4 @@ public class FloorComponent implements Component {
 	public GreasedRegion getFloors() {
 		return floors;
 	}
-	
-	/**
-	 * Checks if a provided {@link squidpony.squidmath.Coord Coord} corresponds to a floor.
-	 * 
-	 * @param coord {@link squidpony.squidmath.Coord a Coord} that is supposed to be a floor
-	 * 
-	 * @return true if {@link squidpony.squidmath.Coord a Coord} is a floor, false otherwise
-	 */
-	public boolean isFloor(Coord coord) {
-		return floors.contains(coord);
-	}
 }

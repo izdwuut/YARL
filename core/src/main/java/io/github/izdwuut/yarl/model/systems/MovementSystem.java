@@ -1,6 +1,7 @@
 package io.github.izdwuut.yarl.model.systems;
 
 import com.badlogic.ashley.core.ComponentMapper;
+import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.signals.Listener;
@@ -9,7 +10,6 @@ import com.badlogic.ashley.systems.IteratingSystem;
 
 import io.github.izdwuut.yarl.model.Event;
 import io.github.izdwuut.yarl.model.components.PositionComponent;
-import io.github.izdwuut.yarl.model.components.SizeComponent;
 import io.github.izdwuut.yarl.model.components.creatures.MovementComponent;
 import io.github.izdwuut.yarl.model.entities.World;
 import io.github.izdwuut.yarl.model.utils.Mappers;
@@ -32,8 +32,8 @@ public class MovementSystem extends IteratingSystem implements Listenable<Event>
 	/** An {@link io.github.izdwuut.yarl.model.Event Event} dispatcher. */
 	private Signal<Event> dispatcher;
 	
-	/** A world {@link com.badlogic.ashley.core.Entity Entity}. */
-	private World world;
+	/** An Ashley engine needed to retrieve {@link io.github.izdwuut.yarl.model.systems.WorldSystem WorldSystem}. */
+	private Engine engine;
 	
 	/**
 	 * Specifies a class of {@link com.badlogic.ashley.core.Entity Entities} that are processed by the system, 
@@ -42,14 +42,14 @@ public class MovementSystem extends IteratingSystem implements Listenable<Event>
 	 * that can be manipulated and {@link io.github.izdwuut.yarl.model.components.creatures.MovementComponent MovementComponent} 
 	 * that describes movement).
 	 * 
-	 * @param world provides world's bounds
+	 * @param engine an Ashley engine needed to retrieve {@link io.github.izdwuut.yarl.model.systems.WorldSystem WorldSystem}
 	 */
-	public MovementSystem(World world) {
+	public MovementSystem(Engine engine) {
 		super(Family.all(PositionComponent.class, MovementComponent.class).get());
 		
+		this.engine = engine;
 		this.mm = Mappers.movement;
 		this.dispatcher = new Signal<Event>();
-		this.world = world;
 	}
 	
 	/**
@@ -70,13 +70,9 @@ public class MovementSystem extends IteratingSystem implements Listenable<Event>
 			PositionComponent pos = Mappers.position.get(entity);
 			Coord target = pos.getPosition()
 					.translate(direction.deltaX, direction.deltaY);
-			//TODO: move to world/game system
-			SizeComponent size = Mappers.size.get(world);
-			if(target.x >= 0 
-					&& target.x < size.getWidth() 
-					&& target.y >= 0 
-					&& target.y < size.getHeight() 
-					&& Mappers.floor.get(world).isFloor(target)) {
+			WorldSystem world = engine.getSystem(WorldSystem.class);
+			if(world.isBounds(target)
+					&& world.isFloor(target)) {
 				pos.setPosition(target);
 			}
 			mov.removeDirection();
@@ -91,8 +87,8 @@ public class MovementSystem extends IteratingSystem implements Listenable<Event>
 	 * @param direction movement direction
 	 */
 	public void move(Entity entity, Direction direction) {
-		MovementComponent mov = mm.get(entity);
-		mov.setDirection(direction);
+		mm.get(entity)
+		.setDirection(direction);
 	}
 	
 	/**

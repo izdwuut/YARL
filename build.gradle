@@ -7,17 +7,17 @@ buildscript {
   }
   dependencies {
     classpath "com.badlogicgames.gdx:gdx-tools:$gdxVersion"
+    classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.2'
   }
 }
 
 allprojects {
   apply plugin: 'eclipse'
-  apply plugin: 'idea'
 }
 
 configure(subprojects) {
   apply plugin: 'java'
-  sourceCompatibility = 1.7
+  sourceCompatibility = 1.8
   compileJava {
     options.fork = true
     options.incremental = true
