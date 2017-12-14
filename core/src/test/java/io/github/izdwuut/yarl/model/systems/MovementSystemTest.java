@@ -78,7 +78,8 @@ class MovementSystemTest {
 		engine.addSystem(worldSystem);
 		engine.addSystem(new MovementSystem(engine));
 		SizeComponent size = world.getComponent(SizeComponent.class);
-		positions = Arrays.asList(Coord.get(size.getWidth(),0), Coord.get(size.getWidth(),size.getHeight()), Coord.get(0,size.getHeight()), Coord.get(0,0));
+		int width = size.getWidth() - 1, height = size.getHeight() - 1;
+		positions = Arrays.asList(Coord.get(width, 0), Coord.get(width, height), Coord.get(0, height), Coord.get(0, 0));
 		directions = Arrays.asList(Direction.CLOCKWISE);
 		iterator = directions.iterator();
 	}
