@@ -36,11 +36,18 @@ class MovementSystemTest {
 	
 	/** Moved entity. */
 	Entity entity;
-	/** Pre and post movement position. */
-	PositionComponent prePosition, postPosition;
 	
-	/** Denotes pre and post movement direction. */
-	MovementComponent preMovement, postMovement;
+	/** Pre movement position. */
+	PositionComponent prePosition;
+	
+	/** Post movement position. */
+	PositionComponent postPosition;
+	
+	/** Denotes pre movement direction. */
+	MovementComponent preMovement;
+	
+	/** Post movement direction. */
+	MovementComponent postMovement;
 	
 	/**
 	 * Entity engine tick.
