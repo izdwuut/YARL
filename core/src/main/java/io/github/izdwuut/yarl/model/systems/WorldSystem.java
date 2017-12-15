@@ -47,7 +47,7 @@ public class WorldSystem extends EntitySystem {
 	 * @return true if {@link squidpony.squidmath.Coord a Coord} is a floor, false otherwise
 	 */
 	public boolean isFloor(Coord coord) {
-		return Mappers.floor.get(world)
+		return Mappers.dungeon.get(world)
 				.getFloors()
 				.contains(coord);
 	}

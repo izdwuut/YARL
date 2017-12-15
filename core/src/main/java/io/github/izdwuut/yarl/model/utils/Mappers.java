@@ -9,7 +9,6 @@ import io.github.izdwuut.yarl.model.components.creatures.MovementComponent;
 import io.github.izdwuut.yarl.model.components.settings.CellSizeComponent;
 import io.github.izdwuut.yarl.model.components.settings.RNGComponent;
 import io.github.izdwuut.yarl.model.components.world.DungeonComponent;
-import io.github.izdwuut.yarl.model.components.world.FloorComponent;
 
 /**
  * Component mappers. A static utility class.
@@ -35,9 +34,6 @@ public class Mappers {
 	
 	/** {@link io.github.izdwuut.yarl.model.components.creatures.MovementComponent A movement} mapper. */
 	public static final ComponentMapper<MovementComponent> movement = ComponentMapper.getFor(MovementComponent.class);
-	
-	/** {@link io.github.izdwuut.yarl.model.components.world.FloorComponent Floor} mapper. */
-	public static final ComponentMapper<FloorComponent> floor = ComponentMapper.getFor(FloorComponent.class);
 
 	/** {@link io.github.izdwuut.yarl.model.component.GlyphComponent A Glyph} mapper. */
 	public static final ComponentMapper<GlyphComponent> glyph = ComponentMapper.getFor(GlyphComponent.class);
