@@ -74,9 +74,7 @@ class WorldSystemTest {
 	 */
 	@Test
 	void isFloorTest() {
-		DungeonComponent dungeonComponent = Mappers.dungeon.get(world);
-		char[][] dungeon = dungeonComponent.getDungeon();
-		GreasedRegion floors = dungeonComponent.getFloors();
+		GreasedRegion floors = Mappers.dungeon.get(world).getFloors();
 		
 		for(int i = 0; i < width; i++) {
 			for(int j = 0; j < width; j++) {
