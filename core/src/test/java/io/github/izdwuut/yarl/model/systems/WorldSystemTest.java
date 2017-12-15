@@ -1,23 +1,19 @@
-package io.github.izdwuut.yarl.test.model.systems;
+package io.github.izdwuut.yarl.model.systems;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
-import java.util.Random;
 import java.util.List;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-
-import com.badlogic.ashley.core.Engine;
+import org.junit.jupiter.api.Test;
 
 import io.github.izdwuut.yarl.model.components.SizeComponent;
 import io.github.izdwuut.yarl.model.entities.World;
-import io.github.izdwuut.yarl.model.utils.Mappers;
 import io.github.izdwuut.yarl.model.factories.SettingsFactory;
 import io.github.izdwuut.yarl.model.factories.WorldFactory;
-import io.github.izdwuut.yarl.model.components.world.DungeonComponent;
-import io.github.izdwuut.yarl.model.systems.WorldSystem;
+import io.github.izdwuut.yarl.model.utils.Mappers;
 import squidpony.squidmath.Coord;
 import squidpony.squidmath.GreasedRegion;
 

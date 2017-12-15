@@ -91,7 +91,8 @@ public class InitSystem extends EntitySystem {
 	
 	/**
 	 * Gets a {@link #player player}.
-	 * @return
+	 * 
+	 * @return a player entity
 	 */
 	public Creature getPlayer() {
 		return player;

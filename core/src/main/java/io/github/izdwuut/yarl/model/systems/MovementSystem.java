@@ -92,7 +92,7 @@ public class MovementSystem extends IteratingSystem implements Listenable<Event>
 	}
 	
 	/**
-	 * Applies movement to every entity specified in {@link #MovementSystem(World world) a Constructor}
+	 * Applies movement to every entity specified in {@link #MovementSystem(Engine) a Constructor}
 	 * and dispatches a {@link io.github.izdwuut.yarl.model.Event#MOVEMENT_END MOVEMENT_END} 
 	 * {@link io.github.izdwuut.yarl.model.Event Event}.
 	 * 

@@ -32,7 +32,7 @@ public class Creature extends Entity {
 	/**
 	 * Tags a player.
 	 * 
-	 * @return current instance of an object (chaining)
+	 * @return a current instance of an object (chaining)
 	 */
 	public Creature setPlayer() {
 		add(new PlayerComponent());
@@ -45,7 +45,7 @@ public class Creature extends Entity {
 	 * 
 	 * @param volume inventory volume
 	 * 
-	 * @return current instance of an object (chaining)
+	 * @return a current instance of an object (chaining)
 	 */
 	public Creature setInv(int volume) {
 		add(new BagComponent(volume));
@@ -56,7 +56,7 @@ public class Creature extends Entity {
 	/**
 	 * Makes a creature able to move.
 	 * 
-	 * @return current instance of an object (chaining)
+	 * @return a current instance of an object (chaining)
 	 */
 	public Creature setMov() {
 		add(new MovementComponent());
@@ -66,8 +66,10 @@ public class Creature extends Entity {
 	
 	/**
 	 * Sets a glyph (display character).
-	 * @param glyph
-	 * @return
+	 * 
+	 * @param glyph a glyph to set
+	 * 
+	 * @return a current instance of an object (chaining)
 	 */
 	public Creature setGlyph(char glyph) {
 		add(new GlyphComponent(glyph));

@@ -50,7 +50,7 @@ class MovementSystemTest {
 	/** Clockwise {@link #entity Entity} positions, starting from top right. */ 
 	static List<Coord> positions;
 	
-	/** Clockwise directions starting from {@link squidpony.squidgrid.Direction.UP UP}. */ 
+	/** Clockwise directions starting from {@link squidpony.squidgrid.Direction UP}. */ 
 	static List<Direction> directions;
 	
 	/** Tracks currently processed direction. */
