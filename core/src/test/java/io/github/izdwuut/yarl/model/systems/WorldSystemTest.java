@@ -1,4 +1,4 @@
-package io.github.izdwuut.yarl.model.systems;
+package io.github.izdwuut.yarl.test.model.systems;
 
 import java.util.Arrays;
 import java.util.Random;

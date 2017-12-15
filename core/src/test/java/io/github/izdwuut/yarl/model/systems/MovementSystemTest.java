@@ -1,31 +1,28 @@
 package io.github.izdwuut.yarl.model.systems;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
-import java.util.Arrays;
-import java.util.ArrayList;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 
-import squidpony.squidgrid.Direction;
-import squidpony.squidmath.Coord;
-import squidpony.squidmath.GreasedRegion;
 import io.github.izdwuut.yarl.model.components.PositionComponent;
 import io.github.izdwuut.yarl.model.components.SizeComponent;
 import io.github.izdwuut.yarl.model.components.creatures.MovementComponent;
 import io.github.izdwuut.yarl.model.components.world.DungeonComponent;
-import io.github.izdwuut.yarl.model.entities.Settings;
 import io.github.izdwuut.yarl.model.entities.World;
 import io.github.izdwuut.yarl.model.factories.SettingsFactory;
 import io.github.izdwuut.yarl.model.factories.WorldFactory;
+import squidpony.squidgrid.Direction;
+import squidpony.squidmath.Coord;
+import squidpony.squidmath.GreasedRegion;
 
 /**
  * Tests {@link io.github.izdwuut.yarl.model.systems.MovementSystem MovementSystem}.
