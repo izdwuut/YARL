@@ -16,7 +16,7 @@ public class CreatureFactory {
 	 * 
 	 * @return a creature entity tagged as a player
 	 */
-	public Creature getPlayer(String name) {
+	public Creature player(String name) {
 		Creature player = new Creature(name);
 		player.setPlayer()
 			.setInv(10)

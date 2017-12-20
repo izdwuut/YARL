@@ -42,7 +42,7 @@ public class InitSystem extends EntitySystem {
 		
 		settings = new SettingsFactory().getSettings();
 		world = new WorldFactory(settings).getWorld();
-		player = new CreatureFactory().getPlayer("izdwuut");
+		player = new CreatureFactory().player("izdwuut");
 		engine.addEntity(player);
 		
 		addSystems();
