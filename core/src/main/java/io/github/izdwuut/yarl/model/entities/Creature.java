@@ -6,6 +6,7 @@ import io.github.izdwuut.yarl.model.components.BagComponent;
 import io.github.izdwuut.yarl.model.components.GlyphComponent;
 import io.github.izdwuut.yarl.model.components.NameComponent;
 import io.github.izdwuut.yarl.model.components.PositionComponent;
+import io.github.izdwuut.yarl.model.components.creatures.HPComponent;
 import io.github.izdwuut.yarl.model.components.creatures.MovementComponent;
 import io.github.izdwuut.yarl.model.components.creatures.PlayerComponent;
 
@@ -73,6 +74,19 @@ public class Creature extends Entity {
 	 */
 	public Creature setGlyph(char glyph) {
 		add(new GlyphComponent(glyph));
+		
+		return this;
+	}
+	
+	/**
+	 * Sets hit points.
+	 * 
+	 * @param hp hit points to set
+	 * 
+	 * @returna a current instance of an object (chaining)
+	 */
+	public Creature setHP(int hp) {
+		add(new HPComponent(hp));
 		
 		return this;
 	}
