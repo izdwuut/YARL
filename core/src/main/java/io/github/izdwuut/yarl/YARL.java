@@ -45,9 +45,7 @@ public class YARL extends Game {
 	public void create() {
 		Gdx.graphics.setContinuousRendering(false);
 		
-		InitSystem init = new InitSystem(engine);
-		init.setProcessing(false);
-		engine.addSystem(init); //TODO: consider refactoring. potentially dangerous - acts as globals. 
+		new InitSystem(engine);
 
 		this.controller = new GameController(this, engine);
 	}
