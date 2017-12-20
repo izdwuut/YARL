@@ -40,4 +40,14 @@ public class CreatureFactory {
 		
 		return sloth;
 	}
+	
+	/**
+	 * Gets a random monster. There is only a {@link #sloth() Sloth} for now, 
+	 * so returning it is as random as it gets.
+	 * 
+	 * @return a random monster (a Sloth for now)
+	 */
+	public Creature random() {
+		return sloth();
+	}
 }
