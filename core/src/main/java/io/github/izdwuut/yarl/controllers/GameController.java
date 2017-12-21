@@ -9,6 +9,7 @@ import io.github.izdwuut.yarl.model.entities.Settings;
 import io.github.izdwuut.yarl.model.entities.World;
 import io.github.izdwuut.yarl.model.systems.InitSystem;
 import io.github.izdwuut.yarl.model.systems.MovementSystem;
+import io.github.izdwuut.yarl.model.systems.WorldSystem;
 import io.github.izdwuut.yarl.views.GameScreen;
 import squidpony.squidgrid.Direction;
 import squidpony.squidgrid.gui.gdx.SquidInput;
@@ -59,7 +60,7 @@ public class GameController extends Controller {
 	private void init() {
 		InitSystem init = engine.getSystem(InitSystem.class);
 		player = init.getPlayer();
-		screen = new GameScreen(init.getWorld(), init.getSettings(), player);
+		screen = new GameScreen(init.getWorld(), init.getSettings(), player, engine.getSystem(WorldSystem.class));
 		
 		engine.getSystem(MovementSystem.class)
 			.addListener(screen);	
