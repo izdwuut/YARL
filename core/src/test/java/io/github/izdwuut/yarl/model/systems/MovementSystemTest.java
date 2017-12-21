@@ -17,6 +17,7 @@ import io.github.izdwuut.yarl.model.components.PositionComponent;
 import io.github.izdwuut.yarl.model.components.SizeComponent;
 import io.github.izdwuut.yarl.model.components.creatures.MovementComponent;
 import io.github.izdwuut.yarl.model.components.world.DungeonComponent;
+import io.github.izdwuut.yarl.model.entities.Settings;
 import io.github.izdwuut.yarl.model.entities.World;
 import io.github.izdwuut.yarl.model.factories.SettingsFactory;
 import io.github.izdwuut.yarl.model.factories.WorldFactory;
@@ -77,7 +78,7 @@ class MovementSystemTest {
 		//use known seed, self-populate world (known entities)
 		World world = new WorldFactory(new SettingsFactory().getSettings()).getWorld();
 		floors = world.getComponent(DungeonComponent.class).getFloors();
-		worldSystem = new WorldSystem(world);
+		worldSystem = new WorldSystem(world, new Settings());
 		worldSystem.setProcessing(false);
 		engine.addSystem(worldSystem);
 		engine.addSystem(new MovementSystem(engine));

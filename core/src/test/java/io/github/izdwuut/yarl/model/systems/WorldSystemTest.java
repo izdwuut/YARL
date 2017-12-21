@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import io.github.izdwuut.yarl.model.components.SizeComponent;
+import io.github.izdwuut.yarl.model.entities.Settings;
 import io.github.izdwuut.yarl.model.entities.World;
 import io.github.izdwuut.yarl.model.factories.SettingsFactory;
 import io.github.izdwuut.yarl.model.factories.WorldFactory;
@@ -41,8 +42,9 @@ class WorldSystemTest {
 	
 	@BeforeAll
 	static void initAll() {
-		world = new WorldFactory(new SettingsFactory().getSettings()).getWorld();
-		worldSystem = new WorldSystem(world);
+		Settings settings = new SettingsFactory().getSettings();
+		world = new WorldFactory(settings).getWorld();
+		worldSystem = new WorldSystem(world, settings);
 		SizeComponent size = Mappers.size.get(world);
 		width = size.getWidth();
 		height = size.getHeight();
