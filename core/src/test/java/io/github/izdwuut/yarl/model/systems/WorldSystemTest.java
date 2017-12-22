@@ -1,5 +1,6 @@
 package io.github.izdwuut.yarl.model.systems;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -9,7 +10,11 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import com.badlogic.ashley.core.Engine;
+
 import io.github.izdwuut.yarl.model.components.SizeComponent;
+import io.github.izdwuut.yarl.model.components.world.DungeonComponent;
+import io.github.izdwuut.yarl.model.entities.Creature;
 import io.github.izdwuut.yarl.model.entities.Settings;
 import io.github.izdwuut.yarl.model.entities.World;
 import io.github.izdwuut.yarl.model.factories.SettingsFactory;
@@ -40,6 +45,8 @@ class WorldSystemTest {
 	/** Dungeon width. */
 	static int width;
 	
+	static DungeonComponent dungeon;
+	
 	static Engine engine;
 	
 	@BeforeAll
@@ -52,6 +59,7 @@ class WorldSystemTest {
 		width = size.getWidth();
 		height = size.getHeight();
 		invalid = Arrays.asList(Coord.get(0, -1), Coord.get(width, 0), Coord.get(width, height), Coord.get(-1, 0));
+		dungeon = Mappers.dungeon.get(world);
 	}
 	
 	/**
@@ -75,7 +83,7 @@ class WorldSystemTest {
 	 */
 	@Test
 	void isFloorTest() {
-		GreasedRegion floors = Mappers.dungeon.get(world).getFloors();
+		GreasedRegion floors = dungeon.getFloors();
 		
 		for(int i = 0; i < width; i++) {
 			for(int j = 0; j < width; j++) {
@@ -92,5 +100,35 @@ class WorldSystemTest {
 		for(Coord coord : invalid) {
 			assertFalse(worldSystem.isFloor(coord));
 		}
+	}
+	
+	/**
+	 * Tests {@link io.github.izdwuut.yarl.model.systems.WorldSystem#populate() populate}.
+	 */
+	@Test
+	void populateTest() {
+		List<Coord> positions = Arrays.asList(Coord.get(71, 10),  
+				Coord.get(77, 12),  
+				Coord.get(58, 21),  
+				Coord.get(72, 13), 
+				Coord.get(46, 22),  
+				Coord.get(61, 21),  
+				Coord.get(15, 21),  
+				Coord.get(11, 3),  
+				Coord.get(41, 16),  
+				Coord.get(5, 20));
+		GreasedRegion floors = new GreasedRegion(dungeon.getDungeon(), '.');
+		
+		assertEquals(dungeon.getCreatureMap()
+				.getAll()
+				.size(), positions.size());
+		
+		for(Coord pos : positions) {
+			assertTrue(worldSystem.isCreature(pos));
+			assertEquals(dungeon.getCreature(pos).getClass(), Creature.class);
+			floors.remove(pos);
+		}
+		
+		assertEquals(floors, dungeon.getFloors());
 	}
 }
