@@ -8,10 +8,14 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.badlogic.ashley.core.Engine;
+import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.utils.ImmutableArray;
 
+import io.github.izdwuut.yarl.model.components.PositionComponent;
 import io.github.izdwuut.yarl.model.components.SizeComponent;
 import io.github.izdwuut.yarl.model.components.world.DungeonComponent;
 import io.github.izdwuut.yarl.model.entities.Creature;
@@ -31,10 +35,10 @@ import squidpony.squidmath.GreasedRegion;
  */
 class WorldSystemTest {
 	/** A world entity. */
-	static World world;
+	World world;
 	
 	/** Tested system. */
-	static WorldSystem worldSystem;
+	WorldSystem worldSystem;
 	
 	/** Coords for which tests should fail. */
 	static List<Coord> invalid;
@@ -45,20 +49,26 @@ class WorldSystemTest {
 	/** Dungeon width. */
 	static int width;
 	
-	static DungeonComponent dungeon;
+	DungeonComponent dungeon;
 	
 	static Engine engine;
 	
 	@BeforeAll
 	static void initAll() {
 		engine = new Engine();
-		Settings settings = new SettingsFactory().getSettings();
-		world = new WorldFactory(settings).getWorld();
-		worldSystem = new WorldSystem(world, settings, engine);
+		World world = new WorldFactory(new SettingsFactory().getSettings()).getWorld();
 		SizeComponent size = Mappers.size.get(world);
 		width = size.getWidth();
 		height = size.getHeight();
 		invalid = Arrays.asList(Coord.get(0, -1), Coord.get(width, 0), Coord.get(width, height), Coord.get(-1, 0));
+	}
+	
+	@BeforeEach
+	void init() {
+		engine.removeAllEntities();
+		Settings settings = new SettingsFactory().getSettings();
+		world = new WorldFactory(settings).getWorld();
+		worldSystem = new WorldSystem(world, settings, engine);
 		dungeon = Mappers.dungeon.get(world);
 	}
 	
@@ -125,10 +135,45 @@ class WorldSystemTest {
 		
 		for(Coord pos : positions) {
 			assertTrue(worldSystem.isCreature(pos));
-			assertEquals(dungeon.getCreature(pos).getClass(), Creature.class);
 			floors.remove(pos);
 		}
 		
-		assertEquals(floors, dungeon.getFloors());
+		List<Coord> testedFloors = floors.getAll(), fetchedFloors = dungeon.getFloors().getAll();
+		assertEquals(testedFloors.size(), fetchedFloors.size());
+		for(int i = 0, j = 0; i < testedFloors.size(); i++, j++) {
+			assertEquals(testedFloors.get(i), fetchedFloors.get(j));
+		}
+		
+		ImmutableArray<Entity> entities = engine.getEntities();
+		assertEquals(entities.size(), positions.size());
+		for(Entity entity : entities) {
+			Coord pos = Mappers.position.get(entity)
+					.getPosition();
+			assertTrue(positions.contains(pos));
+		}
+	}
+	
+	/**
+	 * Tests {@link io.github.izdwuut.yarl.model.systems.WorldSystem#isCreature(Coord coord) isCreature}.
+	 */
+	@Test
+	void isCreatureTest() {
+		Coord pos = Coord.get(5, 5);
+		Creature creature = new Creature("Test creature");
+		PositionComponent posComp = new PositionComponent();
+		posComp.setPosition(pos);
+		creature.add(posComp);
+		dungeon.setCreature(pos, creature);
+		assertTrue(worldSystem.isCreature(pos));
+		
+		List<Coord> emptyPositions = Arrays.asList(Coord.get(1, 1),
+				Coord.get(15, 1),
+				Coord.get(10, 20),
+				Coord.get(23, 3),
+				Coord.get(5, 11));
+		
+		for(Coord emptyPos : emptyPositions) {
+			assertFalse(worldSystem.isCreature(emptyPos));
+		}
 	}
 }
