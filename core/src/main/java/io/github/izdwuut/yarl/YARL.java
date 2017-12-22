@@ -6,7 +6,6 @@ import com.badlogic.gdx.Gdx;
 
 import io.github.izdwuut.yarl.controllers.Controller;
 import io.github.izdwuut.yarl.controllers.GameController;
-import io.github.izdwuut.yarl.model.systems.InitSystem;
 
 /**
  * Main game class. It stores a reference to a current {@link #controller controller} and 
@@ -38,14 +37,11 @@ public class YARL extends Game {
 	
 	/**
 	 * Sets non continuous rendering.
-	 * Instantiates default {@link #controller controller} 
-	 * and creates systems which are then added to an Ashley
+	 * Instantiates a default {@link #controller controller}.
 	 * {@link #engine engine}. 
 	 */
 	public void create() {
 		Gdx.graphics.setContinuousRendering(false);
-		
-		new InitSystem(engine);
 
 		this.controller = new GameController(this, engine);
 	}

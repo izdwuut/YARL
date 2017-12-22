@@ -10,8 +10,8 @@ import io.github.izdwuut.yarl.model.Event;
 import io.github.izdwuut.yarl.model.components.SizeComponent;
 import io.github.izdwuut.yarl.model.components.world.DungeonComponent;
 import io.github.izdwuut.yarl.model.entities.Creature;
-import io.github.izdwuut.yarl.model.entities.Settings;
 import io.github.izdwuut.yarl.model.entities.World;
+import io.github.izdwuut.yarl.model.systems.InitSystem;
 import io.github.izdwuut.yarl.model.systems.WorldSystem;
 import io.github.izdwuut.yarl.model.utils.Mappers;
 import squidpony.squidgrid.gui.gdx.SColor;
@@ -61,16 +61,15 @@ public class GameScreen extends Screen implements Listener<Event> {
 	 * adds actors to a {@link #stage Stage} and calls for {@link #putMap() putMap} to put 
 	 * {@link #dungeon a dungeon} on a {@link squidpony.squidgrid.gui.gdx.SparseLayers SparseLayers}.
 	 * 
-	 * @param world a {@link io.github.izdwuut.yarl.model.entities.World World} entity
-	 * @param settings {@link io.github.izdwuut.yarl.model.entities.Settings Settings} entity
-	 * @param player a player {@link io.github.izdwuut.yarl.model.entities.Creature Creature}
+	 * @param initSystem an initialization system
+	 * @param worldSystem a world system
 	 */
 	//TODO: init()
-	public GameScreen(World world, Settings settings, Creature player, WorldSystem worldSystem) {
-		super(settings);
+	public GameScreen(InitSystem initSystem, WorldSystem worldSystem) {
+		super(initSystem.getSettings());
 		
-		this.player = player;
-		this.world = world;
+		this.player = initSystem.getPlayer();
+		this.world = initSystem.getWorld();
 		this.worldSystem = worldSystem;
 		
 		SizeComponent size = Mappers.size.get(world);

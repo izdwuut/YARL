@@ -59,6 +59,7 @@ public class InitSystem extends EntitySystem {
 		engine.addSystem(this);
 		engine.addSystem(movementSystem);
 		engine.addSystem(worldSystem);
+		engine.removeSystem(this);
 		
 		pause();
 	}

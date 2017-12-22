@@ -56,11 +56,12 @@ public class GameController extends Controller {
 
 	/**
 	 * Further actions needed to be done to build a GameController.
+	 * An InitSystem has to not be used outside constructors.
 	 */
 	private void init() {
-		InitSystem init = engine.getSystem(InitSystem.class);
+		InitSystem init = new InitSystem(engine);
 		player = init.getPlayer();
-		screen = new GameScreen(init.getWorld(), init.getSettings(), player, engine.getSystem(WorldSystem.class));
+		screen = new GameScreen(init, engine.getSystem(WorldSystem.class));
 		
 		engine.getSystem(MovementSystem.class)
 			.addListener(screen);	
