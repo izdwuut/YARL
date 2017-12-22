@@ -54,7 +54,7 @@ public class InitSystem extends EntitySystem {
 	 */
 	private void addSystems() {
 		MovementSystem movementSystem = new MovementSystem(engine);
-		WorldSystem worldSystem = new WorldSystem(world, settings);
+		WorldSystem worldSystem = new WorldSystem(world, settings, engine);
 		
 		engine.addSystem(this);
 		engine.addSystem(movementSystem);

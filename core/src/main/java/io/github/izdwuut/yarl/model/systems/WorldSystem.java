@@ -1,5 +1,6 @@
 package io.github.izdwuut.yarl.model.systems;
 
+import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.EntitySystem;
 
 import io.github.izdwuut.yarl.model.components.SizeComponent;
@@ -32,11 +33,14 @@ public class WorldSystem extends EntitySystem {
 	/** A dungeon component. */
 	DungeonComponent dungeonComp;
 	
-	public WorldSystem(World world, Settings settings) {
+	Engine engine;
+	
+	public WorldSystem(World world, Settings settings, Engine engine) {
 		this.world = world;
 		this.settings = settings;
 		this.dungeonComp = Mappers.dungeon.get(world);
 		this.floors = dungeonComp.getFloors();
+		this.engine = engine;
 		
 		populate();
 	}
@@ -74,12 +78,11 @@ public class WorldSystem extends EntitySystem {
 	 * Populate a dungeon with procedurally generated creatures.
 	 */
 	//TODO: handle no empty floor
-	public void populate() {
+	void populate() {
 		CreatureFactory factory = new CreatureFactory();
 		for(int i = 0; i < 10; i++) {
 			Creature creature = factory.random();
 			//TODO: a player has to be in a creatures array!
-			//TODO: rng is not a part of a world, put in settings
 			Mappers.position.get(creature)
 			.setPosition(getRandomFloor());
 			addCreature(creature);
@@ -98,6 +101,7 @@ public class WorldSystem extends EntitySystem {
 			dungeonComp.setCreature(pos, creature);
 			dungeonComp.getFloors()
 			.remove(pos);
+			engine.addEntity(creature);
 		}
 	}
 	

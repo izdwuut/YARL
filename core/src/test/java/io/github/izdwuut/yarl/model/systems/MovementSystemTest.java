@@ -76,9 +76,10 @@ class MovementSystemTest {
 	static void initAll() {
 		engine = new Engine();
 		//use known seed, self-populate world (known entities)
-		World world = new WorldFactory(new SettingsFactory().getSettings()).getWorld();
+		Settings settings = new SettingsFactory().getSettings();
+		World world = new WorldFactory(settings).getWorld();
 		floors = world.getComponent(DungeonComponent.class).getFloors();
-		worldSystem = new WorldSystem(world, new Settings());
+		worldSystem = new WorldSystem(world, settings, engine);
 		worldSystem.setProcessing(false);
 		engine.addSystem(worldSystem);
 		engine.addSystem(new MovementSystem(engine));

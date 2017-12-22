@@ -40,11 +40,14 @@ class WorldSystemTest {
 	/** Dungeon width. */
 	static int width;
 	
+	static Engine engine;
+	
 	@BeforeAll
 	static void initAll() {
+		engine = new Engine();
 		Settings settings = new SettingsFactory().getSettings();
 		world = new WorldFactory(settings).getWorld();
-		worldSystem = new WorldSystem(world, settings);
+		worldSystem = new WorldSystem(world, settings, engine);
 		SizeComponent size = Mappers.size.get(world);
 		width = size.getWidth();
 		height = size.getHeight();
