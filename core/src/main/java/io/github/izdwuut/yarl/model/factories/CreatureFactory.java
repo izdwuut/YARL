@@ -29,7 +29,7 @@ public class CreatureFactory {
 	/**
 	 * Gets a Sloth. He is really friendly (or just lazy) and not in a mood
 	 * to do anything but sit and think of things he could possibly not do.
-	 * Everyone needs to be like the Sloth from time to time.
+	 * Everybody needs to be like the Sloth from time to time.
 	 * 
 	 * @return a Sloth creature
 	 */
