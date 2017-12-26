@@ -83,7 +83,7 @@ public class MovementSystem extends IteratingSystem implements Listenable<Event>
 				if(worldSystem.isFloor(target)) {
 					pos.setPosition(target);
 				} else {
-					initCombat(target, (Creature) entity);
+					initCombat(target, entity);
 				}
 			}
 			mov.removeDirection();
@@ -120,10 +120,10 @@ public class MovementSystem extends IteratingSystem implements Listenable<Event>
 		dispatcher.add(listener);
 	}
 	
-	private void initCombat(Coord target, Creature attacker) {
-		if(worldSystem.isCreature(target)) {
+	private void initCombat(Coord target, Entity attacker) {
+		if(attacker instanceof Creature && worldSystem.isCreature(target)) {
 			Combat combat = new Combat();
-			combat.setAttacker(attacker); //?
+			combat.setAttacker((Creature) attacker);
 			combat.setDefender(Mappers.dungeon.get(world).getCreature(target));
 			engine.addEntity(combat);
 		}
