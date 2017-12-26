@@ -134,14 +134,16 @@ public class GameScreen extends Screen implements Listener<Event> {
 	
 	/**
 	 * Listens for an {@link io.github.izdwuut.yarl.model.Event Event} dispatched by
-	 * {@link io.github.izdwuut.yarl.model.systems.MovementSystem a MovementSystem}.
+	 * {@link io.github.izdwuut.yarl.model.systems.MovementSystem a MovementSystem} or 
+	 * {@link io.github.izdwuut.yarl.model.systems.CombatSystem a CombatSystem}.
 	 */
 	@Override
 	public void receive(Signal<Event> signal, Event e) {
 		switch(e) {
 		case MOVEMENT_END:
-			putMap();
 			slide();
+		case CREATURE_KILL:
+			putMap();
 		break;
 		}
 	}

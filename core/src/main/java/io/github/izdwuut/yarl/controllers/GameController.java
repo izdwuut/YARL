@@ -7,6 +7,7 @@ import com.badlogic.gdx.Gdx;
 import io.github.izdwuut.yarl.model.entities.Creature;
 import io.github.izdwuut.yarl.model.entities.Settings;
 import io.github.izdwuut.yarl.model.entities.World;
+import io.github.izdwuut.yarl.model.systems.CombatSystem;
 import io.github.izdwuut.yarl.model.systems.InitSystem;
 import io.github.izdwuut.yarl.model.systems.MovementSystem;
 import io.github.izdwuut.yarl.model.systems.WorldSystem;
@@ -59,9 +60,12 @@ public class GameController extends Controller {
 		player = init.getPlayer();
 		screen = new GameScreen(init, engine.getSystem(WorldSystem.class));
 		
+		//TODO: listeners are set in screens
 		engine.getSystem(MovementSystem.class)
 			.addListener(screen);	
 		game.setScreen(screen);
+		engine.getSystem(CombatSystem.class).
+		addListener(screen);
 		
 		handleInput();
 		
@@ -99,10 +103,12 @@ public class GameController extends Controller {
 	@Override
 	protected void pause() {
 		engine.getSystem(MovementSystem.class).setProcessing(false);
+		engine.getSystem(CombatSystem.class).setProcessing(false);
 	}
 	
 	@Override
 	protected void resume() {
 		engine.getSystem(MovementSystem.class).setProcessing(true);
+		engine.getSystem(CombatSystem.class).setProcessing(true);
 	}
 }

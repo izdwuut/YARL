@@ -11,6 +11,9 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import io.github.izdwuut.yarl.model.Event;
 import io.github.izdwuut.yarl.model.components.PositionComponent;
 import io.github.izdwuut.yarl.model.components.creatures.MovementComponent;
+import io.github.izdwuut.yarl.model.entities.Combat;
+import io.github.izdwuut.yarl.model.entities.Creature;
+import io.github.izdwuut.yarl.model.entities.World;
 import io.github.izdwuut.yarl.model.utils.Mappers;
 import squidpony.squidgrid.Direction;
 import squidpony.squidmath.Coord;
@@ -19,7 +22,8 @@ import squidpony.squidmath.Coord;
  * {@link com.badlogic.ashley.core.EntitySystem A system} that is responsible for 
  * {@link com.badlogic.ashley.core.Entity Entity} movement.
  * Uses {@link com.badlogic.ashley.signals.Signal Signal} to dispatch 
- * {@link io.github.izdwuut.yarl.model.Event Events}.
+ * {@link io.github.izdwuut.yarl.model.Event Events}. Relies on a 
+ * {@link io.github.izdwuut.yarl.model.systems.WorldSystem WorldSystem}.
  * 
  * @author Bartosz "izdwuut" Konikiewicz
  * @since  2017-11-20
@@ -34,6 +38,10 @@ public class MovementSystem extends IteratingSystem implements Listenable<Event>
 	/** An Ashley engine needed to retrieve {@link io.github.izdwuut.yarl.model.systems.WorldSystem WorldSystem}. */
 	private Engine engine;
 	
+	World world;
+	
+	WorldSystem worldSystem;
+	
 	/**
 	 * Specifies a class of {@link com.badlogic.ashley.core.Entity Entities} that are processed by the system, 
 	 * which is every {@link com.badlogic.ashley.core.Entity Entity} that can be moved 
@@ -43,12 +51,14 @@ public class MovementSystem extends IteratingSystem implements Listenable<Event>
 	 * 
 	 * @param engine an Ashley engine needed to retrieve {@link io.github.izdwuut.yarl.model.systems.WorldSystem WorldSystem}
 	 */
-	public MovementSystem(Engine engine) {
+	public MovementSystem(Engine engine, World world) {
 		super(Family.all(PositionComponent.class, MovementComponent.class).get());
 		
 		this.engine = engine;
 		this.mm = Mappers.movement;
 		this.dispatcher = new Signal<Event>();
+		this.world = world;
+		this.worldSystem = engine.getSystem(WorldSystem.class);
 	}
 	
 	/**
@@ -69,10 +79,12 @@ public class MovementSystem extends IteratingSystem implements Listenable<Event>
 			PositionComponent pos = Mappers.position.get(entity);
 			Coord target = pos.getPosition()
 					.translate(direction.deltaX, direction.deltaY);
-			WorldSystem world = engine.getSystem(WorldSystem.class);
-			if(world.isBounds(target)
-					&& world.isFloor(target)) {
-				pos.setPosition(target);
+			if(worldSystem.isBounds(target)) {
+				if(worldSystem.isFloor(target)) {
+					pos.setPosition(target);
+				} else {
+					initCombat(target, (Creature) entity);
+				}
 			}
 			mov.removeDirection();
 		}
@@ -106,5 +118,14 @@ public class MovementSystem extends IteratingSystem implements Listenable<Event>
 	@Override
 	public void addListener(Listener<Event> listener) {
 		dispatcher.add(listener);
+	}
+	
+	private void initCombat(Coord target, Creature attacker) {
+		if(worldSystem.isCreature(target)) {
+			Combat combat = new Combat();
+			combat.setAttacker(attacker); //?
+			combat.setDefender(Mappers.dungeon.get(world).getCreature(target));
+			engine.addEntity(combat);
+		}
 	}
 }

@@ -80,7 +80,7 @@ public class WorldSystem extends EntitySystem {
 	//TODO: handle no empty floor
 	void populate() {
 		CreatureFactory factory = new CreatureFactory();
-		for(int i = 0; i < 10; i++) {
+		for(int i = 0; i < 30; i++) {
 			Creature creature = factory.random();
 			//TODO: a player has to be in a creatures array!
 			Mappers.position.get(creature)
@@ -134,5 +134,11 @@ public class WorldSystem extends EntitySystem {
 	 */
 	public World getWorld() {
 		return world;
+	}
+	
+	public void removeCreature(Creature creature) {
+		dungeonComp.removeCreature(Mappers.position.get(creature)
+				.getPosition());
+		engine.removeEntity(creature);
 	}
 }
