@@ -6,6 +6,7 @@ import java.util.Map;
 import com.badlogic.ashley.core.Component;
 
 import io.github.izdwuut.yarl.model.entities.Creature;
+import io.github.izdwuut.yarl.model.utils.Mappers;
 import squidpony.squidmath.Coord;
 import squidpony.squidmath.GreasedRegion;
 
@@ -85,12 +86,13 @@ public class DungeonComponent implements Component {
 	}
 
 	/**
-	 * Adds a creature at provided position.
+	 * Adds a creature at it's position.
 	 * 
-	 * @param pos a creature position
 	 * @param creature a creature to add
 	 */
-	public void setCreature(Coord pos, Creature creature) {
+	public void setCreature(Creature creature) {
+		Coord pos = Mappers.position.get(creature)
+				.getPosition();
 		creatures.put(pos, creature);
 		creatureMap.insert(pos);
 	}
@@ -102,5 +104,11 @@ public class DungeonComponent implements Component {
 	 */
 	public GreasedRegion getCreatureMap() {
 		return creatureMap;
+	}
+	
+	public void removeCreature(Coord pos) {
+		creatures.remove(pos);
+		creatureMap.remove(pos);
+		floors.add(pos);
 	}
 }

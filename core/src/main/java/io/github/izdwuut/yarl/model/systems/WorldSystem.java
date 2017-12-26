@@ -98,7 +98,7 @@ public class WorldSystem extends EntitySystem {
 	private void addCreature(Creature creature) {
 		Coord pos = Mappers.position.get(creature).getPosition();
 		if(isFloor(pos)) {
-			dungeonComp.setCreature(pos, creature);
+			dungeonComp.setCreature(creature);
 			dungeonComp.getFloors()
 			.remove(pos);
 			engine.addEntity(creature);
