@@ -43,7 +43,7 @@ public class YARL extends Game {
 	public void create() {
 		Gdx.graphics.setContinuousRendering(false);
 
-		this.controller = new GameController(this, engine);
+		this.controller = new GameController(engine, this);
 	}
 	
 	/**

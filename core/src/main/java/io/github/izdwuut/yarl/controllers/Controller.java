@@ -1,6 +1,7 @@
 package io.github.izdwuut.yarl.controllers;
 
 import com.badlogic.ashley.core.Engine;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 
 import squidpony.squidgrid.gui.gdx.SquidInput;
@@ -22,14 +23,18 @@ public abstract class Controller {
 	/** An Ashley engine. */
 	protected Engine engine;
 	
+	/** A game class. */
+	protected Game game;
+	
 	/**
 	 * Constructs a controller using an {@link com.badlogic.ashley.core.Engine Engine} 
 	 * passed either by {@link io.github.izdwuut.yarl.YARL YARL} or any controller.
 	 * 
 	 * @param engine an Ashley engine
 	 */
-	public Controller(Engine engine) {
+	public Controller(Engine engine, Game game) {
 		this.engine = engine;
+		this.game = game;
 	}
 	
 	/**

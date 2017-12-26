@@ -1,9 +1,9 @@
 package io.github.izdwuut.yarl.controllers;
 
 import com.badlogic.ashley.core.Engine;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 
-import io.github.izdwuut.yarl.YARL;
 import io.github.izdwuut.yarl.model.entities.Creature;
 import io.github.izdwuut.yarl.model.entities.Settings;
 import io.github.izdwuut.yarl.model.entities.World;
@@ -22,9 +22,6 @@ import squidpony.squidgrid.gui.gdx.SquidInput;
  * @since  2017-11-18
  */
 public class GameController extends Controller {
-	/** A game class. */
-	private YARL game;
-	
 	/** A player entity. */
 	private Creature player;
 	
@@ -45,11 +42,10 @@ public class GameController extends Controller {
 	 * @param game a main game object
 	 * @param engine an Ashley engine
 	 */
-	public GameController(YARL game, Engine engine) {
-		super(engine);
+	public GameController(Engine engine, Game game) {
+		super(engine, game);
 		
 		this.game = game;
-		this.engine = engine;
 		
 		init();
 	}
