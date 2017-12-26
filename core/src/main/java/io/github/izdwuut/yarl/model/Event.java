@@ -1,5 +1,9 @@
 package io.github.izdwuut.yarl.model;
 
+import com.badlogic.ashley.core.Entity;
+
+import io.github.izdwuut.yarl.model.entities.Creature;
+
 /**
  * An enum that holds every event that an Ashley 
  * {@link com.badlogic.ashley.core.EntitySystem system} can dispatch.
@@ -12,5 +16,10 @@ public enum Event {
 	 * Dispatches after {@link io.github.izdwuut.yarl.model.systems.MovementSystem} 
 	 * {@link io.github.izdwuut.yarl.model.systems.MovementSystem#update(float deltaTime) update}. 
 	 */
-	MOVEMENT_END;
+	MOVEMENT_END,
+	
+	/**
+	 * Dispatched by {@link io.github.izdwuut.yarl.model.systems.CombatSystem#cleanup(Creature creature, Entity combat) CombatSystem}'s 
+	 */
+	CREATURE_KILL;
 }

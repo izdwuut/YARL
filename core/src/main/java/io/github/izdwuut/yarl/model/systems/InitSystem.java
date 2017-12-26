@@ -31,7 +31,6 @@ public class InitSystem extends EntitySystem {
 	/** A player entity. */
 	private Creature player;
 	
-	
 	/**
 	 * Gets main entities from factories and adds systems to an {@link #engine engine}.
 	 * 
@@ -53,12 +52,18 @@ public class InitSystem extends EntitySystem {
 	 * Creates and adds systems to an {@link #engine engine}.
 	 */
 	private void addSystems() {
-		MovementSystem movementSystem = new MovementSystem(engine);
-		WorldSystem worldSystem = new WorldSystem(world, settings, engine);
-		
 		engine.addSystem(this);
-		engine.addSystem(movementSystem);
+
+		WorldSystem worldSystem = new WorldSystem(world, settings, engine);
 		engine.addSystem(worldSystem);
+		
+		MovementSystem movementSystem = new MovementSystem(engine, world);
+		movementSystem.priority = 1;
+		engine.addSystem(movementSystem);
+
+		CombatSystem combatSystem = new CombatSystem(engine);
+		engine.addSystem(combatSystem);
+		
 		engine.removeSystem(this);
 		
 		pause();
