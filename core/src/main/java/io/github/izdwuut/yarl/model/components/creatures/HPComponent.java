@@ -33,4 +33,8 @@ public class HPComponent implements Component {
 	public void setHP(int hp) {
 		this.hp = hp;
 	}
+	
+	public void addHP(int hp) {
+		this.hp += hp;
+	}
 }
