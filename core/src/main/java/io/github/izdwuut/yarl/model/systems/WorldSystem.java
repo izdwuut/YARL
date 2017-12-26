@@ -82,7 +82,6 @@ public class WorldSystem extends EntitySystem {
 		CreatureFactory factory = new CreatureFactory();
 		for(int i = 0; i < 10; i++) {
 			Creature creature = factory.random();
-			//TODO: a player has to be in a creatures array!
 			Mappers.position.get(creature)
 			.setPosition(getRandomFloor());
 			addCreature(creature);
@@ -94,7 +93,6 @@ public class WorldSystem extends EntitySystem {
 	 * 
 	 * @param creature {@link io.github.izdwuut.yarl.model.entities.Creature a creature} to add to a dungeon
 	 */
-	//TODO: unit test out of bounds
 	private void addCreature(Creature creature) {
 		Coord pos = Mappers.position.get(creature).getPosition();
 		if(isFloor(pos)) {

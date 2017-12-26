@@ -83,7 +83,7 @@ public class Creature extends Entity {
 	 * 
 	 * @param hp hit points to set
 	 * 
-	 * @returna a current instance of an object (chaining)
+	 * @return a current instance of an object (chaining)
 	 */
 	public Creature setHP(int hp) {
 		add(new HPComponent(hp));

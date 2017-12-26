@@ -34,6 +34,11 @@ public class HPComponent implements Component {
 		this.hp = hp;
 	}
 	
+	/**
+	 * Modifies {@link #hp hit points}.
+	 * 
+	 * @param hp an amount of hit points to add
+	 */
 	public void addHP(int hp) {
 		this.hp += hp;
 	}

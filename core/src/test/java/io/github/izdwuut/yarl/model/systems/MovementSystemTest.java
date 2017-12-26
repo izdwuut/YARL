@@ -117,7 +117,8 @@ class MovementSystemTest {
 	
 	/**
 	 * Tests movement, specifically {@link io.github.izdwuut.yarl.model.systems.MovementSystem MovementSystem} {@link io.github.izdwuut.yarl.model.systems.MovementSystem#processEntity(Entity entity, float deltaTime) processEntity} method.
-	 * Assures that only floors are traversable and an {@link com.badlogic.ashley.core.Entity Entity} can't move out of map bounds.
+	 * Assures that only floors are traversable and an {@link com.badlogic.ashley.core.Entity Entity} can't move out of map bounds. 
+	 * Initiates combat if possible.
 	 */
 	@Test
 	void movementTest() {				

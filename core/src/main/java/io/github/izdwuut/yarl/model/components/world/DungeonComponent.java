@@ -106,6 +106,11 @@ public class DungeonComponent implements Component {
 		return creatureMap;
 	}
 	
+	/**
+	 * Removes a creature at a given position.
+	 * 
+	 * @param pos creature's position
+	 */
 	public void removeCreature(Coord pos) {
 		creatures.remove(pos);
 		creatureMap.remove(pos);
