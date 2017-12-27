@@ -14,6 +14,5 @@ public interface Listenable<T> {
 	 * 
 	 * @param listener a listener to register
 	 */
-	default void addListener(Listener<T> listener) {
-	}
+	void addListener(Listener<T> listener);
 }
