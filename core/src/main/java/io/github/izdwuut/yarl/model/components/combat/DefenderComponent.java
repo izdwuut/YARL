@@ -8,6 +8,7 @@ import io.github.izdwuut.yarl.model.entities.Creature;
  * A defender component. Stores a creature that is .
  * 
  * @author Bartosz "izdwuut" Konikiewicz
+ * @since  2017-12-22
  */
 public class DefenderComponent implements Component{
 	/** A {@link io.github.izdwuut.yarl.model.entities.Combat Combat}'s passive side. */

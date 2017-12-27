@@ -19,7 +19,7 @@ import io.github.izdwuut.yarl.model.utils.Mappers;
  * i.e. a battle between two creatures - an attacker and a defender.
  * 
  * @author Bartosz "izdwuut" Konikiewicz
- *
+ * @since  2017-12-26
  */
 public class CombatSystem extends IteratingSystem implements Listenable<Event> {
 	/** 
@@ -48,7 +48,7 @@ public class CombatSystem extends IteratingSystem implements Listenable<Event> {
 	 * 
 	 * @param defender a defender side
 	 * 
-	 * @return a defender creature if hit points are above 0, null otherwise
+	 * @return null if hit points are above 0, a defender creature otherwise
 	 */
 	Creature combat(Creature defender) {
 		HPComponent hp = Mappers.hp.get(defender);
@@ -63,7 +63,7 @@ public class CombatSystem extends IteratingSystem implements Listenable<Event> {
 	}
 	
 	/**
-	 * Cleans up after combat. Imagine Viscera Cleanup Detail.
+	 * Cleans up casualties. Imagine Viscera Cleanup Detail.
 	 * 
 	 * @param creature a creature if any died in a combat, null otherwise
 	 * 

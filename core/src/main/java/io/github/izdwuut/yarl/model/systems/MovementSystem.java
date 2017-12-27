@@ -38,8 +38,10 @@ public class MovementSystem extends IteratingSystem implements Listenable<Event>
 	/** An Ashley engine needed to retrieve {@link io.github.izdwuut.yarl.model.systems.WorldSystem WorldSystem}. */
 	Engine engine;
 	
+	/** A world entity. */
 	World world;
 	
+	/** A world system. */
 	WorldSystem worldSystem;
 	
 	/**
@@ -120,6 +122,13 @@ public class MovementSystem extends IteratingSystem implements Listenable<Event>
 		dispatcher.add(listener);
 	}
 	
+	/**
+	 * Initiates combat.
+	 * 
+	 * @param target a position of a defender {@link io.github.izdwuut.yarl.model.entities.Creature Creature}
+	 * @param attacker an attacker {@link io.github.izdwuut.yarl.model.entities.Creature Creature} fetched from
+	 * {@link #engine an engine}.
+	 */
 	void initCombat(Coord target, Entity attacker) {
 		if(worldSystem.isCreature(target) && attacker instanceof Creature) {
 			Combat combat = new Combat();

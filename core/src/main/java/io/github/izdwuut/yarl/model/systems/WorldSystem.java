@@ -134,6 +134,11 @@ public class WorldSystem extends EntitySystem {
 		return world;
 	}
 	
+	/**
+	 * Removes a creature from both a dungeon and engine.
+	 * 
+	 * @param creature {@link io.github.izdwuut.yarl.model.entities.Creature a creature} to remove
+	 */
 	public void removeCreature(Creature creature) {
 		dungeonComp.removeCreature(Mappers.position.get(creature)
 				.getPosition());

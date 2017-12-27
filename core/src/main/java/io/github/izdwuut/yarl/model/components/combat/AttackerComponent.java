@@ -9,6 +9,7 @@ import io.github.izdwuut.yarl.model.entities.Creature;
  * {@link io.github.izdwuut.yarl.model.entities.Combat Combat}.
  * 
  * @author Bartosz "izdwuut" Konikiewicz
+ * @since  2017-12-22
  */
 public class AttackerComponent implements Component {
 	/** A creature that initiates combat. */
