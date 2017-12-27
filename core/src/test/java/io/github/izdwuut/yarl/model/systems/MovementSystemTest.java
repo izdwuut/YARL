@@ -92,8 +92,6 @@ class MovementSystemTest {
 		world = new WorldFactory(settings).getWorld();
 		floors = world.getComponent(DungeonComponent.class).getFloors();
 		worldSystem = new WorldSystem(world, settings, engine);
-		System.out.println(world.getComponent(DungeonComponent.class).getCreatureMap().toString());
-		System.out.println(world.getComponent(DungeonComponent.class).getFloors().toString());
 		
 		worldSystem.setProcessing(false);
 		engine.addSystem(worldSystem);
@@ -166,9 +164,6 @@ class MovementSystemTest {
 				}
 				assertEquals(preMovement.getDirection(), postMovement.getDirection());
 			}
-		}
-		for(Entity entity: engine.getEntities()) {
-			System.out.println(entity);
 		}
 		
 		//TODO: put here:
