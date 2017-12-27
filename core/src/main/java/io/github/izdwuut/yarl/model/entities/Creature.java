@@ -26,7 +26,11 @@ public class Creature extends Entity {
 	 * @param name a creature name
 	 */
 	public Creature(String name) {
+		this();
 		add(new NameComponent(name));
+	}
+	
+	public Creature() {		
 		add(new PositionComponent());
 	}
 	
@@ -87,6 +91,20 @@ public class Creature extends Entity {
 	 */
 	public Creature setHP(int hp) {
 		add(new HPComponent(hp));
+		
+		return this;
+	}
+	
+	
+	/**
+	 * Sets a creature's name;
+	 * 
+	 * @param name a name to set
+	 * 
+	 * @returna current instance of an object (chaining)
+	 */
+	public Creature setName(String name) {
+		add(new NameComponent(name));
 		
 		return this;
 	}

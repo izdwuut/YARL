@@ -8,7 +8,7 @@ import io.github.izdwuut.yarl.model.entities.Creature;
  * @author Bartosz "izdwuut" Konikiewicz
  * @since  2017-11-20
  */
-public class CreatureFactory {
+public class CreatureFactory extends FlyweightCreatureFactory {
 	/**
 	 * Gets a player with a provided name.
 	 * 
@@ -34,9 +34,8 @@ public class CreatureFactory {
 	 * @return a Sloth creature
 	 */
 	public Creature sloth() {
-		Creature sloth = new Creature("Sloth");
-		sloth.setHP(20)
-			.setGlyph('S');
+		Creature sloth = super.sloth();
+		sloth.setHP(20);
 		
 		return sloth;
 	}
