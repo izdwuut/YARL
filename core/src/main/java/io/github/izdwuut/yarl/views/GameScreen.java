@@ -29,23 +29,23 @@ import squidpony.squidmath.Coord;
  */
 public class GameScreen extends Screen implements Listener<Event> {
 	/** {@link #dungeon Dungeon} width. */
-	private int width;
+	int width;
 	
 	/** {@link #dungeon Dungeon} height. */
-	private int height;
+	int height;
 	
 	/** {@link com.badlogic.gdx.scenes.scene2d.Stage A stage} that handles display. */
 	public Stage stage;
 	
 	/** {@link squidpony.squidgrid.gui.gdx.SparseLayers A Layer} with a dungeon. */
-	private SparseLayers display;
+	SparseLayers display;
 	
 	/** A player {@link io.github.izdwuut.yarl.model.entities.Creature creature}. */
-	private Creature player;
+	Creature player;
 	
 	/** A player {@link squidpony.squidgrid.gui.gdx.TextCellFactory.Glyph Glyph} (@). */
 	//TODO: actors index. listen on display.glyphs
-	private TextCellFactory.Glyph playerGlyph;
+	TextCellFactory.Glyph playerGlyph;
 	
 	/** A world entity. */
 	World world;
@@ -103,7 +103,7 @@ public class GameScreen extends Screen implements Listener<Event> {
 	/**
 	 * Puts a map on a {@link squidpony.squidgrid.gui.gdx.SparseLayers SparseLayers}.
 	 */
-	private void putMap() {
+	void putMap() {
 		//TODO: template
 		float bg = SColor.DARK_SLATE_GRAY.toFloatBits();
 		for (int x = 0; x < width; x++) {
@@ -116,7 +116,7 @@ public class GameScreen extends Screen implements Listener<Event> {
 	/**
 	 * Moves {@link #player a player}.
 	 */
-	private void slide() {
+	void slide() {
 		Coord pos = Mappers.position.get(player).getPosition();
 		setCamera(pos);	
 		display.slide(playerGlyph, (int) playerGlyph.getX(), (int) playerGlyph.getY(), pos.x, pos.y, 0, null);
@@ -127,7 +127,7 @@ public class GameScreen extends Screen implements Listener<Event> {
 	 * 
 	 * @param coord a position to set
 	 */
-	private void setCamera(Coord coord) {
+	void setCamera(Coord coord) {
 		stage.getCamera().position.x = coord.x * cellWidth;
 		stage.getCamera().position.y = (height - coord.y) * cellHeight;
 	}
@@ -155,7 +155,7 @@ public class GameScreen extends Screen implements Listener<Event> {
 	 * 
 	 * @return a character at a given position
 	 */
-	private char getGlyph(Coord pos) {
+	char getGlyph(Coord pos) {
     	if(worldSystem.isCreature(pos)) {
     		return Mappers.glyph.get(dungComp.getCreature(pos)).getGlyph();
     	}

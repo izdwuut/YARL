@@ -20,16 +20,16 @@ import io.github.izdwuut.yarl.model.factories.WorldFactory;
  */
 public class InitSystem extends EntitySystem {
 	/** {@link #world World} settings **/
-	private Settings settings;
+	Settings settings;
 	
 	/** World entity */
-	private World world;
+	World world;
 	
 	/** An Ashley Engine */
-	private Engine engine;
+	Engine engine;
 	
 	/** A player entity. */
-	private Creature player;
+	Creature player;
 	
 	/**
 	 * Gets main entities from factories and adds systems to an {@link #engine engine}.
@@ -51,7 +51,7 @@ public class InitSystem extends EntitySystem {
 	/**
 	 * Creates and adds systems to an {@link #engine engine}.
 	 */
-	private void addSystems() {
+	void addSystems() {
 		engine.addSystem(this);
 
 		WorldSystem worldSystem = new WorldSystem(world, settings, engine);
@@ -72,7 +72,7 @@ public class InitSystem extends EntitySystem {
 	/**
 	 * Pauses systems.
 	 */
-	private void pause() {
+	void pause() {
 		for (EntitySystem system : engine.getSystems()) {
 			system.setProcessing(false);
 		}

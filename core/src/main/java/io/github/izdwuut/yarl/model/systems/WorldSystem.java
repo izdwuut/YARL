@@ -93,7 +93,7 @@ public class WorldSystem extends EntitySystem {
 	 * 
 	 * @param creature {@link io.github.izdwuut.yarl.model.entities.Creature a creature} to add to a dungeon
 	 */
-	private void addCreature(Creature creature) {
+	void addCreature(Creature creature) {
 		Coord pos = Mappers.position.get(creature).getPosition();
 		if(isFloor(pos)) {
 			dungeonComp.setCreature(creature);
@@ -121,7 +121,7 @@ public class WorldSystem extends EntitySystem {
 	 * 
 	 * @return {@link squidpony.squidmath.Coord a coord} that represents an empty dungeon cell
 	 */
-	private Coord getRandomFloor() {
+	Coord getRandomFloor() {
 		return floors.singleRandom(Mappers.rng.get(settings).getRng());
 	}
 

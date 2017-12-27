@@ -13,7 +13,7 @@ import squidpony.squidgrid.Direction;
  */
 public class MovementComponent implements Component {
 	/** Movement direction. */
-	private Direction direction = null;
+	Direction direction = null;
 
 	/**
 	 * Gets {@link #direction a direction}.

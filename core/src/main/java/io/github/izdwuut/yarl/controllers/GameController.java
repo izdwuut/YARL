@@ -24,7 +24,7 @@ import squidpony.squidgrid.gui.gdx.SquidInput;
  */
 public class GameController extends Controller {
 	/** A player entity. */
-	private Creature player;
+	Creature player;
 	
 	/** 
 	 * A screen that is used by {@link io.github.izdwuut.yarl.YARL YARL} to 
@@ -32,7 +32,7 @@ public class GameController extends Controller {
 	 * GameController is only responsible for 
 	 * {@link io.github.izdwuut.yarl.views.GameScreen#GameScreen(World, Settings, Creature) constructing} it. 
 	 * */
-	private GameScreen screen;
+	GameScreen screen;
 	
 	/**
 	 * Takes as parameters {@link io.github.izdwuut.yarl.YARL YARL} object (used in {@link #init() init} method to
@@ -55,7 +55,7 @@ public class GameController extends Controller {
 	 * Further actions needed to be done to build a GameController.
 	 * An InitSystem has to not be used outside constructors.
 	 */
-	private void init() {
+	void init() {
 		InitSystem init = new InitSystem(engine);
 		player = init.getPlayer();
 		screen = new GameScreen(init, engine.getSystem(WorldSystem.class));

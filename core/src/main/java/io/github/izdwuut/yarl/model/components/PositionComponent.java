@@ -12,7 +12,7 @@ import squidpony.squidmath.Coord;
  */
 public class PositionComponent implements Component {
 	/** A position on a map. */
-	private Coord position;
+	Coord position;
 	
 	/**
 	 * Initiates a {@link #position position} field to a default (1, 1).

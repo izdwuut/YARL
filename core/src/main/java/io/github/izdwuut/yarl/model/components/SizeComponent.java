@@ -12,10 +12,10 @@ import com.badlogic.ashley.core.Component;
  */
 public class SizeComponent implements Component {
 	/** {@link com.badlogic.ashley.core.Entity An Entity} width. */
-	private int width;
+	int width;
 	
 	/** {@link com.badlogic.ashley.core.Entity An Entity} height. */
-	private int height;
+	int height;
 	
 	/**
 	 * Constructs a component and sets it's fields to provided values.

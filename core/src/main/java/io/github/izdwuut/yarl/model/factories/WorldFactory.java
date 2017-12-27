@@ -15,7 +15,7 @@ import squidpony.squidmath.RNG;
  */
 public class WorldFactory {
 	/** A random number generator obtained from {@link io.github.izdwuut.yarl.model.entities.Settings Settings}. */
-	private RNG rng;
+	RNG rng;
 	
 	/** A dungeon generator. */
 	IDungeonGenerator gen;

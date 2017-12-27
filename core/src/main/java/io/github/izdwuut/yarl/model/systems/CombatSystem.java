@@ -50,7 +50,7 @@ public class CombatSystem extends IteratingSystem implements Listenable<Event> {
 	 * 
 	 * @return a defender creature if hit points are above 0, null otherwise
 	 */
-	private Creature combat(Creature defender) {
+	Creature combat(Creature defender) {
 		HPComponent hp = Mappers.hp.get(defender);
 		
 		if(hp.getHP() - 20 > 0) {
@@ -69,7 +69,7 @@ public class CombatSystem extends IteratingSystem implements Listenable<Event> {
 	 * 
 	 * @param combat {@link com.badlogic.ashley.core.Entity.Combat a Combat} entity
 	 */
-	private void cleanup(Creature creature, Entity combat) {
+	void cleanup(Creature creature, Entity combat) {
 		if(creature != null) {
 			engine.getSystem(WorldSystem.class)
 			.removeCreature(creature);

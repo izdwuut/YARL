@@ -30,13 +30,13 @@ import squidpony.squidmath.Coord;
  */
 public class MovementSystem extends IteratingSystem implements Listenable<Event> {
 	/** A movement {@link com.badlogic.ashley.core.ComponentMapper Mapper}. */
-	private ComponentMapper<MovementComponent> mm;
+	ComponentMapper<MovementComponent> mm;
 	
 	/** An {@link io.github.izdwuut.yarl.model.Event Event} dispatcher. */
-	private Signal<Event> dispatcher;
+	Signal<Event> dispatcher;
 	
 	/** An Ashley engine needed to retrieve {@link io.github.izdwuut.yarl.model.systems.WorldSystem WorldSystem}. */
-	private Engine engine;
+	Engine engine;
 	
 	World world;
 	
@@ -120,8 +120,8 @@ public class MovementSystem extends IteratingSystem implements Listenable<Event>
 		dispatcher.add(listener);
 	}
 	
-	private void initCombat(Coord target, Entity attacker) {
-		if(attacker instanceof Creature && worldSystem.isCreature(target)) {
+	void initCombat(Coord target, Entity attacker) {
+		if(worldSystem.isCreature(target) && attacker instanceof Creature) {
 			Combat combat = new Combat();
 			combat.setAttacker((Creature) attacker);
 			combat.setDefender(Mappers.dungeon.get(world).getCreature(target));

@@ -11,7 +11,7 @@ import squidpony.squidmath.RNG;
  */
 public class SettingsFactory {
 	/** Settings that a factory produces. */
-	private Settings settings;
+	Settings settings;
 	
 	/** A {@link #rng random number generator} seed. */
 	//TODO: random seed
@@ -42,7 +42,7 @@ public class SettingsFactory {
 	/**
 	 * Produces {@link #settings settings}.
 	 */
-	private void build() {
+	void build() {
 		settings.setCellSize(10, 20)
 			.setRNG(rng);
 	}

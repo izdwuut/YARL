@@ -10,7 +10,7 @@ import com.badlogic.ashley.core.Component;
  */
 public class HPComponent implements Component {
 	/** Hit points. */
-	private int hp;
+	int hp;
 	
 	public HPComponent(int hp) {
 		this.hp = hp;

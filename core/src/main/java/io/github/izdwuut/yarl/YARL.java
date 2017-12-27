@@ -22,10 +22,10 @@ import io.github.izdwuut.yarl.controllers.GameController;
 //TODO: populate system
 public class YARL extends Game {
 	/** A current controller. */
-	private Controller controller;
+	Controller controller;
 	
 	/** An Ashley engine. */
-	private Engine engine;
+	Engine engine;
 	
 	/**
 	 * Creates an Ashley {@link #engine engine}.

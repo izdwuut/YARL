@@ -22,7 +22,7 @@ public class DungeonComponent implements Component {
 	char[][] dungeon;
 	
 	/** Floors generated from a {@link #dungeon}. */
-	private GreasedRegion floors;
+	GreasedRegion floors;
 	
 	/** Creatures that inhabit a dungeon. */
 	Map<Coord, Creature> creatures;
