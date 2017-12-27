@@ -163,7 +163,7 @@ class WorldSystemTest {
 		PositionComponent posComp = new PositionComponent();
 		posComp.setPosition(pos);
 		creature.add(posComp);
-		dungeon.setCreature(pos, creature);
+		dungeon.setCreature(creature);
 		assertTrue(worldSystem.isCreature(pos));
 		
 		List<Coord> emptyPositions = Arrays.asList(Coord.get(1, 1),
