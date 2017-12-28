@@ -7,8 +7,10 @@ import io.github.izdwuut.yarl.model.components.PositionComponent;
 import io.github.izdwuut.yarl.model.components.SizeComponent;
 import io.github.izdwuut.yarl.model.components.combat.AttackerComponent;
 import io.github.izdwuut.yarl.model.components.combat.DefenderComponent;
+import io.github.izdwuut.yarl.model.components.creatures.ArmsComponent;
 import io.github.izdwuut.yarl.model.components.creatures.HPComponent;
 import io.github.izdwuut.yarl.model.components.creatures.MovementComponent;
+import io.github.izdwuut.yarl.model.components.items.WeaponComponent;
 import io.github.izdwuut.yarl.model.components.settings.CellSizeComponent;
 import io.github.izdwuut.yarl.model.components.settings.RNGComponent;
 import io.github.izdwuut.yarl.model.components.world.DungeonComponent;
@@ -69,4 +71,14 @@ public class Mappers {
 	 * {@link io.github.izdwuut.yarl.model.components.creatures.HPComponent An HP} mapper. 
 	 */
 	public static final ComponentMapper<HPComponent> hp = ComponentMapper.getFor(HPComponent.class);
+	
+	/** 
+	 * {@link io.github.izdwuut.yarl.model.components.creatures.ArmsComponent An Arms} mapper. 
+	 */
+	public static final ComponentMapper<ArmsComponent> arms = ComponentMapper.getFor(ArmsComponent.class);
+	
+	/** 
+	 * {@link io.github.izdwuut.yarl.model.components.items.WeaponComponent A Weapon} mapper. 
+	 */
+	public static final ComponentMapper<WeaponComponent> weapon = ComponentMapper.getFor(WeaponComponent.class);
 }
