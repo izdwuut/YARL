@@ -12,7 +12,9 @@ import squidpony.squidmath.RNG;
  * @since  2017-11-18
  */
 public class RNGComponent implements Component {
-	/** A random number generator. */
+	/** 
+	 * A random number generator. 
+	 */
 	RNG rng;
 	
 	/**

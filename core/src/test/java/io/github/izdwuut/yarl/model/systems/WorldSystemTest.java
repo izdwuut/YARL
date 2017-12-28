@@ -34,23 +34,39 @@ import squidpony.squidmath.GreasedRegion;
  * @since  2017-12-15
  */
 class WorldSystemTest {
-	/** A world entity. */
+	/** 
+	 * A world entity. 
+	 */
 	World world;
 	
-	/** Tested system. */
+	/** 
+	 * Tested system. 
+	 */
 	WorldSystem worldSystem;
 	
-	/** Coords for which tests should fail. */
+	/** 
+	 * Coords for which tests should fail. 
+	 */
 	static List<Coord> invalid;
 	
-	/** Dungeon height. */
+	/** 
+	 * Dungeon height. 
+	 */
 	static int height;
 	
-	/** Dungeon width. */
+	/**
+	 * Dungeon width. 
+	 */
 	static int width;
 	
+	/**
+	 * A dungeon component.
+	 */
 	DungeonComponent dungeon;
 	
+	/**
+	 * An Ashley engine.
+	 */
 	static Engine engine;
 	
 	@BeforeAll

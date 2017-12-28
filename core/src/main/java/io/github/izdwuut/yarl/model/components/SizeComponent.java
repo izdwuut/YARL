@@ -11,10 +11,14 @@ import com.badlogic.ashley.core.Component;
  * @since  2017-11-18
  */
 public class SizeComponent implements Component {
-	/** {@link com.badlogic.ashley.core.Entity An Entity} width. */
+	/** 
+	 * {@link com.badlogic.ashley.core.Entity An Entity} width. 
+	 */
 	int width;
 	
-	/** {@link com.badlogic.ashley.core.Entity An Entity} height. */
+	/** 
+	 * {@link com.badlogic.ashley.core.Entity An Entity} height. 
+	 */
 	int height;
 	
 	/**

@@ -11,16 +11,23 @@ import squidpony.squidmath.RNG;
  * A factory that produces {@link io.github.izdwuut.yarl.model.entities.World a World}.
  * 
  * @author Bartosz "izdwuut" Konikiewicz
- *
+ * @since  2017-11-18
  */
 public class WorldFactory {
-	/** A random number generator obtained from {@link io.github.izdwuut.yarl.model.entities.Settings Settings}. */
+	/** 
+	 * A random number generator obtained from 
+	 * {@link io.github.izdwuut.yarl.model.entities.Settings Settings}. 
+	 */
 	RNG rng;
 	
-	/** A dungeon generator. */
+	/** 
+	 * A dungeon generator. 
+	 */
 	IDungeonGenerator gen;
 	
-	/** World settings. */
+	/** 
+	 * World settings. 
+	 */
 	Settings settings;
 	
 	/**

@@ -38,22 +38,34 @@ import squidpony.squidmath.GreasedRegion;
  * @since  2017-12-14
  */
 class MovementSystemTest {
-	/** An Ashley engine. */
+	/** 
+	 * An Ashley engine. 
+	 */
 	static Engine engine;
 	
-	/** A creature that moves. */
+	/** 
+	 * A creature that moves. 
+	 */
 	Creature creature;
 	
-	/** Pre movement position. */
+	/** 
+	 * Pre movement position. 
+	 */
 	PositionComponent prePosition;
 	
-	/** Post movement position. */
+	/** 
+	 * Post movement position. 
+	 */
 	PositionComponent postPosition;
 	
-	/** Denotes pre movement direction. */
+	/** 
+	 * Denotes pre movement direction. 
+	 */
 	MovementComponent preMovement;
 	
-	/** Post movement direction. */
+	/** 
+	 * Post movement direction. 
+	 */
 	MovementComponent postMovement;
 	
 	/**

@@ -27,33 +27,52 @@ import squidpony.squidmath.Coord;
  * @author Bartosz "izdwuut" Konikiewicz
  * @since  2017-11-18
  */
+//TODO: refactor with fire
 public class GameScreen extends Screen implements Listener<Event> {
-	/** {@link #dungeon Dungeon} width. */
+	/** 
+	 * {@link #dungeon Dungeon} width. 
+	 */
 	int width;
 	
-	/** {@link #dungeon Dungeon} height. */
+	/** 
+	 * {@link #dungeon Dungeon} height. 
+	 */
 	int height;
 	
-	/** {@link com.badlogic.gdx.scenes.scene2d.Stage A stage} that handles display. */
+	/** 
+	 * {@link com.badlogic.gdx.scenes.scene2d.Stage A stage} that handles display. 
+	 */
 	public Stage stage;
 	
-	/** {@link squidpony.squidgrid.gui.gdx.SparseLayers A Layer} with a dungeon. */
+	/** 
+	 * {@link squidpony.squidgrid.gui.gdx.SparseLayers A Layer} with a dungeon. 
+	 */
 	SparseLayers display;
 	
-	/** A player {@link io.github.izdwuut.yarl.model.entities.Creature creature}. */
+	/** 
+	 * A player {@link io.github.izdwuut.yarl.model.entities.Creature creature}. 
+	 */
 	Creature player;
 	
-	/** A player {@link squidpony.squidgrid.gui.gdx.TextCellFactory.Glyph Glyph} (@). */
+	/** 
+	 * A player {@link squidpony.squidgrid.gui.gdx.TextCellFactory.Glyph Glyph} (@). 
+	 */
 	//TODO: actors index. listen on display.glyphs
 	TextCellFactory.Glyph playerGlyph;
 	
-	/** A world entity. */
+	/** 
+	 * A world entity. 
+	 */
 	World world;
 	
-	/** A component that stores dungeon data. */
+	/** 
+	 * A component that stores dungeon data. 
+	 */
 	DungeonComponent dungComp;
 	
-	/** An Ashley system that is used to query {@link #world a world entity}. */
+	/** 
+	 * An Ashley system that is used to query {@link #world a world entity}. 
+	 */
 	WorldSystem worldSystem;
 
 	/**

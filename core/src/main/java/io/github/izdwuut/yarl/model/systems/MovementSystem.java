@@ -29,19 +29,29 @@ import squidpony.squidmath.Coord;
  * @since  2017-11-20
  */
 public class MovementSystem extends IteratingSystem implements Listenable<Event> {
-	/** A movement {@link com.badlogic.ashley.core.ComponentMapper Mapper}. */
+	/** 
+	 * A movement {@link com.badlogic.ashley.core.ComponentMapper Mapper}. 
+	 */
 	ComponentMapper<MovementComponent> mm;
 	
-	/** An {@link io.github.izdwuut.yarl.model.Event Event} dispatcher. */
+	/** 
+	 * An {@link io.github.izdwuut.yarl.model.Event Event} dispatcher. 
+	 */
 	Signal<Event> dispatcher;
 	
-	/** An Ashley engine needed to retrieve {@link io.github.izdwuut.yarl.model.systems.WorldSystem WorldSystem}. */
+	/** 
+	 * An Ashley engine needed to retrieve {@link io.github.izdwuut.yarl.model.systems.WorldSystem WorldSystem}. 
+	 */
 	Engine engine;
 	
-	/** A world entity. */
+	/** 
+	 * A world entity. 
+	 */
 	World world;
 	
-	/** A world system. */
+	/** 
+	 * A world system. 
+	 */
 	WorldSystem worldSystem;
 	
 	/**

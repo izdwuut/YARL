@@ -21,18 +21,29 @@ import squidpony.squidmath.GreasedRegion;
  * @since  2017-12-12
  */
 public class WorldSystem extends EntitySystem {
-	/** A world entity. */
+	/** 
+	 * A world entity. 
+	 */
 	World world;
 	
-	/** Game settings. */
+	/** 
+	 * Game settings. 
+	 */
 	Settings settings;
 	
-	/** Floors obtained from a {@link #dungeonComp dungeon component}. */
+	/** 
+	 * Floors obtained from a {@link #dungeonComp dungeon component}. 
+	 */
 	GreasedRegion floors;
 	
-	/** A dungeon component. */
+	/** 
+	 * A dungeon component. 
+	 */
 	DungeonComponent dungeonComp;
 	
+	/**
+	 * An Ashley engine needed to {@link #populate populate} creatures.
+	 */
 	Engine engine;
 	
 	public WorldSystem(World world, Settings settings, Engine engine) {

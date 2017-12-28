@@ -12,7 +12,9 @@ import io.github.izdwuut.yarl.model.entities.Creature;
  * @since  2017-12-22
  */
 public class AttackerComponent implements Component {
-	/** A creature that initiates combat. */
+	/** 
+	 * A creature that initiates combat. 
+	 */
 	Creature attacker;
 	
 	public AttackerComponent(Creature attacker) {

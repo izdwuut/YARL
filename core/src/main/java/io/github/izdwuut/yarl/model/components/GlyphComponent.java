@@ -9,7 +9,9 @@ import com.badlogic.ashley.core.Component;
  * @since  2017-12-10
  */
 public class GlyphComponent implements Component {
-	/** A character that is displayed on a screen */
+	/** 
+	 * A character that is displayed on a screen 
+	 */
 	char glyph;
 	
 	public GlyphComponent(char glyph) {

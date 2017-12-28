@@ -9,7 +9,9 @@ import com.badlogic.ashley.core.Component;
  * @since  2017-11-18
  */
 public class HPComponent implements Component {
-	/** Hit points. */
+	/** 
+	 * Hit points. 
+	 */
 	int hp;
 	
 	public HPComponent(int hp) {

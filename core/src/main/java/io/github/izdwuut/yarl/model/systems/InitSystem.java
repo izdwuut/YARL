@@ -19,16 +19,24 @@ import io.github.izdwuut.yarl.model.factories.WorldFactory;
  * @since  2017-12-08
  */
 public class InitSystem extends EntitySystem {
-	/** {@link #world World} settings **/
+	/** 
+	 * {@link #world World} settings 
+	 */
 	Settings settings;
 	
-	/** World entity */
+	/** 
+	 * World entity 
+	 */
 	World world;
 	
-	/** An Ashley Engine */
+	/** 
+	 * An Ashley Engine 
+	 */
 	Engine engine;
 	
-	/** A player entity. */
+	/** 
+	 * A player entity. 
+	 */
 	Creature player;
 	
 	/**

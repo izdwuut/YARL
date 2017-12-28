@@ -11,7 +11,9 @@ import io.github.izdwuut.yarl.model.entities.Creature;
  * @since  2017-12-22
  */
 public class DefenderComponent implements Component{
-	/** A {@link io.github.izdwuut.yarl.model.entities.Combat Combat}'s passive side. */
+	/** 
+	 * A {@link io.github.izdwuut.yarl.model.entities.Combat Combat}'s passive side. 
+	 */
 	Creature defender;
 	
 	public DefenderComponent(Creature defender) {

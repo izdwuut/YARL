@@ -11,7 +11,9 @@ import squidpony.squidmath.Coord;
  * @since  2017-11-20
  */
 public class PositionComponent implements Component {
-	/** A position on a map. */
+	/** 
+	 * A position on a map. 
+	 */
 	Coord position;
 	
 	/**

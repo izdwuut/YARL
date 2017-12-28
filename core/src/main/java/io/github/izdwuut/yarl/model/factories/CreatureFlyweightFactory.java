@@ -15,7 +15,8 @@ import io.github.izdwuut.yarl.model.entities.Creature;
  * @author Bartosz "izdwuut" Konikiewicz
  * @since  2017-12-27
  */
-public abstract class FlyweightCreatureFactory {
+//TODO: FlyweightCreatureFactory -> CreatureFlyweightFactory
+public abstract class CreatureFlyweightFactory {
 	/**
 	 * Common creature names.
 	 */
@@ -26,7 +27,7 @@ public abstract class FlyweightCreatureFactory {
 	 */
 	List<GlyphComponent> glyphs;
 	
-	public FlyweightCreatureFactory() {
+	public CreatureFlyweightFactory() {
 		names = new ArrayList<NameComponent>();
 		glyphs = new ArrayList<GlyphComponent>();
 	}

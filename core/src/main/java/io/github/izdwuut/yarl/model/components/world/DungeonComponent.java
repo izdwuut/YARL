@@ -18,16 +18,24 @@ import squidpony.squidmath.GreasedRegion;
  * @since  2017-12-05
  */
 public class DungeonComponent implements Component {
-	/** An ASCII representation of a dungeon. */
+	/** 
+	 * An ASCII representation of a dungeon. 
+	 */
 	char[][] dungeon;
 	
-	/** Floors generated from a {@link #dungeon}. */
+	/** 
+	 * Floors generated from a {@link #dungeon}. 
+	 */
 	GreasedRegion floors;
 	
-	/** Creatures that inhabit a dungeon. */
+	/** 
+	 * Creatures that inhabit a dungeon. 
+	 */
 	Map<Coord, Creature> creatures;
 	
-	/** Cells that are inhabited by creatures. */
+	/** 
+	 * Cells that are inhabited by creatures. 
+	 */
 	GreasedRegion creatureMap;
 	
 	/**

@@ -10,14 +10,20 @@ import squidpony.squidmath.RNG;
  * @since  2017-11-18
  */
 public class SettingsFactory {
-	/** Settings that a factory produces. */
+	/** 
+	 * Settings that a factory produces. 
+	 */
 	Settings settings;
 	
-	/** A {@link #rng random number generator} seed. */
+	/** 
+	 * A {@link #rng random number generator} seed. 
+	 */
 	//TODO: random seed
 	String seed = "YARL";
 	
-	/** A {@link #seed seeded} random number generator. */
+	/** 
+	 * A {@link #seed seeded} random number generator. 
+	 */
 	RNG rng = new RNG(seed);
 	
 	/**

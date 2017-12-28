@@ -8,7 +8,7 @@ import io.github.izdwuut.yarl.model.entities.Creature;
  * @author Bartosz "izdwuut" Konikiewicz
  * @since  2017-11-20
  */
-public class CreatureFactory extends FlyweightCreatureFactory {
+public class CreatureFactory extends CreatureFlyweightFactory {
 	/**
 	 * Gets a player with a provided name.
 	 * 

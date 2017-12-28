@@ -17,13 +17,19 @@ import squidpony.squidgrid.gui.gdx.SquidInput;
  * @since  2017-11-28
  */
 public abstract class Controller {
-	/** An input handler. */
+	/** 
+	 * An input handler. 
+	 */
 	protected SquidInput input;
 	
-	/** An Ashley engine. */
+	/** 
+	 * An Ashley engine. 
+	 */
 	protected Engine engine;
 	
-	/** A game class. */
+	/** 
+	 * A game class. 
+	 */
 	protected Game game;
 	
 	/**

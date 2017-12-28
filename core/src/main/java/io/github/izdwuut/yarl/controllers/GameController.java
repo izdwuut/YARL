@@ -23,7 +23,9 @@ import squidpony.squidgrid.gui.gdx.SquidInput;
  * @since  2017-11-18
  */
 public class GameController extends Controller {
-	/** A player entity. */
+	/** 
+	 * A player entity. 
+	 */
 	Creature player;
 	
 	/** 
