@@ -1,5 +1,6 @@
 package io.github.izdwuut.yarl.model.factories;
 
+import io.github.izdwuut.yarl.model.components.creatures.ArmsComponent;
 import io.github.izdwuut.yarl.model.entities.Creature;
 
 /**
@@ -22,6 +23,8 @@ public class CreatureFactory extends CreatureFlyweightFactory {
 			.setInv(10)
 			.setMov()
 			.setGlyph('@');
+		
+		player.add(new ArmsComponent(new ItemFactory().sword()));
 		
 		return player;
 	}
