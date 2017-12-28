@@ -10,10 +10,12 @@ import org.junit.jupiter.api.Test;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 
+import io.github.izdwuut.yarl.model.components.creatures.ArmsComponent;
 import io.github.izdwuut.yarl.model.entities.Combat;
 import io.github.izdwuut.yarl.model.entities.Creature;
 import io.github.izdwuut.yarl.model.entities.Settings;
 import io.github.izdwuut.yarl.model.entities.World;
+import io.github.izdwuut.yarl.model.factories.ItemFactory;
 import io.github.izdwuut.yarl.model.factories.SettingsFactory;
 import io.github.izdwuut.yarl.model.factories.WorldFactory;
 import io.github.izdwuut.yarl.model.utils.Mappers;
@@ -57,6 +59,7 @@ class CombatSystemTest {
 		combatSystem = new CombatSystem(engine);
 		engine.addSystem(combatSystem);
 		attacker = new Creature("Test creature");
+		attacker.add(new ArmsComponent(new ItemFactory().sword()));
 	}
 	
 	/**

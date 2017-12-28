@@ -39,7 +39,7 @@ public class CombatSystem extends IteratingSystem implements Listenable<Event> {
 	
 	@Override
 	protected void processEntity(Entity combat, float deltaTime) {
-		cleanup(combat(Mappers.defender.get(combat)
+		cleanup(combat(Mappers.attacker.get(combat).getAttacker(), Mappers.defender.get(combat)
 				.getDefender()), combat);
 	}
 	
@@ -50,11 +50,12 @@ public class CombatSystem extends IteratingSystem implements Listenable<Event> {
 	 * 
 	 * @return null if hit points are above 0, a defender creature otherwise
 	 */
-	Creature combat(Creature defender) {
+	Creature combat(Creature attacker, Creature defender) {
 		HPComponent hp = Mappers.hp.get(defender);
+		int dmg = Mappers.weapon.get(Mappers.arms.get(attacker).getWeapon()).getDmg(); 
 		
-		if(hp.getHP() - 20 > 0) {
-			hp.addHP(-20);
+		if(hp.getHP() - dmg > 0) {
+			hp.addHP(-dmg);
 		} else {
 			return defender;
 		}
