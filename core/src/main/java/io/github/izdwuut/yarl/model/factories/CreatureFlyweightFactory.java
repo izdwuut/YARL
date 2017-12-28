@@ -9,7 +9,7 @@ import io.github.izdwuut.yarl.model.components.NameComponent;
 import io.github.izdwuut.yarl.model.entities.Creature;
 
 /**
- * A flyweight creature factory. Separates common creature components. 
+ * A flyweight creature factory. Separates common {@link io.github.izdwuut.yarl.model.entities.Creature Creature}'s components. 
  * Implements lo and behold, the flyweight design pattern. Relies on lazy initialization.
  * 
  * @author Bartosz "izdwuut" Konikiewicz
@@ -43,7 +43,7 @@ public abstract class CreatureFlyweightFactory {
 	
 	/**
 	 * Gets a flyweight creature. Created to reduce boilerplate code.
-	 * Make sure to operate on {@link #names names} and {@link glyphs} from this method only,
+	 * Make sure to operate on {@link #names names} and {@link #glyphs} from this method only,
 	 * because both name and glyph have to be treated as one!
 	 * 
 	 * @param name a creature's name

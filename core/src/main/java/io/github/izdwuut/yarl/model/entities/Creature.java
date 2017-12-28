@@ -95,13 +95,12 @@ public class Creature extends Entity {
 		return this;
 	}
 	
-	
 	/**
 	 * Sets a creature's name;
 	 * 
 	 * @param name a name to set
 	 * 
-	 * @returna current instance of an object (chaining)
+	 * @return a current instance of an object (chaining)
 	 */
 	public Creature setName(String name) {
 		add(new NameComponent(name));
