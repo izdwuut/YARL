@@ -1,6 +1,5 @@
 package io.github.izdwuut.yarl.model.factories;
 
-import io.github.izdwuut.yarl.model.components.creatures.ArmsComponent;
 import io.github.izdwuut.yarl.model.entities.Creature;
 import squidpony.squidmath.Coord;
 
@@ -12,6 +11,15 @@ import squidpony.squidmath.Coord;
  */
 public class CreatureFactory extends CreatureFlyweightFactory {
 	/**
+	 * An item factory.
+	 */
+	ItemFactory itemFactory;
+	
+	public CreatureFactory() {
+		itemFactory = new ItemFactory();
+	}
+	
+	/**
 	 * Gets a player with a provided name.
 	 * 
 	 * @param name player's name
@@ -19,12 +27,11 @@ public class CreatureFactory extends CreatureFlyweightFactory {
 	 * @return a creature entity tagged as a player
 	 */
 	public Creature player(String name) {
-		Creature player = new Creature();
-		player.setPlayer()
+		Creature player = new Creature().setPlayer()
 				.setInv(10)
 				.setMov()
 				.setPos(Coord.get(1, 1))
-				.add(new ArmsComponent(new ItemFactory().sword()));
+				.setArms(itemFactory.sword());
 				
 		return getCreature(name, '@', player);
 	}

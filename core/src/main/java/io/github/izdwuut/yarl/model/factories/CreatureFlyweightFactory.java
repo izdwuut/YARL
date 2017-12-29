@@ -37,7 +37,7 @@ public abstract class CreatureFlyweightFactory extends FlyweightFactory<Characte
 	 * 
 	 * @return a {@code creature} expanded by flyweight components
 	 */
-	//TODO: further reduce boilerplate code
+	//TODO: further reduce boilerplate code. add a bag of common components?
 	private Creature addCommon(String name, char glyph, Creature creature) {
 		Creature flyweight = new Creature();
 		NameComponent nameComp = new NameComponent(name);

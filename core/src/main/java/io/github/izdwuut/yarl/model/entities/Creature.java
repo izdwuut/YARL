@@ -6,6 +6,7 @@ import io.github.izdwuut.yarl.model.components.BagComponent;
 import io.github.izdwuut.yarl.model.components.GlyphComponent;
 import io.github.izdwuut.yarl.model.components.NameComponent;
 import io.github.izdwuut.yarl.model.components.PositionComponent;
+import io.github.izdwuut.yarl.model.components.creatures.ArmsComponent;
 import io.github.izdwuut.yarl.model.components.creatures.HPComponent;
 import io.github.izdwuut.yarl.model.components.creatures.MovementComponent;
 import io.github.izdwuut.yarl.model.components.creatures.PlayerComponent;
@@ -111,6 +112,19 @@ public class Creature extends Entity {
 	 */
 	public Creature setPos(Coord pos) {
 		add(new PositionComponent(pos));
+		
+		return this;
+	}
+	
+	/**
+	 * Sets a wielded weapon.
+	 * 
+	 * @param arms a wielded weapon to set
+	 * 
+	 * @return a current instance of an object (chaining)
+	 */
+	public Creature setArms(Item arms) {
+		add(new ArmsComponent(arms));
 		
 		return this;
 	}
