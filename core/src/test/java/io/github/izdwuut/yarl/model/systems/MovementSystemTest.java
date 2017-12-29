@@ -2,6 +2,7 @@ package io.github.izdwuut.yarl.model.systems;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -162,6 +163,7 @@ class MovementSystemTest {
 			}
 		}
 		
+		List<Creature> combatTargets = new ArrayList<Creature>();
 		for(Coord start : floors.asCoords()) {
 			for(Direction direction : directions) {
 				prePosition.setPosition(start);
@@ -172,28 +174,31 @@ class MovementSystemTest {
 					assertEquals(prePosition.getPosition(), target);
 				} else {
 					assertEquals(prePosition.getPosition(), start);
-					initCombatTest(target);
+					if(worldSystem.isCreature(target)) {
+						combatTargets.add(Mappers.dungeon.get(world)
+								.getCreature(target));
+						
+					}
 				}
 				assertEquals(preMovement.getDirection(), postMovement.getDirection());
 			}
 		}
 		
-		//TODO: put here:
-		//initCombatTest(target);
+		initCombatTest(combatTargets);
 	}
 	
 	/**
 	 * Tests that combat was initiated. Fired by {@link io.github.izdwuut.yarl.model.systems.MovementSystemTest#movementTest() a movementTest}.
+	 * Covers (@link io.github.izdwuut.yarl.model.systems.MovementSystem#initCombat(Coord target, Entity attacker) initCombat}.
 	 */
-	void initCombatTest(Coord target) {		
-		if(worldSystem.isCreature(target)) {
-			for(Entity combat : engine.getEntitiesFor(Family.all(AttackerComponent.class, DefenderComponent.class).get())) {
-				if(combat instanceof Combat) {
-					Mappers.attacker.get((Combat) combat).getAttacker().equals((Creature) creature);
-					Mappers.defender.get((Combat) combat).getDefender().equals(Mappers.dungeon.get(world)
-							.getCreature(target));
-				}
+	void initCombatTest(List<Creature> combatTargets) {
+		List<Creature> defenderCreatures = new ArrayList<Creature>();
+		for(Entity combat : engine.getEntitiesFor(Family.all(AttackerComponent.class, DefenderComponent.class).get())) {
+			if(combat instanceof Combat) {
+				assertEquals(Mappers.attacker.get((Combat) combat).getAttacker(), (Creature) creature);
+				defenderCreatures.add(Mappers.defender.get((Combat) combat).getDefender());
 			}
 		}
+		assertEquals(combatTargets, defenderCreatures);
 	}
 }
