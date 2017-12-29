@@ -1,6 +1,7 @@
 package io.github.izdwuut.yarl.model.factories;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Entity;
@@ -20,7 +21,7 @@ public abstract class FlyweightFactory<K, V extends Entity> {
 	/**
 	 * Flyweights storage.
 	 */
-	HashMap<K, V> flyweights;
+	Map<K, V> flyweights;
 	
 	public FlyweightFactory() {
 		flyweights = new HashMap<K, V>();
