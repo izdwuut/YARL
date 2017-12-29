@@ -93,8 +93,7 @@ public class WorldSystem extends EntitySystem {
 		CreatureFactory factory = new CreatureFactory();
 		for(int i = 0; i < 10; i++) {
 			Creature creature = factory.random();
-			Mappers.position.get(creature)
-			.setPosition(getRandomFloor());
+			creature.setPos(getRandomFloor());
 			addCreature(creature);
 		}
 	}

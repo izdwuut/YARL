@@ -1,79 +1,52 @@
 package io.github.izdwuut.yarl.model.factories;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 import io.github.izdwuut.yarl.model.components.GlyphComponent;
 import io.github.izdwuut.yarl.model.components.NameComponent;
 import io.github.izdwuut.yarl.model.entities.Creature;
 
 /**
  * A flyweight creature factory. Separates common {@link io.github.izdwuut.yarl.model.entities.Creature Creature}'s components. 
- * Implements lo and behold, the flyweight design pattern. Relies on lazy initialization.
+ * Created to reduce boilerplate code. Relies on lazy initialization. 
+ * It is separated from a {@link io.github.izdwuut.yarl.model.factories.CreatureFactory} to unclog it.
  * 
  * @author Bartosz "izdwuut" Konikiewicz
  * @since  2017-12-27
  */
-//TODO: FlyweightCreatureFactory -> CreatureFlyweightFactory
-public abstract class CreatureFlyweightFactory {
+public abstract class CreatureFlyweightFactory extends FlyweightFactory<Character, Creature> {
 	/**
-	 * Common creature names.
-	 */
-	List<NameComponent> names;
-	
-	/**
-	 * Common creature display characters.
-	 */
-	List<GlyphComponent> glyphs;
-	
-	public CreatureFlyweightFactory() {
-		names = new ArrayList<NameComponent>();
-		glyphs = new ArrayList<GlyphComponent>();
-	}
-	
-	/**
-	 * Gets a flyweight Sloth.
+	 * Gets a weapon with flyweight components.
 	 * 
-	 * @return a flyweight Sloth.
-	 */
-	protected Creature sloth() {		
-		return getFlyweight("Sloth", 'S');
-	}
-	
-	/**
-	 * Gets a flyweight creature. Created to reduce boilerplate code.
-	 * Make sure to operate on {@link #names names} and {@link #glyphs} from this method only,
-	 * because both name and glyph have to be treated as one!
+	 * @param name an item's name
+	 * @param dmg an item's damage
 	 * 
-	 * @param name a creature's name
-	 * @param glyph a creature's display character
-	 * 
-	 * @return a flyweight creature
+	 * @return a weapon with flyweight components
 	 */
-	//TODO: wouldn't be efficient for multiple creatures. use a hashmap instead, add a merge method (takes two creatures as parameters).
-	Creature getFlyweight(String name, char glyph) {
-		Iterator<NameComponent> nameIter = names.iterator();
-		Iterator<GlyphComponent> glyphIter = glyphs.iterator();
-		Creature creature = new Creature();
-		
-		while(nameIter.hasNext() && glyphIter.hasNext()) {
-			NameComponent currName = nameIter.next();
-			GlyphComponent currGlyph = glyphIter.next(); 
-			if(currName.getName() == name && currGlyph.getGlyph() == glyph) {
-				creature.add(currName)
-				.add(currGlyph);
-				
-				return creature;
-			}
+	protected Creature getCreature(String name, char glyph, Creature creature) {	
+		if(hasFlyweight(glyph)) {
+			return mergeFlyweight(glyph, creature);		
 		}
 		
+		return addCommon(name, glyph, creature);
+	}
+	
+	/**
+	 * Adds common components to a {@code creature} and flyweight object.
+	 * 
+	 * @param name a creature's name
+	 * @param creature an creature with no components
+	 * 
+	 * @return a {@code creature} expanded by flyweight components
+	 */
+	//TODO: further reduce boilerplate code
+	private Creature addCommon(String name, char glyph, Creature creature) {
+		Creature flyweight = new Creature();
 		NameComponent nameComp = new NameComponent(name);
 		GlyphComponent glyphComp = new GlyphComponent(glyph);
 		creature.add(nameComp)
 		.add(glyphComp);
-		names.add(nameComp);
-		glyphs.add(glyphComp);
+		flyweight.add(nameComp)
+		.add(glyphComp);
+		addFlyweight(glyph, flyweight);
 		
 		return creature;
 	}

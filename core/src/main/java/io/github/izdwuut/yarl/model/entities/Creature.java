@@ -9,6 +9,7 @@ import io.github.izdwuut.yarl.model.components.PositionComponent;
 import io.github.izdwuut.yarl.model.components.creatures.HPComponent;
 import io.github.izdwuut.yarl.model.components.creatures.MovementComponent;
 import io.github.izdwuut.yarl.model.components.creatures.PlayerComponent;
+import squidpony.squidmath.Coord;
 
 /**
  * A creature {@link com.badlogic.ashley.core.Entity Entity}. It covers every creature, they only 
@@ -18,20 +19,13 @@ import io.github.izdwuut.yarl.model.components.creatures.PlayerComponent;
  * @since  2017-11-13
  */
 public class Creature extends Entity {
-	/**
-	 * Constructs a creature using a provided name.
-	 * Base creature is composed of {@link io.github.izdwuut.yarl.model.components.NameComponent name} 
-	 * and {@link io.github.izdwuut.yarl.model.components.PositionComponent a position}.
-	 * 
-	 * @param name a creature name
-	 */
 	public Creature(String name) {
-		this();
 		add(new NameComponent(name));
+		add(new PositionComponent());
 	}
 	
-	public Creature() {		
-		add(new PositionComponent());
+	public Creature() {
+		
 	}
 	
 	/**
@@ -104,6 +98,19 @@ public class Creature extends Entity {
 	 */
 	public Creature setName(String name) {
 		add(new NameComponent(name));
+		
+		return this;
+	}
+	
+	/**
+	 * Sets a creature's position.
+	 * 
+	 * @param pos a position to set
+	 * 
+	 * @return a current instance of an object (chaining)
+	 */
+	public Creature setPos(Coord pos) {
+		add(new PositionComponent(pos));
 		
 		return this;
 	}

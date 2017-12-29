@@ -2,6 +2,7 @@ package io.github.izdwuut.yarl.model.factories;
 
 import io.github.izdwuut.yarl.model.components.creatures.ArmsComponent;
 import io.github.izdwuut.yarl.model.entities.Creature;
+import squidpony.squidmath.Coord;
 
 /**
  * A factory that produces {@link io.github.izdwuut.yarl.model.entities.Creature Creatures}.
@@ -18,15 +19,14 @@ public class CreatureFactory extends CreatureFlyweightFactory {
 	 * @return a creature entity tagged as a player
 	 */
 	public Creature player(String name) {
-		Creature player = new Creature(name);
+		Creature player = new Creature();
 		player.setPlayer()
-			.setInv(10)
-			.setMov()
-			.setGlyph('@');
-		
-		player.add(new ArmsComponent(new ItemFactory().sword()));
-		
-		return player;
+				.setInv(10)
+				.setMov()
+				.setPos(Coord.get(1, 1))
+				.add(new ArmsComponent(new ItemFactory().sword()));
+				
+		return getCreature(name, '@', player);
 	}
 	
 	/**
@@ -37,10 +37,8 @@ public class CreatureFactory extends CreatureFlyweightFactory {
 	 * @return a Sloth creature
 	 */
 	public Creature sloth() {
-		Creature sloth = super.sloth();
-		sloth.setHP(20);
-		
-		return sloth;
+		Creature sloth = new Creature().setHP(20);
+		return getCreature("Sloth", 'S', sloth);
 	}
 	
 	/**

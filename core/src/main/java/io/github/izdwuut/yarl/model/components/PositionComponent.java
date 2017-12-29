@@ -16,11 +16,12 @@ public class PositionComponent implements Component {
 	 */
 	Coord position;
 	
-	/**
-	 * Initiates a {@link #position position} field to a default (1, 1).
-	 */
+	public PositionComponent(Coord pos) {
+		this.position = pos;
+	}
+	
 	public PositionComponent() {
-		this.position = Coord.get(1, 1);
+		
 	}
 	
 	/**
