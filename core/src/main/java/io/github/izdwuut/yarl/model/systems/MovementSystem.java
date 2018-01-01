@@ -8,7 +8,6 @@ import com.badlogic.ashley.signals.Listener;
 import com.badlogic.ashley.signals.Signal;
 import com.badlogic.ashley.systems.IteratingSystem;
 
-import io.github.izdwuut.yarl.model.Event;
 import io.github.izdwuut.yarl.model.components.PositionComponent;
 import io.github.izdwuut.yarl.model.components.creatures.MovementComponent;
 import io.github.izdwuut.yarl.model.entities.Combat;
@@ -22,7 +21,7 @@ import squidpony.squidmath.Coord;
  * {@link com.badlogic.ashley.core.EntitySystem A system} that is responsible for 
  * {@link com.badlogic.ashley.core.Entity Entity} movement.
  * Uses {@link com.badlogic.ashley.signals.Signal Signal} to dispatch 
- * {@link io.github.izdwuut.yarl.model.Event Events}. Relies on a 
+ * {@link io.github.izdwuut.yarl.model.systems.Event Events}. Relies on a 
  * {@link io.github.izdwuut.yarl.model.systems.WorldSystem WorldSystem}.
  * 
  * @author Bartosz "izdwuut" Konikiewicz
@@ -35,7 +34,7 @@ public class MovementSystem extends IteratingSystem implements Listenable<Event>
 	ComponentMapper<MovementComponent> mm;
 	
 	/** 
-	 * An {@link io.github.izdwuut.yarl.model.Event Event} dispatcher. 
+	 * An {@link io.github.izdwuut.yarl.model.systems.Event Event} dispatcher. 
 	 */
 	Signal<Event> dispatcher;
 	
@@ -116,8 +115,8 @@ public class MovementSystem extends IteratingSystem implements Listenable<Event>
 	
 	/**
 	 * Applies movement to every entity specified in {@link #MovementSystem(Engine) a Constructor}
-	 * and dispatches a {@link io.github.izdwuut.yarl.model.Event#MOVEMENT_END MOVEMENT_END} 
-	 * {@link io.github.izdwuut.yarl.model.Event Event}.
+	 * and dispatches a {@link io.github.izdwuut.yarl.model.systems.Event#MOVEMENT_END MOVEMENT_END} 
+	 * {@link io.github.izdwuut.yarl.model.systems.Event Event}.
 	 * 
 	 * @param deltaTime time that passed since last engine update
 	 */

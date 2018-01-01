@@ -6,11 +6,11 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-import io.github.izdwuut.yarl.model.Event;
 import io.github.izdwuut.yarl.model.components.SizeComponent;
 import io.github.izdwuut.yarl.model.components.world.DungeonComponent;
 import io.github.izdwuut.yarl.model.entities.Creature;
 import io.github.izdwuut.yarl.model.entities.World;
+import io.github.izdwuut.yarl.model.systems.Event;
 import io.github.izdwuut.yarl.model.systems.InitSystem;
 import io.github.izdwuut.yarl.model.systems.WorldSystem;
 import io.github.izdwuut.yarl.model.utils.Mappers;
@@ -20,7 +20,7 @@ import squidpony.squidgrid.gui.gdx.TextCellFactory;
 import squidpony.squidmath.Coord;
 
 /**
- * A main screen - the game screen. It displays {@link #dungeon a dungeon} and a message log.
+ * A main screen - the game screen. It displays {@link #dungeon a dungeon}.
  * It listens to {@link io.github.izdwuut.yarl.model.systems.MovementSystem a MovementSystem} in order to update
  * a display based on a player input.
  * 
@@ -42,7 +42,7 @@ public class GameScreen extends Screen implements Listener<Event> {
 	/** 
 	 * {@link com.badlogic.gdx.scenes.scene2d.Stage A stage} that handles display. 
 	 */
-	public Stage stage;
+	Stage stage;
 	
 	/** 
 	 * {@link squidpony.squidgrid.gui.gdx.SparseLayers A Layer} with a dungeon. 
@@ -152,7 +152,7 @@ public class GameScreen extends Screen implements Listener<Event> {
 	}
 	
 	/**
-	 * Listens for an {@link io.github.izdwuut.yarl.model.Event Event} dispatched by
+	 * Listens for an {@link io.github.izdwuut.yarl.model.systems.Event Event} dispatched by
 	 * {@link io.github.izdwuut.yarl.model.systems.MovementSystem a MovementSystem} or 
 	 * {@link io.github.izdwuut.yarl.model.systems.CombatSystem a CombatSystem}.
 	 */

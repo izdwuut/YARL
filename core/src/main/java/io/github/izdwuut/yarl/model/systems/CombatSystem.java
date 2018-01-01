@@ -7,7 +7,6 @@ import com.badlogic.ashley.signals.Listener;
 import com.badlogic.ashley.signals.Signal;
 import com.badlogic.ashley.systems.IteratingSystem;
 
-import io.github.izdwuut.yarl.model.Event;
 import io.github.izdwuut.yarl.model.components.combat.AttackerComponent;
 import io.github.izdwuut.yarl.model.components.combat.DefenderComponent;
 import io.github.izdwuut.yarl.model.components.creatures.HPComponent;
@@ -27,7 +26,9 @@ public class CombatSystem extends IteratingSystem implements Listenable<Event> {
 	 */
 	Engine engine;
 	
-	/** An {@link io.github.izdwuut.yarl.model.Event Event} dispatcher. */
+	/** 
+	 * An {@link io.github.izdwuut.yarl.model.systems.Event Event} dispatcher. 
+	 */
 	Signal<Event> dispatcher;
 	
 	public CombatSystem(Engine engine) {
