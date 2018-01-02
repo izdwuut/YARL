@@ -45,6 +45,8 @@ public class DungeonComponent implements Component {
 	 * of cells that are {@link #floors floors} and {@link #creatureMap creatures}.
 	 *  
 	 * @param dungeon a two-dimensional array of ASCII characters representing a dungeon
+	 * @param width dungeon width
+	 * @param height dungeon height
 	 */
 	public DungeonComponent(char[][] dungeon, int width, int height) {
 		this.dungeon = dungeon;
@@ -84,8 +86,7 @@ public class DungeonComponent implements Component {
 	/**
 	 * Gets a {@link #creatures creature} at a given position.
 	 * 
-	 * @param x an x coordinate of a creature
-	 * @param y a y coordinate of a creature
+	 * @param pos a creature position
 	 * 
 	 * @return a creature at (x,y)
 	 */

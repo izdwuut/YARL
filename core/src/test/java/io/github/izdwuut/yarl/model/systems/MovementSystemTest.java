@@ -190,6 +190,8 @@ class MovementSystemTest {
 	/**
 	 * Tests that combat was initiated. Fired by {@link io.github.izdwuut.yarl.model.systems.MovementSystemTest#movementTest() a movementTest}.
 	 * Covers (@link io.github.izdwuut.yarl.model.systems.MovementSystem#initCombat(Coord target, Entity attacker) initCombat}.
+	 * 
+	 * @param combatTargets defender sides
 	 */
 	void initCombatTest(List<Creature> combatTargets) {
 		List<Creature> defenderCreatures = new ArrayList<Creature>();

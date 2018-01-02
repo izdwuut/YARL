@@ -17,7 +17,8 @@ public abstract class CreatureFlyweightFactory extends FlyweightFactory<Characte
 	 * Gets a weapon with flyweight components.
 	 * 
 	 * @param name an item's name
-	 * @param dmg an item's damage
+	 * @param glyph an item's glyph
+	 * @param creature a creature with custom components
 	 * 
 	 * @return a weapon with flyweight components
 	 */
@@ -33,9 +34,10 @@ public abstract class CreatureFlyweightFactory extends FlyweightFactory<Characte
 	 * Adds common components to a {@code creature} and flyweight object.
 	 * 
 	 * @param name a creature's name
+	 * @param glyph a creature's display character
 	 * @param creature an creature with no components
 	 * 
-	 * @return a {@code creature} expanded by flyweight components
+	 * @return a {@code #creature} expanded by flyweight components
 	 */
 	//TODO: further reduce boilerplate code. add a bag of common components?
 	private Creature addCommon(String name, char glyph, Creature creature) {

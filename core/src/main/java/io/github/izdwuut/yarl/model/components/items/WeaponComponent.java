@@ -19,16 +19,16 @@ public class WeaponComponent implements Component {
 	}
 	
 	/**
-	 * Gets weapon {@link #damage damage}.
+	 * Gets weapon {@link #dmg damage}.
 	 * 
-	 * @return weapon {@link #damage damage}
+	 * @return weapon {@link #dmg damage}
 	 */
 	public int getDmg() {
 		return dmg;
 	}
 
 	/**
-	 * Sets weapon {@link #damage damage}.
+	 * Sets weapon {@link #dmg damage}.
 	 * 
 	 * @param dmg a damage to set
 	 */

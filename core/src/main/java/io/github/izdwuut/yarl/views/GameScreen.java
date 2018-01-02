@@ -20,7 +20,7 @@ import squidpony.squidgrid.gui.gdx.TextCellFactory;
 import squidpony.squidmath.Coord;
 
 /**
- * A main screen - the game screen. It displays {@link #dungeon a dungeon}.
+ * A main screen - the game screen. It displays a dungeon fetched from {@link #dungComp a dungeon component}.
  * It listens to {@link io.github.izdwuut.yarl.model.systems.MovementSystem a MovementSystem} in order to update
  * a display based on a player input.
  * 
@@ -30,12 +30,12 @@ import squidpony.squidmath.Coord;
 //TODO: refactor with fire
 public class GameScreen extends Screen implements Listener<Event> {
 	/** 
-	 * {@link #dungeon Dungeon} width. 
+	 * {@link #dungComp Dungeon} width. 
 	 */
 	int width;
 	
 	/** 
-	 * {@link #dungeon Dungeon} height. 
+	 * {@link #dungComp Dungeon} height. 
 	 */
 	int height;
 	
@@ -78,7 +78,7 @@ public class GameScreen extends Screen implements Listener<Event> {
 	/**
 	 * Constructs a game screen using provided parameters. Sets a {@link com.badlogic.gdx.utils.viewport.Viewport Viewport}, 
 	 * adds actors to a {@link #stage Stage} and calls for {@link #putMap() putMap} to put 
-	 * {@link #dungeon a dungeon} on a {@link squidpony.squidgrid.gui.gdx.SparseLayers SparseLayers}.
+	 * {@link #dungComp a dungeon} on a {@link squidpony.squidgrid.gui.gdx.SparseLayers SparseLayers}.
 	 * 
 	 * @param initSystem an initialization system
 	 * @param worldSystem a world system

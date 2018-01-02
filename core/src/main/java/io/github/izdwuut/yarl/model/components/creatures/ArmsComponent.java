@@ -22,7 +22,8 @@ public class ArmsComponent implements Component {
 	
 	/**
 	 * Gets {@link #weapon an equipped weapon}.
-	 * @return
+	 * 
+	 * @return an equipped weapon
 	 */
 	public Item getWeapon() {
 		return weapon;

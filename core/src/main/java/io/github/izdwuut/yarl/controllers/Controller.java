@@ -37,6 +37,7 @@ public abstract class Controller {
 	 * passed either by {@link io.github.izdwuut.yarl.YARL YARL} or any controller.
 	 * 
 	 * @param engine an Ashley engine
+	 * @param game a main {@link com.badlogic.gdx.Game Game} class
 	 */
 	public Controller(Engine engine, Game game) {
 		this.engine = engine;

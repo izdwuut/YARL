@@ -61,6 +61,7 @@ public class MovementSystem extends IteratingSystem implements Listenable<Event>
 	 * that describes movement).
 	 * 
 	 * @param engine an Ashley engine needed to retrieve {@link io.github.izdwuut.yarl.model.systems.WorldSystem WorldSystem}
+	 * @param world a {@link io.github.izdwuut.yarl.model.entities.World World} [@link com.badlogic.ashley.core.Entity Entity}
 	 */
 	public MovementSystem(Engine engine, World world) {
 		super(Family.all(PositionComponent.class, MovementComponent.class).get());
@@ -114,7 +115,7 @@ public class MovementSystem extends IteratingSystem implements Listenable<Event>
 	}
 	
 	/**
-	 * Applies movement to every entity specified in {@link #MovementSystem(Engine) a Constructor}
+	 * Applies movement to every entity specified in {@link #MovementSystem(Engine engine, World world) a Constructor}
 	 * and dispatches a {@link io.github.izdwuut.yarl.model.systems.Event#MOVEMENT_END MOVEMENT_END} 
 	 * {@link io.github.izdwuut.yarl.model.systems.Event Event}.
 	 * 

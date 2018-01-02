@@ -21,7 +21,9 @@ public class DefenderComponent implements Component{
 	}
 	
 	/**
-	 * Gets {@link #defender a defender}. 
+	 * Gets {@link #defender a defender}.
+	 * 
+	 * @return a defender side of combat
 	 */
 	public Creature getDefender() {
 		return defender;

@@ -1,7 +1,7 @@
 io.github.izdwuut.yarl
 io.github.izdwuut.yarl.controllers
-io.github.izdwuut.yarl.model
 io.github.izdwuut.yarl.model.components
+io.github.izdwuut.yarl.model.components.combat
 io.github.izdwuut.yarl.model.components.creatures
 io.github.izdwuut.yarl.model.components.items
 io.github.izdwuut.yarl.model.components.settings

@@ -14,7 +14,7 @@ import io.github.izdwuut.yarl.model.entities.Creature;
 import io.github.izdwuut.yarl.model.utils.Mappers;
 
 /**
- * A system that process {@link com.badlogic.ashley.core.Entity.Combat Combat} entities,
+ * A system that process {@link io.github.izdwuut.yarl.model.entities.Combat Combat} {@link com.badlogic.ashley.core.Entity Entities},
  * i.e. a battle between two creatures - an attacker and a defender.
  * 
  * @author Bartosz "izdwuut" Konikiewicz
@@ -47,6 +47,7 @@ public class CombatSystem extends IteratingSystem implements Listenable<Event> {
 	/**
 	 * Resolves a combat.
 	 * 
+	 * @param attacker an atacker side
 	 * @param defender a defender side
 	 * 
 	 * @return null if hit points are above 0, a defender creature otherwise
@@ -68,8 +69,7 @@ public class CombatSystem extends IteratingSystem implements Listenable<Event> {
 	 * Cleans up casualties. Imagine Viscera Cleanup Detail.
 	 * 
 	 * @param creature a creature if any died in a combat, null otherwise
-	 * 
-	 * @param combat {@link com.badlogic.ashley.core.Entity.Combat a Combat} entity
+	 * @param combat {@link io.github.izdwuut.yarl.model.entities.Combat a Combat} {@link com.badlogic.ashley.core.Entity Entity}
 	 */
 	void cleanup(Creature creature, Entity combat) {
 		if(creature != null) {
