@@ -19,7 +19,8 @@ public class World extends Entity {
 	 * @param dungeon two-dimensional ASCII array representing a dungeon
 	 */
 	public World(char[][] dungeon) {
-		add(new DungeonComponent(dungeon));
-		add(new SizeComponent(dungeon.length, dungeon[0].length));
+		int width = dungeon.length, height = dungeon[0].length;
+		add(new DungeonComponent(dungeon, width, height));
+		add(new SizeComponent(width, height));
 	}
 }

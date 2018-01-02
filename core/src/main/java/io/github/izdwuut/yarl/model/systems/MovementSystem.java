@@ -8,9 +8,10 @@ import com.badlogic.ashley.signals.Listener;
 import com.badlogic.ashley.signals.Signal;
 import com.badlogic.ashley.systems.IteratingSystem;
 
-import io.github.izdwuut.yarl.model.Event;
 import io.github.izdwuut.yarl.model.components.PositionComponent;
 import io.github.izdwuut.yarl.model.components.creatures.MovementComponent;
+import io.github.izdwuut.yarl.model.entities.Combat;
+import io.github.izdwuut.yarl.model.entities.Creature;
 import io.github.izdwuut.yarl.model.entities.World;
 import io.github.izdwuut.yarl.model.utils.Mappers;
 import squidpony.squidgrid.Direction;
@@ -20,20 +21,37 @@ import squidpony.squidmath.Coord;
  * {@link com.badlogic.ashley.core.EntitySystem A system} that is responsible for 
  * {@link com.badlogic.ashley.core.Entity Entity} movement.
  * Uses {@link com.badlogic.ashley.signals.Signal Signal} to dispatch 
- * {@link io.github.izdwuut.yarl.model.Event Events}.
+ * {@link io.github.izdwuut.yarl.model.systems.Event Events}. Relies on a 
+ * {@link io.github.izdwuut.yarl.model.systems.WorldSystem WorldSystem}.
  * 
  * @author Bartosz "izdwuut" Konikiewicz
  * @since  2017-11-20
  */
 public class MovementSystem extends IteratingSystem implements Listenable<Event> {
-	/** A movement {@link com.badlogic.ashley.core.ComponentMapper Mapper}. */
-	private ComponentMapper<MovementComponent> mm;
+	/** 
+	 * A movement {@link com.badlogic.ashley.core.ComponentMapper Mapper}. 
+	 */
+	ComponentMapper<MovementComponent> mm;
 	
-	/** An {@link io.github.izdwuut.yarl.model.Event Event} dispatcher. */
-	private Signal<Event> dispatcher;
+	/** 
+	 * An {@link io.github.izdwuut.yarl.model.systems.Event Event} dispatcher. 
+	 */
+	Signal<Event> dispatcher;
 	
-	/** An Ashley engine needed to retrieve {@link io.github.izdwuut.yarl.model.systems.WorldSystem WorldSystem}. */
-	private Engine engine;
+	/** 
+	 * An Ashley engine needed to retrieve {@link io.github.izdwuut.yarl.model.systems.WorldSystem WorldSystem}. 
+	 */
+	Engine engine;
+	
+	/** 
+	 * A world entity. 
+	 */
+	World world;
+	
+	/** 
+	 * A world system. 
+	 */
+	WorldSystem worldSystem;
 	
 	/**
 	 * Specifies a class of {@link com.badlogic.ashley.core.Entity Entities} that are processed by the system, 
@@ -43,13 +61,16 @@ public class MovementSystem extends IteratingSystem implements Listenable<Event>
 	 * that describes movement).
 	 * 
 	 * @param engine an Ashley engine needed to retrieve {@link io.github.izdwuut.yarl.model.systems.WorldSystem WorldSystem}
+	 * @param world a {@link io.github.izdwuut.yarl.model.entities.World World} [@link com.badlogic.ashley.core.Entity Entity}
 	 */
-	public MovementSystem(Engine engine) {
+	public MovementSystem(Engine engine, World world) {
 		super(Family.all(PositionComponent.class, MovementComponent.class).get());
 		
 		this.engine = engine;
 		this.mm = Mappers.movement;
 		this.dispatcher = new Signal<Event>();
+		this.world = world;
+		this.worldSystem = engine.getSystem(WorldSystem.class);
 	}
 	
 	/**
@@ -70,10 +91,12 @@ public class MovementSystem extends IteratingSystem implements Listenable<Event>
 			PositionComponent pos = Mappers.position.get(entity);
 			Coord target = pos.getPosition()
 					.translate(direction.deltaX, direction.deltaY);
-			WorldSystem world = engine.getSystem(WorldSystem.class);
-			if(world.isBounds(target)
-					&& world.isFloor(target)) {
-				pos.setPosition(target);
+			if(worldSystem.isBounds(target)) {
+				if(worldSystem.isFloor(target)) {
+					pos.setPosition(target);
+				} else {
+					initCombat(target, entity);
+				}
 			}
 			mov.removeDirection();
 		}
@@ -92,9 +115,9 @@ public class MovementSystem extends IteratingSystem implements Listenable<Event>
 	}
 	
 	/**
-	 * Applies movement to every entity specified in {@link #MovementSystem(Engine) a Constructor}
-	 * and dispatches a {@link io.github.izdwuut.yarl.model.Event#MOVEMENT_END MOVEMENT_END} 
-	 * {@link io.github.izdwuut.yarl.model.Event Event}.
+	 * Applies movement to every entity specified in {@link #MovementSystem(Engine engine, World world) a Constructor}
+	 * and dispatches a {@link io.github.izdwuut.yarl.model.systems.Event#MOVEMENT_END MOVEMENT_END} 
+	 * {@link io.github.izdwuut.yarl.model.systems.Event Event}.
 	 * 
 	 * @param deltaTime time that passed since last engine update
 	 */
@@ -107,5 +130,21 @@ public class MovementSystem extends IteratingSystem implements Listenable<Event>
 	@Override
 	public void addListener(Listener<Event> listener) {
 		dispatcher.add(listener);
+	}
+	
+	/**
+	 * Initiates combat.
+	 * 
+	 * @param target a position of a defender {@link io.github.izdwuut.yarl.model.entities.Creature Creature}
+	 * @param attacker an attacker {@link io.github.izdwuut.yarl.model.entities.Creature Creature} fetched from
+	 * {@link #engine an engine}.
+	 */
+	void initCombat(Coord target, Entity attacker) {
+		if(worldSystem.isCreature(target) && attacker instanceof Creature) {
+			Combat combat = new Combat();
+			combat.setAttacker((Creature) attacker);
+			combat.setDefender(Mappers.dungeon.get(world).getCreature(target));
+			engine.addEntity(combat);
+		}
 	}
 }

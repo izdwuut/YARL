@@ -10,8 +10,10 @@ import com.badlogic.ashley.core.Component;
  * @since  2017-11-13
  */
 public class NameComponent implements Component {
-	/** {@link com.badlogic.ashley.core.Entity An entity} name. */
-	private String name;
+	/** 
+	 * {@link com.badlogic.ashley.core.Entity An entity} name. 
+	 */
+	String name;
 	
 	/**
 	 * Creates a component and sets it's {@link #name name} field to a provided string.

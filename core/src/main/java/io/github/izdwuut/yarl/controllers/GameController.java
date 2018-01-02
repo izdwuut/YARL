@@ -1,15 +1,22 @@
 package io.github.izdwuut.yarl.controllers;
 
 import com.badlogic.ashley.core.Engine;
+import com.badlogic.ashley.signals.Listener;
+import com.badlogic.ashley.signals.Signal;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 
-import io.github.izdwuut.yarl.YARL;
 import io.github.izdwuut.yarl.model.entities.Creature;
 import io.github.izdwuut.yarl.model.entities.Settings;
 import io.github.izdwuut.yarl.model.entities.World;
+import io.github.izdwuut.yarl.model.systems.CombatSystem;
+import io.github.izdwuut.yarl.model.systems.Event;
 import io.github.izdwuut.yarl.model.systems.InitSystem;
 import io.github.izdwuut.yarl.model.systems.MovementSystem;
+import io.github.izdwuut.yarl.model.systems.WinSystem;
+import io.github.izdwuut.yarl.model.systems.WorldSystem;
 import io.github.izdwuut.yarl.views.GameScreen;
+import io.github.izdwuut.yarl.views.WinScreen;
 import squidpony.squidgrid.Direction;
 import squidpony.squidgrid.gui.gdx.SquidInput;
 
@@ -20,20 +27,29 @@ import squidpony.squidgrid.gui.gdx.SquidInput;
  * @author Bartosz "izdwuut" Konikiewicz
  * @since  2017-11-18
  */
-public class GameController extends Controller {
-	/** A game class. */
-	private YARL game;
-	
-	/** A player entity. */
-	private Creature player;
+public class GameController extends Controller implements Listener<Event> {
+	/** 
+	 * A player entity. 
+	 */
+	Creature player;
 	
 	/** 
 	 * A screen that is used by {@link io.github.izdwuut.yarl.YARL YARL} to 
 	 * {@link io.github.izdwuut.yarl.YARL#render() render} stuff. 
 	 * GameController is only responsible for 
-	 * {@link io.github.izdwuut.yarl.views.GameScreen#GameScreen(World, Settings, Creature) constructing} it. 
+	 * {@link io.github.izdwuut.yarl.views.GameScreen#GameScreen(InitSystem initSystem, WorldSystem worldSystem) constructing} it. 
 	 * */
-	private GameScreen screen;
+	GameScreen screen;
+	
+	/**
+	 * An initialization system.
+	 */
+	InitSystem initSys;
+	
+	/**
+	 * A world system.
+	 */
+	WorldSystem worldSys;
 	
 	/**
 	 * Takes as parameters {@link io.github.izdwuut.yarl.YARL YARL} object (used in {@link #init() init} method to
@@ -44,26 +60,32 @@ public class GameController extends Controller {
 	 * @param game a main game object
 	 * @param engine an Ashley engine
 	 */
-	public GameController(YARL game, Engine engine) {
-		super(engine);
+	public GameController(Engine engine, Game game) {
+		super(engine, game);
 		
 		this.game = game;
-		this.engine = engine;
 		
 		init();
 	}
 
 	/**
 	 * Further actions needed to be done to build a GameController.
+	 * An InitSystem has to not be used outside constructors.
 	 */
-	private void init() {
-		InitSystem init = engine.getSystem(InitSystem.class);
-		player = init.getPlayer();
-		screen = new GameScreen(init.getWorld(), init.getSettings(), player);
+	void init() {
+		initSys = new InitSystem(engine);
+		worldSys = engine.getSystem(WorldSystem.class);
+		player = initSys.getPlayer();
+		screen = new GameScreen(initSys, worldSys);
 		
+		//TODO: listeners are set in screens
 		engine.getSystem(MovementSystem.class)
 			.addListener(screen);	
 		game.setScreen(screen);
+		engine.getSystem(CombatSystem.class)
+		.addListener(screen);
+		engine.getSystem(WinSystem.class)
+		.addListener(this);
 		
 		handleInput();
 		
@@ -101,10 +123,26 @@ public class GameController extends Controller {
 	@Override
 	protected void pause() {
 		engine.getSystem(MovementSystem.class).setProcessing(false);
+		engine.getSystem(CombatSystem.class).setProcessing(false);
+		engine.getSystem(WinSystem.class).setProcessing(true);
 	}
 	
 	@Override
 	protected void resume() {
 		engine.getSystem(MovementSystem.class).setProcessing(true);
+		engine.getSystem(CombatSystem.class).setProcessing(true);
+		engine.getSystem(WinSystem.class).setProcessing(true);
+	}
+	
+	/**
+	 * Listens for a {@link io.github.izdwuut.yarl.model.systems.Event#FLOOR_CLEAR FLOOR_CLEAR} event dispatched by 
+	 * {@link io.github.izdwuut.yarl.model.systems.CombatSystem a CombatSystem}.
+	 */
+	@Override
+	public void receive(Signal<Event> signal, Event e) {
+		switch(e) {
+		case FLOOR_CLEAR:
+			game.setScreen(new WinScreen(initSys, worldSys));
+		}
 	}
 }

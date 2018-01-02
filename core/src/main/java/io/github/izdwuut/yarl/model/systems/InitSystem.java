@@ -19,18 +19,25 @@ import io.github.izdwuut.yarl.model.factories.WorldFactory;
  * @since  2017-12-08
  */
 public class InitSystem extends EntitySystem {
-	/** {@link #world World} settings **/
-	private Settings settings;
+	/** 
+	 * {@link #world World} settings 
+	 */
+	Settings settings;
 	
-	/** World entity */
-	private World world;
+	/** 
+	 * World entity 
+	 */
+	World world;
 	
-	/** An Ashley Engine */
-	private Engine engine;
+	/** 
+	 * An Ashley Engine 
+	 */
+	Engine engine;
 	
-	/** A player entity. */
-	private Creature player;
-	
+	/** 
+	 * A player entity. 
+	 */
+	Creature player;
 	
 	/**
 	 * Gets main entities from factories and adds systems to an {@link #engine engine}.
@@ -42,7 +49,7 @@ public class InitSystem extends EntitySystem {
 		
 		settings = new SettingsFactory().getSettings();
 		world = new WorldFactory(settings).getWorld();
-		player = new CreatureFactory().getPlayer("izdwuut");
+		player = new CreatureFactory().player("izdwuut");
 		engine.addEntity(player);
 		
 		addSystems();
@@ -52,12 +59,23 @@ public class InitSystem extends EntitySystem {
 	/**
 	 * Creates and adds systems to an {@link #engine engine}.
 	 */
-	private void addSystems() {
-		MovementSystem movementSystem = new MovementSystem(engine);
-		WorldSystem worldSystem = new WorldSystem(world);
-		
-		engine.addSystem(movementSystem);
+	void addSystems() {
+		engine.addSystem(this);
+
+		WorldSystem worldSystem = new WorldSystem(world, settings, engine);
 		engine.addSystem(worldSystem);
+		
+		MovementSystem movementSystem = new MovementSystem(engine, world);
+		movementSystem.priority = 1;
+		engine.addSystem(movementSystem);
+
+		CombatSystem combatSystem = new CombatSystem(engine);
+		engine.addSystem(combatSystem);
+		
+		WinSystem winSys = new WinSystem(engine);
+		engine.addSystem(winSys);
+		
+		engine.removeSystem(this);
 		
 		pause();
 	}
@@ -65,7 +83,7 @@ public class InitSystem extends EntitySystem {
 	/**
 	 * Pauses systems.
 	 */
-	private void pause() {
+	void pause() {
 		for (EntitySystem system : engine.getSystems()) {
 			system.setProcessing(false);
 		}

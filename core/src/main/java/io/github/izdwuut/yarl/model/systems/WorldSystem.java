@@ -1,11 +1,17 @@
 package io.github.izdwuut.yarl.model.systems;
 
+import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.EntitySystem;
 
 import io.github.izdwuut.yarl.model.components.SizeComponent;
+import io.github.izdwuut.yarl.model.components.world.DungeonComponent;
+import io.github.izdwuut.yarl.model.entities.Creature;
+import io.github.izdwuut.yarl.model.entities.Settings;
 import io.github.izdwuut.yarl.model.entities.World;
+import io.github.izdwuut.yarl.model.factories.CreatureFactory;
 import io.github.izdwuut.yarl.model.utils.Mappers;
 import squidpony.squidmath.Coord;
+import squidpony.squidmath.GreasedRegion;
 
 /**
  * Logic related to a {@link io.github.izdwuut.yarl.model.entities.World World}.
@@ -15,10 +21,39 @@ import squidpony.squidmath.Coord;
  * @since  2017-12-12
  */
 public class WorldSystem extends EntitySystem {
-	private World world;
+	/** 
+	 * A world entity. 
+	 */
+	World world;
 	
-	public WorldSystem(World world) {
+	/** 
+	 * Game settings. 
+	 */
+	Settings settings;
+	
+	/** 
+	 * Floors obtained from a {@link #dungeonComp dungeon component}. 
+	 */
+	GreasedRegion floors;
+	
+	/** 
+	 * A dungeon component. 
+	 */
+	DungeonComponent dungeonComp;
+	
+	/**
+	 * An Ashley engine needed to {@link #populate populate} creatures.
+	 */
+	Engine engine;
+	
+	public WorldSystem(World world, Settings settings, Engine engine) {
 		this.world = world;
+		this.settings = settings;
+		this.dungeonComp = Mappers.dungeon.get(world);
+		this.floors = dungeonComp.getFloors();
+		this.engine = engine;
+		
+		populate();
 	}
 	
 	/**
@@ -47,8 +82,76 @@ public class WorldSystem extends EntitySystem {
 	 * @return true if {@link squidpony.squidmath.Coord a Coord} is a floor, false otherwise
 	 */
 	public boolean isFloor(Coord coord) {
+		return floors.contains(coord);
+	}
+	
+	/**
+	 * Populate a dungeon with procedurally generated creatures.
+	 */
+	//TODO: handle no empty floor
+	void populate() {
+		CreatureFactory factory = new CreatureFactory();
+		for(int i = 0; i < 10; i++) {
+			Creature creature = factory.random();
+			creature.setPos(getRandomFloor());
+			addCreature(creature);
+		}
+	}
+	
+	/**
+	 * Adds {@link io.github.izdwuut.yarl.model.entities.Creature a creature} to a dungeon.
+	 * 
+	 * @param creature {@link io.github.izdwuut.yarl.model.entities.Creature a creature} to add to a dungeon
+	 */
+	void addCreature(Creature creature) {
+		Coord pos = Mappers.position.get(creature).getPosition();
+		if(isFloor(pos)) {
+			dungeonComp.setCreature(creature);
+			dungeonComp.getFloors()
+			.remove(pos);
+			engine.addEntity(creature);
+		}
+	}
+	
+	/**
+	 * Checks if a provided {@link squidpony.squidmath.Coord coord} is inhabited by any creature.
+	 * 
+	 * @param coord {@link squidpony.squidmath.Coord a coord} to check
+	 * 
+	 * @return true if a provided {@link squidpony.squidmath.Coord coord} is inhabited, false otherwise
+	 */
+	public boolean isCreature(Coord coord) {
 		return Mappers.dungeon.get(world)
-				.getFloors()
+				.getCreatureMap()
 				.contains(coord);
+	}
+	
+	/**
+	 * Gets a random empty floor. Returns (-1,-1) if none is found.
+	 * 
+	 * @return {@link squidpony.squidmath.Coord a coord} that represents an empty dungeon cell
+	 */
+	Coord getRandomFloor() {
+		return floors.singleRandom(Mappers.rng.get(settings).getRng());
+	}
+
+	/**
+	 * Gets {@link #world a world} entity
+	 * 
+	 * @return {@link #world a world} entity
+	 */
+	public World getWorld() {
+		return world;
+	}
+	
+	/**
+	 * Removes a creature from both a dungeon and engine.
+	 * 
+	 * @param creature {@link io.github.izdwuut.yarl.model.entities.Creature a creature} to remove
+	 */
+	public void removeCreature(Creature creature) {
+		dungeonComp.removeCreature(Mappers.position.get(creature)
+				.getPosition());
+		engine.removeEntity(creature);
 	}
 }

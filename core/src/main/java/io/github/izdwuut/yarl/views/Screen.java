@@ -17,10 +17,14 @@ import squidpony.squidgrid.gui.gdx.SColor;
  * @since  2017-12-08
  */
 public abstract class Screen extends ScreenAdapter {
-	/** Cell width (in pixels). */
+	/** 
+	 * Cell width (in pixels). 
+	 */
 	protected int cellWidth;
 	
-	/** Cell height (in pixels). */
+	/** 
+	 * Cell height (in pixels). 
+	 */
 	protected int cellHeight;
 	
 	/**

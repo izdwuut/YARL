@@ -11,7 +11,7 @@ junitPlatform {
 		includeClassNamePattern '.*Test'
 	}
 	// enableStandardTestTask true
-	logManager 'org.apache.logging.log4j.jul.LogManager'
+	//logManager 'org.apache.logging.log4j.jul.LogManager'
 }
 
 dependencies {

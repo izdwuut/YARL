@@ -11,14 +11,17 @@ import squidpony.squidmath.Coord;
  * @since  2017-11-20
  */
 public class PositionComponent implements Component {
-	/** A position on a map. */
-	private Coord position;
-	
-	/**
-	 * Initiates a {@link #position position} field to a default (1, 1).
+	/** 
+	 * A position on a map. 
 	 */
+	Coord position;
+	
+	public PositionComponent(Coord pos) {
+		this.position = pos;
+	}
+	
 	public PositionComponent() {
-		this.position = Coord.get(1, 1);
+		
 	}
 	
 	/**
