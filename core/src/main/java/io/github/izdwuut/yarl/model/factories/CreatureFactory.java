@@ -1,5 +1,7 @@
 package io.github.izdwuut.yarl.model.factories;
 
+import io.github.izdwuut.yarl.model.components.GlyphComponent;
+import io.github.izdwuut.yarl.model.components.NameComponent;
 import io.github.izdwuut.yarl.model.entities.Creature;
 import squidpony.squidmath.Coord;
 
@@ -9,13 +11,15 @@ import squidpony.squidmath.Coord;
  * @author Bartosz "izdwuut" Konikiewicz
  * @since  2017-11-20
  */
-public class CreatureFactory extends CreatureFlyweightFactory {
+public class CreatureFactory extends FlyweightFactory<String, Creature> {
 	/**
 	 * An item factory.
 	 */
 	ItemFactory itemFactory;
 	
 	public CreatureFactory() {
+		super(Creature.class);
+		
 		itemFactory = new ItemFactory();
 	}
 	
@@ -32,7 +36,7 @@ public class CreatureFactory extends CreatureFlyweightFactory {
 				.setMov()
 				.setPos(Coord.get(1, 1))
 				.setArms(itemFactory.sword());
-				
+		
 		return getCreature(name, '@', player);
 	}
 	
@@ -45,6 +49,7 @@ public class CreatureFactory extends CreatureFlyweightFactory {
 	 */
 	public Creature sloth() {
 		Creature sloth = new Creature().setHP(20);
+		
 		return getCreature("Sloth", 'S', sloth);
 	}
 	
@@ -56,5 +61,25 @@ public class CreatureFactory extends CreatureFlyweightFactory {
 	 */
 	public Creature random() {
 		return sloth();
+	}
+	
+	
+	/**
+	 * Gets a creature using a provided name, glyph and 
+	 * a creature with custom components.
+	 * 
+	 * @param name a creature's name
+	 * @param glyph a creature's display character
+	 * @param creature a creature with custom components
+	 * 
+	 * @return a creature with flyweight components
+	 */
+	//TODO: still too much boilerplate code.
+	Creature getCreature(String name, char glyph, Creature creature) {
+		if(hasFlyweight(name)) {
+			return getEntity(name, creature);
+		}
+		
+		return getEntity(name, creature, new NameComponent(name), new GlyphComponent(glyph));
 	}
 }

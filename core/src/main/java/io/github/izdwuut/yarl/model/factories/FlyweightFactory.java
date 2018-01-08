@@ -23,25 +23,14 @@ public abstract class FlyweightFactory<K, V extends Entity> {
 	 */
 	Map<K, V> flyweights;
 	
-	public FlyweightFactory() {
-		flyweights = new HashMap<K, V>();
-	}
-	
 	/**
-	 * Merges a provided entity with an underlying flyweight 
-	 * accessed using a provided key.
-	 * 
-	 * @param key a flyweight's key
-	 * @param entity an entity that is about to be merged with a flyweight
-	 * 
-	 * @return a merged entity
+	 * A class of underlying flyweight objects.
 	 */
-	protected V mergeFlyweight(K key, V entity) {
-		for(Component comp : flyweights.get(key).getComponents()) {
-			entity.add(comp);
-		}
-		
-		return entity;
+	Class<V> cls;
+	
+	public FlyweightFactory(Class<V> cls) {
+		this.cls = cls;
+		flyweights = new HashMap<K, V>();
 	}
 
 	/**
@@ -50,7 +39,7 @@ public abstract class FlyweightFactory<K, V extends Entity> {
 	 * @param key a flyweight's key
 	 * @param entity a flyweight entity
 	 */
-	protected void addFlyweight(K key, V entity) {
+	void addFlyweight(K key, V entity) {
 		flyweights.put(key, entity);
 	}
 	
@@ -63,5 +52,60 @@ public abstract class FlyweightFactory<K, V extends Entity> {
 	 */
 	protected boolean hasFlyweight(K key) {
 		return flyweights.containsKey(key);
+	}
+	
+	/**
+	 * Gets an entity merged with provided components.
+	 * Creates a flyweight object using provided components.
+	 * 
+	 * @param key a flyweight's key
+	 * @param entity the entity with custom components
+	 * @param components components that are about to be merged with the entity
+	 * 
+	 * @return a merged entity
+	 */
+	protected V getEntity(K key, V entity, Component... components) {	
+		try {				
+			V flyweight = cls.newInstance();
+			addFlyweight(key, flyweight);
+			for(Component comp : components) {
+				flyweight.add(comp);
+				entity.add(comp);
+			}
+		} catch(Exception e) {
+			for(Component comp : components) {
+				entity.add(comp);
+			}
+			System.out.println("This should never happen: " + e);
+		}
+		
+		return entity;
+	}
+	
+	/**
+	 * Gets an entity merged with an underlying flyweight object.
+	 * 
+	 * @param key a flyweight's key
+	 * @param entity an entity with custom components
+	 * 
+	 * @return the entity with flyweight components
+	 */
+	protected V getEntity(K key, V entity) {	
+		for(Component comp : getFlyweight(key).getComponents()) {
+			entity.add(comp);
+		}
+		
+		return entity;
+	}
+	
+	/**
+	 * Gets a flyweight that corresponds to a provided key.
+	 * 
+	 * @param key a key assigned to a flyweight
+	 * 
+	 * @return a flyweight object if a key exists, null otherwise
+	 */
+	V getFlyweight(K key) {
+		return flyweights.get(key);
 	}
 }

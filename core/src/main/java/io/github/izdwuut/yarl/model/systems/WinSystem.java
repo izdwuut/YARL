@@ -13,6 +13,7 @@ import io.github.izdwuut.yarl.model.components.Families;
  * @author Bartosz "izdwuut" Konikiewicz
  * @since  2018-01-01
  */
+//TODO: remove class. dispatch event in a CombatSystem
 public class WinSystem extends EntitySystem implements Listenable<Event> {
 	/** 
 	 * An {@link io.github.izdwuut.yarl.model.systems.Event Event} dispatcher. 

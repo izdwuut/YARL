@@ -1,5 +1,7 @@
 package io.github.izdwuut.yarl.model.factories;
 
+import io.github.izdwuut.yarl.model.components.NameComponent;
+import io.github.izdwuut.yarl.model.components.items.WeaponComponent;
 import io.github.izdwuut.yarl.model.entities.Item;
 
 /**
@@ -8,13 +10,25 @@ import io.github.izdwuut.yarl.model.entities.Item;
  * @author Bartosz "izdwuut" Konikiewicz
  * @since  2017-12-28
  */
-public class ItemFactory extends ItemFlyweightFactory {
+public class ItemFactory extends FlyweightFactory<String, Item> {
+	public ItemFactory() {
+		super(Item.class);
+	}
+	
 	/**
 	 * Gets a sword.
 	 * 
 	 * @return *drumroll* a sword
 	 */
 	public Item sword() {
-		return getWeapon("Sword", 20);
+		return getWeapon("Sword", 20, new Item());
+	}
+	
+	Item getWeapon(String name, int dmg, Item weapon) {
+		if(hasFlyweight(name)) {
+			return getEntity(name, weapon);
+		}
+		
+		return getEntity(name, weapon, new NameComponent(name), new WeaponComponent(dmg));
 	}
 }

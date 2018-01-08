@@ -7,8 +7,6 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 
 import io.github.izdwuut.yarl.model.entities.Creature;
-import io.github.izdwuut.yarl.model.entities.Settings;
-import io.github.izdwuut.yarl.model.entities.World;
 import io.github.izdwuut.yarl.model.systems.CombatSystem;
 import io.github.izdwuut.yarl.model.systems.Event;
 import io.github.izdwuut.yarl.model.systems.InitSystem;
