@@ -2,6 +2,7 @@ package io.github.izdwuut.yarl.model.factories;
 
 import io.github.izdwuut.yarl.model.components.GlyphComponent;
 import io.github.izdwuut.yarl.model.components.NameComponent;
+import io.github.izdwuut.yarl.model.components.creatures.ExpComponent;
 import io.github.izdwuut.yarl.model.entities.Creature;
 import squidpony.squidmath.Coord;
 
@@ -31,13 +32,14 @@ public class CreatureFactory extends FlyweightFactory<String, Creature> {
 	 * @return a creature entity tagged as a player
 	 */
 	public Creature player(String name) {
-		Creature player = new Creature().setPlayer()
+		return new Creature().setPlayer()
 				.setInv(10)
 				.setMov()
 				.setPos(Coord.get(1, 1))
-				.setArms(itemFactory.sword());
-		
-		return getCreature(name, '@', player);
+				.setArms(itemFactory.sword())
+				.setExp(0)
+				.setName(name)
+				.setGlyph('@');
 	}
 	
 	/**
@@ -50,7 +52,7 @@ public class CreatureFactory extends FlyweightFactory<String, Creature> {
 	public Creature sloth() {
 		Creature sloth = new Creature().setHP(20);
 		
-		return getCreature("Sloth", 'S', sloth);
+		return getCreature("Sloth", 'S', 100, sloth);
 	}
 	
 	/**
@@ -65,21 +67,21 @@ public class CreatureFactory extends FlyweightFactory<String, Creature> {
 	
 	
 	/**
-	 * Gets a creature using a provided name, glyph and 
-	 * a creature with custom components.
+	 * Gets a creature using provided common parameters 
+	 * and {@code #creature a creature} with custom components.
 	 * 
-	 * @param name a creature's name
-	 * @param glyph a creature's display character
-	 * @param creature a creature with custom components
+	 * @param name {@code #creature a creature}'s name
+	 * @param glyph {@code #creature a creature}'s display character
+	 * @param exp number of experience points yielded from {@code #creature a creature}
+	 * @param creature {@code #creature a creature} with custom components
 	 * 
-	 * @return a creature with flyweight components
+	 * @return {@code #creature a creature} with flyweight components
 	 */
-	//TODO: still too much boilerplate code.
-	Creature getCreature(String name, char glyph, Creature creature) {
+	Creature getCreature(String name, char glyph, int exp, Creature creature) {
 		if(hasFlyweight(name)) {
 			return getEntity(name, creature);
 		}
 		
-		return getEntity(name, creature, new NameComponent(name), new GlyphComponent(glyph));
+		return getEntity(name, creature, new NameComponent(name), new GlyphComponent(glyph), new ExpComponent(exp));
 	}
 }
