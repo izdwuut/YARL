@@ -8,6 +8,7 @@ import io.github.izdwuut.yarl.model.components.SizeComponent;
 import io.github.izdwuut.yarl.model.components.combat.AttackerComponent;
 import io.github.izdwuut.yarl.model.components.combat.DefenderComponent;
 import io.github.izdwuut.yarl.model.components.creatures.ArmsComponent;
+import io.github.izdwuut.yarl.model.components.creatures.ExpComponent;
 import io.github.izdwuut.yarl.model.components.creatures.HPComponent;
 import io.github.izdwuut.yarl.model.components.creatures.MovementComponent;
 import io.github.izdwuut.yarl.model.components.items.WeaponComponent;
@@ -81,4 +82,9 @@ public class Mappers {
 	 * {@link io.github.izdwuut.yarl.model.components.items.WeaponComponent A Weapon} mapper. 
 	 */
 	public static final ComponentMapper<WeaponComponent> weapon = ComponentMapper.getFor(WeaponComponent.class);
+	
+	/** 
+	 * {@link io.github.izdwuut.yarl.model.components.creatures.ExpComponent Experience points} mapper. 
+	 */
+	public static final ComponentMapper<ExpComponent> exp = ComponentMapper.getFor(ExpComponent.class);
 }

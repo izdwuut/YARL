@@ -64,7 +64,7 @@ class CombatSystemTest {
 	
 	/**
 	 * Tests that a cleaning crew did it's job right. 
-	 * Covers {@link io.github.izdwuut.yarl.model.systems.CombatSystem#cleanup(Creature creature, Entity combat) cleanup}.
+	 * Covers {@link io.github.izdwuut.yarl.model.systems.CombatSystem#cleanUp(Creature creature, Entity combat) cleanup}.
 	 */
 	@Test
 	void cleanupTest() {	

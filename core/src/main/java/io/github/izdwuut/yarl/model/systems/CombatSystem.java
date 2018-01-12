@@ -11,6 +11,7 @@ import io.github.izdwuut.yarl.model.components.combat.AttackerComponent;
 import io.github.izdwuut.yarl.model.components.combat.DefenderComponent;
 import io.github.izdwuut.yarl.model.components.creatures.HPComponent;
 import io.github.izdwuut.yarl.model.entities.Creature;
+import io.github.izdwuut.yarl.model.entities.Exp;
 import io.github.izdwuut.yarl.model.utils.Mappers;
 
 /**
@@ -40,19 +41,26 @@ public class CombatSystem extends IteratingSystem implements Listenable<Event> {
 	
 	@Override
 	protected void processEntity(Entity combat, float deltaTime) {
-		cleanup(combat(Mappers.attacker.get(combat).getAttacker(), Mappers.defender.get(combat)
-				.getDefender()), combat);
+		Creature attacker = Mappers.attacker.get(combat).getAttacker(), 
+				defender = Mappers.defender.get(combat)
+				.getDefender();
+		Creature defeated = resolve(attacker, defender);
+		
+		if(defeated != null) {
+			addExp(attacker, Mappers.exp.get(defender).getExp());
+			cleanUp(defeated, combat);
+		}
 	}
 	
 	/**
 	 * Resolves a combat.
 	 * 
-	 * @param attacker an atacker side
+	 * @param attacker an attacker side
 	 * @param defender a defender side
 	 * 
 	 * @return null if hit points are above 0, a defender creature otherwise
 	 */
-	Creature combat(Creature attacker, Creature defender) {
+	Creature resolve(Creature attacker, Creature defender) {
 		HPComponent hp = Mappers.hp.get(defender);
 		int dmg = Mappers.weapon.get(Mappers.arms.get(attacker).getWeapon()).getDmg(); 
 		
@@ -71,12 +79,10 @@ public class CombatSystem extends IteratingSystem implements Listenable<Event> {
 	 * @param creature a creature if any died in a combat, null otherwise
 	 * @param combat {@link io.github.izdwuut.yarl.model.entities.Combat a Combat} {@link com.badlogic.ashley.core.Entity Entity}
 	 */
-	void cleanup(Creature creature, Entity combat) {
-		if(creature != null) {
-			engine.getSystem(WorldSystem.class)
-			.removeCreature(creature);
-			dispatcher.dispatch(Event.CREATURE_KILL);
-		}
+	void cleanUp(Creature creature, Entity combat) {
+		engine.getSystem(WorldSystem.class)
+		.removeCreature(creature);
+		dispatcher.dispatch(Event.CREATURE_KILL);
 		
 		engine.removeEntity(combat);
 	}
@@ -84,5 +90,16 @@ public class CombatSystem extends IteratingSystem implements Listenable<Event> {
 	@Override
 	public void addListener(Listener<Event> listener) {
 		dispatcher.add(listener);
+	}
+	
+	/**
+	 * Adds {@link io.github.izdwuut.yarl.model.entities.Exp an Exp} entity to an Ashley engine.
+	 * 
+	 * @param creature a creature that gains experience
+	 * 
+	 * @param exp gained experience points
+	 */
+	void addExp(Creature creature, int exp) {
+		engine.addEntity(new Exp(creature, exp));
 	}
 }
