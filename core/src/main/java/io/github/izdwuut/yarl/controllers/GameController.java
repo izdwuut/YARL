@@ -10,6 +10,7 @@ import io.github.izdwuut.yarl.model.entities.Creature;
 import io.github.izdwuut.yarl.model.systems.CombatSystem;
 import io.github.izdwuut.yarl.model.systems.Event;
 import io.github.izdwuut.yarl.model.systems.InitSystem;
+import io.github.izdwuut.yarl.model.systems.LevelingSystem;
 import io.github.izdwuut.yarl.model.systems.MovementSystem;
 import io.github.izdwuut.yarl.model.systems.WinSystem;
 import io.github.izdwuut.yarl.model.systems.WorldSystem;
@@ -122,7 +123,8 @@ public class GameController extends Controller implements Listener<Event> {
 	protected void pause() {
 		engine.getSystem(MovementSystem.class).setProcessing(false);
 		engine.getSystem(CombatSystem.class).setProcessing(false);
-		engine.getSystem(WinSystem.class).setProcessing(true);
+		engine.getSystem(WinSystem.class).setProcessing(false);
+		engine.getSystem(LevelingSystem.class).setProcessing(false);
 	}
 	
 	@Override
@@ -130,6 +132,7 @@ public class GameController extends Controller implements Listener<Event> {
 		engine.getSystem(MovementSystem.class).setProcessing(true);
 		engine.getSystem(CombatSystem.class).setProcessing(true);
 		engine.getSystem(WinSystem.class).setProcessing(true);
+		engine.getSystem(LevelingSystem.class).setProcessing(true);
 	}
 	
 	/**

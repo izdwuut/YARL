@@ -72,11 +72,13 @@ public class InitSystem extends EntitySystem {
 		CombatSystem combatSystem = new CombatSystem(engine);
 		engine.addSystem(combatSystem);
 		
+		LevelingSystem levelSys = new LevelingSystem(engine);
+		engine.addSystem(levelSys);
+
 		WinSystem winSys = new WinSystem(engine);
 		engine.addSystem(winSys);
 		
 		engine.removeSystem(this);
-		
 		pause();
 	}
 	

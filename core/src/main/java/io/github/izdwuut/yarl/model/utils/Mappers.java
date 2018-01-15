@@ -2,6 +2,7 @@ package io.github.izdwuut.yarl.model.utils;
 
 import com.badlogic.ashley.core.ComponentMapper;
 
+import io.github.izdwuut.yarl.model.components.CreatureComponent;
 import io.github.izdwuut.yarl.model.components.GlyphComponent;
 import io.github.izdwuut.yarl.model.components.PositionComponent;
 import io.github.izdwuut.yarl.model.components.SizeComponent;
@@ -87,4 +88,9 @@ public class Mappers {
 	 * {@link io.github.izdwuut.yarl.model.components.creatures.ExpComponent Experience points} mapper. 
 	 */
 	public static final ComponentMapper<ExpComponent> exp = ComponentMapper.getFor(ExpComponent.class);
+	
+	/** 
+	 * {@link io.github.izdwuut.yarl.model.components.CreatureComponent Creature} mapper. 
+	 */
+	public static final ComponentMapper<CreatureComponent> creature = ComponentMapper.getFor(CreatureComponent.class);
 }

@@ -36,4 +36,13 @@ public class ExpComponent implements Component {
 	public void setExp(int exp) {
 		this.exp = exp;
 	}
+	
+	/**
+	 * Adds experience point.
+	 * 
+	 * @param exp number of points that will be added to a current value
+	 */
+	public void addExp(int exp) {
+		this.exp += exp;
+	}
 }
