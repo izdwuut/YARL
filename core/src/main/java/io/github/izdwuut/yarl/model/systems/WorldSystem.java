@@ -103,7 +103,7 @@ public class WorldSystem extends EntitySystem {
 	 * 
 	 * @param creature {@link io.github.izdwuut.yarl.model.entities.Creature a creature} to add to a dungeon
 	 */
-	void addCreature(Creature creature) {
+	public void addCreature(Creature creature) {
 		Coord pos = Mappers.position.get(creature).getPosition();
 		if(isFloor(pos)) {
 			dungeonComp.setCreature(creature);
