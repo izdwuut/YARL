@@ -1,8 +1,11 @@
 package io.github.izdwuut.yarl.model.systems;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -15,10 +18,12 @@ import io.github.izdwuut.yarl.model.entities.Combat;
 import io.github.izdwuut.yarl.model.entities.Creature;
 import io.github.izdwuut.yarl.model.entities.Settings;
 import io.github.izdwuut.yarl.model.entities.World;
+import io.github.izdwuut.yarl.model.factories.CreatureFactory;
 import io.github.izdwuut.yarl.model.factories.ItemFactory;
 import io.github.izdwuut.yarl.model.factories.SettingsFactory;
 import io.github.izdwuut.yarl.model.factories.WorldFactory;
 import io.github.izdwuut.yarl.model.utils.Mappers;
+import squidpony.squidmath.Coord;
 
 /**
  * Tests {@link io.github.izdwuut.yarl.model.systems.CombatSystem a CombatSystem}.
@@ -49,25 +54,41 @@ class CombatSystemTest {
 	
 	static Creature attacker;
 	
+	static CreatureFactory creatureFactory;
+	
+	static List<Coord> positions;
+	
 	@BeforeAll
 	static void initAll() {
 		engine = new Engine();
 		Settings settings = new SettingsFactory().getSettings();
 		world = new WorldFactory(settings).getWorld();
 		worldSystem = new WorldSystem(world, settings, engine);
+		
 		engine.addSystem(worldSystem);
 		combatSystem = new CombatSystem(engine);
 		engine.addSystem(combatSystem);
+		creatureFactory = new CreatureFactory();
 		attacker = new Creature("Test creature");
 		attacker.add(new ArmsComponent(new ItemFactory().sword()));
+		positions = Arrays.asList(Coord.get(71, 10),  
+				Coord.get(77, 12),  
+				Coord.get(58, 21),  
+				Coord.get(72, 13), 
+				Coord.get(46, 22),  
+				Coord.get(61, 21),  
+				Coord.get(15, 21),  
+				Coord.get(11, 3),  
+				Coord.get(41, 16),  
+				Coord.get(5, 20));
 	}
 	
 	/**
 	 * Tests that a cleaning crew did it's job right. 
-	 * Covers {@link io.github.izdwuut.yarl.model.systems.CombatSystem#cleanUp(Creature creature, Entity combat) cleanup}.
+	 * Covers {@link io.github.izdwuut.yarl.model.systems.CombatSystem#cleanUp(Creature creature, Entity combat) cleanUp}.
 	 */
 	@Test
-	void cleanupTest() {	
+	void cleanUpTest() {
 		Iterator<Entity> iterator = engine.getEntities().iterator();
 		while(iterator.hasNext()) {
 			Entity entity = iterator.next();
@@ -76,12 +97,13 @@ class CombatSystemTest {
 				combat.setDefender((Creature) entity);
 				combat.setAttacker(attacker);
 				engine.addEntity(combat);
-				engine.removeEntity(entity);
 			}
 		}
-		
 		engine.update(0);
-		assertEquals(engine.getEntities().size(), 0);
+		for(Entity entity : engine.getEntities()) {
+			assertNotEquals(entity.getClass(), Creature.class);
+			assertNotEquals(entity.getClass(), Combat.class);
+		}
 		assertEquals(Mappers.dungeon.get(world).getCreatureMap().size(), 0);
 	}
 }
