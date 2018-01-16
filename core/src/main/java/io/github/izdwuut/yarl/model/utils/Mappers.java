@@ -35,11 +35,6 @@ public class Mappers {
 	public static final ComponentMapper<DungeonComponent> dungeon = ComponentMapper.getFor(DungeonComponent.class);
 	
 	/** 
-	 * {@link io.github.izdwuut.yarl.model.components.settings.CellSizeComponent A cell size} mapper. 
-	 */
-	public static final ComponentMapper<CellSizeComponent> cellSize = ComponentMapper.getFor(CellSizeComponent.class);
-	
-	/** 
 	 * {@link io.github.izdwuut.yarl.model.components.settings.RNGComponent A random number generator} mapper. 
 	 */
 	public static final ComponentMapper<RNGComponent> rng = ComponentMapper.getFor(RNGComponent.class);

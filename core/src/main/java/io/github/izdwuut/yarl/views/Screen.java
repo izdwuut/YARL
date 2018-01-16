@@ -4,8 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-
-import io.github.izdwuut.yarl.model.components.settings.CellSizeComponent;
+import io.github.izdwuut.yarl.model.components.SizeComponent;
 import io.github.izdwuut.yarl.model.entities.Settings;
 import io.github.izdwuut.yarl.model.utils.Mappers;
 import squidpony.squidgrid.gui.gdx.SColor;
@@ -33,7 +32,7 @@ public abstract class Screen extends ScreenAdapter {
 	 * @param settings cell width and height
 	 */
 	public Screen(Settings settings) {
-		CellSizeComponent cell = Mappers.cellSize.get(settings);
+		SizeComponent cell = Mappers.size.get(settings);
 	    cellWidth = cell.getWidth();
 	    cellHeight = cell.getHeight();
 	}

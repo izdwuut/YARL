@@ -2,7 +2,7 @@ package io.github.izdwuut.yarl.model.entities;
 
 import com.badlogic.ashley.core.Entity;
 
-import io.github.izdwuut.yarl.model.components.settings.CellSizeComponent;
+import io.github.izdwuut.yarl.model.components.SizeComponent;
 import io.github.izdwuut.yarl.model.components.settings.RNGComponent;
 import squidpony.squidmath.RNG;
 
@@ -14,7 +14,7 @@ import squidpony.squidmath.RNG;
  */
 public class Settings extends Entity {
 	/**
-	 * Sets {@link io.github.izdwuut.yarl.model.components.settings.CellSizeComponent cell size} 
+	 * Sets {@link io.github.izdwuut.yarl.model.components.settings.SizeComponent cell size} 
 	 * using provided width and height.
 	 * 
 	 * @param width cell width (in pixels)
@@ -23,7 +23,7 @@ public class Settings extends Entity {
 	 * @return current instance of an object (chaining)
 	 */
 	public Settings setCellSize(int width, int height) {
-		add(new CellSizeComponent(width, height));
+		add(new SizeComponent(width, height));
 		
 		return this;
 	}
