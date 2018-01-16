@@ -56,10 +56,19 @@ class CombatSystemTest {
 	 */
 	static World world;
 	
+	/**
+	 * An active side of combat.
+	 */
 	static Creature attacker;
 	
+	/**
+	 * A factory that produces creatures.
+	 */
 	static CreatureFactory creatureFactory;
 	
+	/**
+	 * Creature positions.
+	 */
 	static List<Coord> positions;
 	
 	@BeforeAll
