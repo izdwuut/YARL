@@ -2,6 +2,7 @@ package io.github.izdwuut.yarl.views;
 
 import com.badlogic.ashley.signals.Listener;
 import com.badlogic.ashley.signals.Signal;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -32,12 +33,12 @@ public class GameScreen extends Screen implements Listener<Event> {
 	/** 
 	 * {@link #dungComp Dungeon} width. 
 	 */
-	int width;
+	int displayWidth;
 	
 	/** 
 	 * {@link #dungComp Dungeon} height. 
 	 */
-	int height;
+	int displayHeight;
 	
 	/** 
 	 * {@link com.badlogic.gdx.scenes.scene2d.Stage A stage} that handles display. 
@@ -73,8 +74,14 @@ public class GameScreen extends Screen implements Listener<Event> {
 	/** 
 	 * An Ashley system that is used to query {@link #world a world entity}. 
 	 */
+	
 	WorldSystem worldSystem;
+	
+	SparseLayers stats;
+	
+	Stage statsStage;
 
+	int statsWidth, statsHeight;
 	/**
 	 * Constructs a game screen using provided parameters. Sets a {@link com.badlogic.gdx.utils.viewport.Viewport Viewport}, 
 	 * adds actors to a {@link #stage Stage} and calls for {@link #putMap() putMap} to put 
@@ -92,31 +99,44 @@ public class GameScreen extends Screen implements Listener<Event> {
 		this.worldSystem = worldSystem;
 		
 		SizeComponent size = Mappers.size.get(world);
-		height = size.getHeight();
-		width = size.getWidth();
+		displayHeight = size.getHeight();
+		displayWidth = size.getWidth();
+		statsWidth = displayWidth;
+		statsHeight = 1;
 		
 		dungComp = Mappers.dungeon.get(world);
 		
-		Viewport vp = new StretchViewport(width * cellWidth, height * cellHeight);
-		vp.setScreenBounds(0, 0, width * cellWidth, height * cellWidth);
-		display = new SparseLayers(width, height, cellWidth, cellHeight);
+		Viewport mainVp = new StretchViewport(displayWidth * cellWidth, displayHeight * cellHeight);
+		mainVp.setScreenBounds(0, 0, displayWidth * cellWidth, displayHeight * cellWidth);
+		display = new SparseLayers(displayWidth, displayHeight, cellWidth, cellHeight);
 		display.setPosition(0f, 0f);
-		
-		stage = new Stage(vp);
+		stage = new Stage(mainVp);
 		stage.addActor(display);
+		
 		Coord pos = Mappers.position.get(player).getPosition();
 		playerGlyph = display.glyph(Mappers.glyph.get(player).getGlyph(), SColor.SAFETY_ORANGE.toFloatBits(), pos.x, pos.y);
 		setCamera(pos);
 		
+		Viewport statsVp = new StretchViewport(statsWidth * cellWidth, 1 * statsHeight * cellHeight);
+		statsVp.setScreenBounds(0, 0, statsWidth * cellWidth, statsHeight * cellHeight);
+		stats = new SparseLayers(statsWidth, statsHeight, cellWidth, cellHeight);
+		statsStage = new Stage(statsVp);
+		statsStage.addActor(stats);
+		
+		
 		putMap();
+		putStats();
 	}
 	
 	@Override
 	public void render(float deltaTime) {
         clear();
         
-		stage.act();
-		stage.draw();
+        statsStage.getViewport().apply(false);
+        statsStage.draw();
+
+        stage.getViewport().apply(false);
+        stage.draw();
 	}
 	
 	/**
@@ -125,8 +145,8 @@ public class GameScreen extends Screen implements Listener<Event> {
 	void putMap() {
 		//TODO: template
 		float bg = SColor.DARK_SLATE_GRAY.toFloatBits();
-		for (int x = 0; x < width; x++) {
-            for (int y = 0; y < height; y++) {
+		for (int x = 0; x < displayWidth; x++) {
+            for (int y = 0; y < displayHeight; y++) {
                 display.put(x, y, getGlyph(Coord.get(x, y)), SColor.FLOAT_WHITE, bg);
             }
 		}	
@@ -148,7 +168,7 @@ public class GameScreen extends Screen implements Listener<Event> {
 	 */
 	void setCamera(Coord coord) {
 		stage.getCamera().position.x = coord.x * cellWidth;
-		stage.getCamera().position.y = (height - coord.y) * cellHeight;
+		stage.getCamera().position.y = (displayHeight - coord.y) * cellHeight;
 	}
 	
 	/**
@@ -180,5 +200,22 @@ public class GameScreen extends Screen implements Listener<Event> {
     	}
     	
     	return dungComp.getDungeon()[pos.x][pos.y];
+	}
+	
+	void putStats() {
+		stats.put(0,0, "YARL", Color.WHITE);
+	}
+	
+	@Override
+	public void resize(int width, int height) {
+		super.resize(width, height);
+
+        float currentHeight = (float) height / (displayHeight + statsHeight);
+        stats.setBounds(0, 0, width, currentHeight * statsHeight);
+        statsStage.getViewport().update(width, height, false);
+        statsStage.getViewport().setScreenBounds(0, 0, width, (int)currentHeight);
+        stage.getViewport().update(width, height, false);
+        stage.getViewport().setScreenBounds(0, (int)currentHeight,
+                width, height - (int)currentHeight);
 	}
 }		
