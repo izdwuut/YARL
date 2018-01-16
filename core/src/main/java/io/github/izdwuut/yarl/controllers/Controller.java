@@ -1,6 +1,10 @@
 package io.github.izdwuut.yarl.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.badlogic.ashley.core.Engine;
+import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 
@@ -33,6 +37,11 @@ public abstract class Controller {
 	protected Game game;
 	
 	/**
+	 * Every entity system related to a controller.
+	 */
+	protected List<EntitySystem> systems;
+	
+	/**
 	 * Constructs a controller using an {@link com.badlogic.ashley.core.Engine Engine} 
 	 * passed either by {@link io.github.izdwuut.yarl.YARL YARL} or any controller.
 	 * 
@@ -42,6 +51,7 @@ public abstract class Controller {
 	public Controller(Engine engine, Game game) {
 		this.engine = engine;
 		this.game = game;
+		systems = new ArrayList<EntitySystem>();
 	}
 	
 	/**
@@ -56,12 +66,26 @@ public abstract class Controller {
 	}
 	
 	/**
+	 * Declares systems related to this controller.
+	 */
+	protected abstract void declareSystems();
+	
+	
+	/**
 	 * Pauses systems.
 	 */
-	abstract protected void pause();
+	protected void pause() {
+		for(EntitySystem sys : systems) {
+			sys.setProcessing(false);
+		}
+	}
 	
 	/**
 	 * Resumes systems.
 	 */
-	abstract protected void resume();
+	protected void resume() {
+		for(EntitySystem sys : systems) {
+			sys.setProcessing(true);
+		}
+	}
 }

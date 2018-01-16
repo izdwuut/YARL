@@ -71,6 +71,7 @@ public class GameController extends Controller implements Listener<Event> {
 	 * Further actions needed to be done to build a GameController.
 	 * An InitSystem has to not be used outside constructors.
 	 */
+	//TODO: there should be NO InitSystem here
 	void init() {
 		initSys = new InitSystem(engine);
 		worldSys = engine.getSystem(WorldSystem.class);
@@ -88,6 +89,7 @@ public class GameController extends Controller implements Listener<Event> {
 		
 		handleInput();
 		
+		declareSystems();
 		resume();
 	}
 	
@@ -119,20 +121,13 @@ public class GameController extends Controller implements Listener<Event> {
 		Gdx.input.setInputProcessor(input);
 	}
 	
+	//TODO: reduce boilerplate code
 	@Override
-	protected void pause() {
-		engine.getSystem(MovementSystem.class).setProcessing(false);
-		engine.getSystem(CombatSystem.class).setProcessing(false);
-		engine.getSystem(WinSystem.class).setProcessing(false);
-		engine.getSystem(LevelingSystem.class).setProcessing(false);
-	}
-	
-	@Override
-	protected void resume() {
-		engine.getSystem(MovementSystem.class).setProcessing(true);
-		engine.getSystem(CombatSystem.class).setProcessing(true);
-		engine.getSystem(WinSystem.class).setProcessing(true);
-		engine.getSystem(LevelingSystem.class).setProcessing(true);
+	protected void declareSystems() {
+		systems.add(engine.getSystem(MovementSystem.class));
+		systems.add(engine.getSystem(CombatSystem.class));
+		systems.add(engine.getSystem(WinSystem.class));
+		systems.add(engine.getSystem(LevelingSystem.class));
 	}
 	
 	/**
