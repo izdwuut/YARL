@@ -86,6 +86,8 @@ public class GameController extends Controller implements Listener<Event> {
 		.addListener(screen);
 		engine.getSystem(WinSystem.class)
 		.addListener(this);
+		engine.getSystem(LevelingSystem.class)
+		.addListener(screen);
 		
 		handleInput();
 		

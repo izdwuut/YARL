@@ -30,6 +30,9 @@ import squidpony.squidmath.Coord;
  */
 //TODO: refactor with fire
 //rename fields (display -> map)
+//templates
+//init()
+//break it into chunks
 public class GameScreen extends Screen implements Listener<Event> {
 	/** 
 	 * {@link #dungComp Dungeon} width. 
@@ -150,7 +153,7 @@ public class GameScreen extends Screen implements Listener<Event> {
 	 */
 	void putMap() {
 		//TODO: template
-		float bg = SColor.DARK_SLATE_GRAY.toFloatBits();
+		float bg = SColor.BLACK.toFloatBits();
 		for (int x = 0; x < displayWidth; x++) {
             for (int y = 0; y < displayHeight; y++) {
                 display.put(x, y, getGlyph(Coord.get(x, y)), SColor.FLOAT_WHITE, bg);
@@ -178,9 +181,12 @@ public class GameScreen extends Screen implements Listener<Event> {
 	}
 	
 	/**
-	 * Listens for an {@link io.github.izdwuut.yarl.model.systems.Event Event} dispatched by
-	 * {@link io.github.izdwuut.yarl.model.systems.MovementSystem a MovementSystem} or 
-	 * {@link io.github.izdwuut.yarl.model.systems.CombatSystem a CombatSystem}.
+	 * Listens for {@link io.github.izdwuut.yarl.model.systems.Event Events}:
+	 * <ul>
+	 * <li>MOVEMENT_END - dispatched by {@link io.github.izdwuut.yarl.model.systems.MovementSystem a MovementSystem} when entities stop to move</li>
+	 * <li>CREATURE_KILL - dispatched by {@link io.github.izdwuut.yarl.model.systems.CombatSystem a CombatSystem} when a creature is killed</li>
+	 * <li>LEVEL_UP - dispatched by {@link io.github.izdwuut.yarl.model.systems.LevelingSystem a LevelingSystem} when a player levels up</li>
+	 * </ul>
 	 */
 	@Override
 	public void receive(Signal<Event> signal, Event e) {
@@ -190,6 +196,8 @@ public class GameScreen extends Screen implements Listener<Event> {
 		case CREATURE_KILL:
 			putMap();
 		break;
+		case LEVEL_UP:
+			putStats();
 		}
 	}
 	
@@ -210,10 +218,17 @@ public class GameScreen extends Screen implements Listener<Event> {
 	
 	
 	/**
-	 * Puts player stats on a screen.
+	 * Puts a player stats panel on a screen.
 	 */
 	void putStats() {
-		stats.put(0,0, "YARL", Color.WHITE);
+		putLevel();
+	}
+	
+	/**
+	 * Puts a player experience level on a stats panel.
+	 */
+	void putLevel() {
+		stats.put(1, 0, "Level: " + String.format("%2d", Mappers.lvl.get(player).getLvl()), Color.WHITE);
 	}
 	
 	@Override

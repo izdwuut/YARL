@@ -159,6 +159,11 @@ public class Creature extends Entity {
 		return this;
 	}
 	
+	/**
+	 * Sets an experience level to 1 - a default value.
+	 * 
+	 * @return a current instance of an object (chaining)
+	 */
 	public Creature setLvl() {
 		return setLvl(1);
 	}

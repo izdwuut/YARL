@@ -29,5 +29,12 @@ public enum Event {
 	 * {@link io.github.izdwuut.yarl.model.systems.CombatSystem CombatSystem#isClear()} method 
 	 * after every creature on a floor was killed.
 	 */
-	FLOOR_CLEAR;
+	FLOOR_CLEAR,
+	
+	/**
+	 * Dispatched by {@link io.github.izdwuut.yarl.model.systems.LevelingSystem a LevelingSystem}'s 
+	 * {@link io.github.izdwuut.yarl.model.systems.LevelingSystem#levelUp(Creature) levelUp} method
+	 * when a player levels up.
+	 */
+	LEVEL_UP;
 }

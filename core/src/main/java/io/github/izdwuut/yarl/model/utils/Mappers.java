@@ -11,9 +11,9 @@ import io.github.izdwuut.yarl.model.components.combat.DefenderComponent;
 import io.github.izdwuut.yarl.model.components.creatures.ArmsComponent;
 import io.github.izdwuut.yarl.model.components.creatures.ExpComponent;
 import io.github.izdwuut.yarl.model.components.creatures.HPComponent;
+import io.github.izdwuut.yarl.model.components.creatures.LvlComponent;
 import io.github.izdwuut.yarl.model.components.creatures.MovementComponent;
 import io.github.izdwuut.yarl.model.components.items.WeaponComponent;
-import io.github.izdwuut.yarl.model.components.settings.CellSizeComponent;
 import io.github.izdwuut.yarl.model.components.settings.RNGComponent;
 import io.github.izdwuut.yarl.model.components.world.DungeonComponent;
 
@@ -85,7 +85,12 @@ public class Mappers {
 	public static final ComponentMapper<ExpComponent> exp = ComponentMapper.getFor(ExpComponent.class);
 	
 	/** 
-	 * {@link io.github.izdwuut.yarl.model.components.CreatureComponent Creature} mapper. 
+	 * {@link io.github.izdwuut.yarl.model.components.CreatureComponent A creature} mapper. 
 	 */
 	public static final ComponentMapper<CreatureComponent> creature = ComponentMapper.getFor(CreatureComponent.class);
+	
+	/** 
+	 * {@link io.github.izdwuut.yarl.model.components.creatures.LvlComponent An LvlComponent} mapper. 
+	 */
+	public static final ComponentMapper<LvlComponent> lvl = ComponentMapper.getFor(LvlComponent.class);
 }
