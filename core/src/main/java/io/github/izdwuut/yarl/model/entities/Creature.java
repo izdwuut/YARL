@@ -9,6 +9,7 @@ import io.github.izdwuut.yarl.model.components.PositionComponent;
 import io.github.izdwuut.yarl.model.components.creatures.ArmsComponent;
 import io.github.izdwuut.yarl.model.components.creatures.ExpComponent;
 import io.github.izdwuut.yarl.model.components.creatures.HPComponent;
+import io.github.izdwuut.yarl.model.components.creatures.LvlComponent;
 import io.github.izdwuut.yarl.model.components.creatures.MovementComponent;
 import io.github.izdwuut.yarl.model.components.creatures.PlayerComponent;
 import squidpony.squidmath.Coord;
@@ -141,5 +142,24 @@ public class Creature extends Entity {
 		add(new ExpComponent(exp));
 		
 		return this;
+	}
+	
+	/**
+	 * Sets an experience level.
+	 * 
+	 * @param lvl a level to set
+	 * 
+	 * @return a current instance of an object (chaining)
+	 */
+	public Creature setLvl(int lvl) {
+		LvlComponent comp = new LvlComponent();
+		comp.setLvl(lvl);
+		add(comp);
+		
+		return this;
+	}
+	
+	public Creature setLvl() {
+		return setLvl(1);
 	}
 }
