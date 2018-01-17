@@ -29,6 +29,7 @@ import squidpony.squidmath.Coord;
  * @since  2017-11-18
  */
 //TODO: refactor with fire
+//rename fields (display -> map)
 public class GameScreen extends Screen implements Listener<Event> {
 	/** 
 	 * {@link #dungComp Dungeon} width. 
@@ -41,7 +42,7 @@ public class GameScreen extends Screen implements Listener<Event> {
 	int displayHeight;
 	
 	/** 
-	 * {@link com.badlogic.gdx.scenes.scene2d.Stage A stage} that handles display. 
+	 * {@link com.badlogic.gdx.scenes.scene2d.Stage A stage} that handles map display. 
 	 */
 	Stage stage;
 	
@@ -74,11 +75,16 @@ public class GameScreen extends Screen implements Listener<Event> {
 	/** 
 	 * An Ashley system that is used to query {@link #world a world entity}. 
 	 */
-	
 	WorldSystem worldSystem;
 	
+	/** 
+	 * {@link squidpony.squidgrid.gui.gdx.SparseLayers A Layer} with player stats. 
+	 */
 	SparseLayers stats;
 	
+	/**
+	 * A stage that handles player stats display.
+	 */
 	Stage statsStage;
 
 	int statsWidth, statsHeight;
@@ -140,7 +146,7 @@ public class GameScreen extends Screen implements Listener<Event> {
 	}
 	
 	/**
-	 * Puts a map on a {@link squidpony.squidgrid.gui.gdx.SparseLayers SparseLayers}.
+	 * Puts a map on a screen.
 	 */
 	void putMap() {
 		//TODO: template
@@ -202,6 +208,10 @@ public class GameScreen extends Screen implements Listener<Event> {
     	return dungComp.getDungeon()[pos.x][pos.y];
 	}
 	
+	
+	/**
+	 * Puts player stats on a screen.
+	 */
 	void putStats() {
 		stats.put(0,0, "YARL", Color.WHITE);
 	}
