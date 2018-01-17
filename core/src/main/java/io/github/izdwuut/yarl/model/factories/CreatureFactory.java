@@ -39,7 +39,8 @@ public class CreatureFactory extends FlyweightFactory<String, Creature> {
 				.setArms(itemFactory.sword())
 				.setExp(0)
 				.setName(name)
-				.setGlyph('@');
+				.setGlyph('@')
+				.setLvl();
 	}
 	
 	/**

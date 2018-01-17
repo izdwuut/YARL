@@ -76,7 +76,7 @@ public class GameController extends Controller implements Listener<Event> {
 		initSys = new InitSystem(engine);
 		worldSys = engine.getSystem(WorldSystem.class);
 		player = initSys.getPlayer();
-		screen = new GameScreen(initSys, worldSys);
+		screen = new GameScreen(initSys, worldSys, engine.getSystem(LevelingSystem.class));
 		
 		//TODO: listeners are set in screens
 		engine.getSystem(MovementSystem.class)
@@ -86,9 +86,10 @@ public class GameController extends Controller implements Listener<Event> {
 		.addListener(screen);
 		engine.getSystem(WinSystem.class)
 		.addListener(this);
+		engine.getSystem(LevelingSystem.class)
+		.addListener(screen);
 		
 		handleInput();
-		
 		declareSystems();
 		resume();
 	}

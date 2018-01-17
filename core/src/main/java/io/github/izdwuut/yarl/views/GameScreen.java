@@ -13,6 +13,7 @@ import io.github.izdwuut.yarl.model.entities.Creature;
 import io.github.izdwuut.yarl.model.entities.World;
 import io.github.izdwuut.yarl.model.systems.Event;
 import io.github.izdwuut.yarl.model.systems.InitSystem;
+import io.github.izdwuut.yarl.model.systems.LevelingSystem;
 import io.github.izdwuut.yarl.model.systems.WorldSystem;
 import io.github.izdwuut.yarl.model.utils.Mappers;
 import squidpony.squidgrid.gui.gdx.SColor;
@@ -30,6 +31,9 @@ import squidpony.squidmath.Coord;
  */
 //TODO: refactor with fire
 //rename fields (display -> map)
+//templates
+//init()
+//break it into chunks
 public class GameScreen extends Screen implements Listener<Event> {
 	/** 
 	 * {@link #dungComp Dungeon} width. 
@@ -86,8 +90,22 @@ public class GameScreen extends Screen implements Listener<Event> {
 	 * A stage that handles player stats display.
 	 */
 	Stage statsStage;
+	
+	/**
+	 * Stats panel width.
+	 */
+	int statsWidth;
+	
+	/**
+	 * Stats panel height.
+	 */
+	int statsHeight;
+	
+	/**
+	 * A system that provides player stats.
+	 */
+	LevelingSystem levelingSystem;
 
-	int statsWidth, statsHeight;
 	/**
 	 * Constructs a game screen using provided parameters. Sets a {@link com.badlogic.gdx.utils.viewport.Viewport Viewport}, 
 	 * adds actors to a {@link #stage Stage} and calls for {@link #putMap() putMap} to put 
@@ -97,12 +115,13 @@ public class GameScreen extends Screen implements Listener<Event> {
 	 * @param worldSystem a world system
 	 */
 	//TODO: init()
-	public GameScreen(InitSystem initSystem, WorldSystem worldSystem) {
+	public GameScreen(InitSystem initSystem, WorldSystem worldSystem, LevelingSystem levelingSystem) {
 		super(initSystem.getSettings());
 		
 		this.player = initSystem.getPlayer();
 		this.world = initSystem.getWorld();
 		this.worldSystem = worldSystem;
+		this.levelingSystem = levelingSystem;
 		
 		SizeComponent size = Mappers.size.get(world);
 		displayHeight = size.getHeight();
@@ -150,7 +169,7 @@ public class GameScreen extends Screen implements Listener<Event> {
 	 */
 	void putMap() {
 		//TODO: template
-		float bg = SColor.DARK_SLATE_GRAY.toFloatBits();
+		float bg = SColor.BLACK.toFloatBits();
 		for (int x = 0; x < displayWidth; x++) {
             for (int y = 0; y < displayHeight; y++) {
                 display.put(x, y, getGlyph(Coord.get(x, y)), SColor.FLOAT_WHITE, bg);
@@ -178,9 +197,13 @@ public class GameScreen extends Screen implements Listener<Event> {
 	}
 	
 	/**
-	 * Listens for an {@link io.github.izdwuut.yarl.model.systems.Event Event} dispatched by
-	 * {@link io.github.izdwuut.yarl.model.systems.MovementSystem a MovementSystem} or 
-	 * {@link io.github.izdwuut.yarl.model.systems.CombatSystem a CombatSystem}.
+	 * Listens for {@link io.github.izdwuut.yarl.model.systems.Event Events}:
+	 * <ul>
+	 * <li>MOVEMENT_END - dispatched by {@link io.github.izdwuut.yarl.model.systems.MovementSystem a MovementSystem} when entities stop to move</li>
+	 * <li>CREATURE_KILL - dispatched by {@link io.github.izdwuut.yarl.model.systems.CombatSystem a CombatSystem} when a creature is killed</li>
+	 * <li>LEVEL_UP - dispatched by {@link io.github.izdwuut.yarl.model.systems.LevelingSystem a LevelingSystem} when a player levels up</li>
+	 * <li>GAIN_EXP - dispatched by {@link io.github.izdwuut.yarl.model.systems.LevelingSystem a LevelingSystem} when a player gains experience points</li>
+	 * </ul>
 	 */
 	@Override
 	public void receive(Signal<Event> signal, Event e) {
@@ -190,6 +213,9 @@ public class GameScreen extends Screen implements Listener<Event> {
 		case CREATURE_KILL:
 			putMap();
 		break;
+		case LEVEL_UP:
+		case GAIN_EXP:
+			putStats();
 		}
 	}
 	
@@ -208,12 +234,39 @@ public class GameScreen extends Screen implements Listener<Event> {
     	return dungComp.getDungeon()[pos.x][pos.y];
 	}
 	
-	
 	/**
-	 * Puts player stats on a screen.
+	 * Puts a player stats panel on a screen.
 	 */
 	void putStats() {
-		stats.put(0,0, "YARL", Color.WHITE);
+		stats.clear();
+		putExp(putLevel());
+	}
+	
+	/**
+	 * Puts a player experience level on a stats panel.
+	 * 
+	 * @return a current panel position
+	 */
+	int putLevel() {
+		String s = "Level: " + String.format("%2d", Mappers.lvl.get(player).getLvl());
+		int pos = 1;
+		stats.put(pos, 0, s, Color.WHITE);
+		
+		return s.length() + pos;
+	}
+	
+	/**
+	 * Puts a player experience points remaining to a next level.
+	 * 
+	 * @param pos x offset
+	 * 
+	 * @return a current panel position
+	 */
+	int putExp(int pos) {
+		String s = "/" + levelingSystem.getRemainingExp(player);
+		stats.put(pos, 0, s, Color.WHITE);
+
+		return s.length() + pos;
 	}
 	
 	@Override
