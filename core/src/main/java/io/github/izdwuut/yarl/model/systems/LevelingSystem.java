@@ -87,7 +87,7 @@ public class LevelingSystem extends IteratingSystem implements Listenable<Event>
 		int breakpoint = 100;
 
 		for(int i = 1; i < lvl; i++) {
-			breakpoint += (int) (breakpoint / 2);
+			breakpoint += Math.round((double) breakpoint / 2);
 		}
 		
 		return breakpoint;
