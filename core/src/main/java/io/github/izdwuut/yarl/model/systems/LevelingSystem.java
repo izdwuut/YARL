@@ -99,10 +99,14 @@ public class LevelingSystem extends IteratingSystem implements Listenable<Event>
 	 * @param creature {@link io.github.izdwuut.yarl.model.entities.Creature a Creature} that gains a level
 	 */
 	void levelUp(Creature creature) {
-		int lvl = Mappers.lvl.get(creature).getLvl();
-		if(getRemainingExp(creature) <= 0) {
-			Mappers.lvl.get(creature).setLvl(lvl + 1);
-			dispatcher.dispatch(Event.LEVEL_UP);
+		while(true) {
+			if(getRemainingExp(creature) <= 0) {
+				int lvl = Mappers.lvl.get(creature).getLvl();
+				Mappers.lvl.get(creature).setLvl(lvl + 1);
+				dispatcher.dispatch(Event.LEVEL_UP);
+			} else {
+				break;
+			}
 		}
 	}
 	
