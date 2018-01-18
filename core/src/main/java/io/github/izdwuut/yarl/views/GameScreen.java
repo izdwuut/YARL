@@ -197,7 +197,7 @@ public class GameScreen extends Screen implements Listener<Event> {
 	}
 	
 	/**
-	 * Listens for {@link io.github.izdwuut.yarl.model.systems.Event Events}:
+	 * Listens for {@link io.github.izdwuut.yarl.model.systems.Event Events}.
 	 * <ul>
 	 * <li>MOVEMENT_END - dispatched by {@link io.github.izdwuut.yarl.model.systems.MovementSystem a MovementSystem} when entities stop to move</li>
 	 * <li>CREATURE_KILL - dispatched by {@link io.github.izdwuut.yarl.model.systems.CombatSystem a CombatSystem} when a creature is killed</li>
