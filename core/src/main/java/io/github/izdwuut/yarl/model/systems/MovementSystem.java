@@ -85,21 +85,9 @@ public class MovementSystem extends IteratingSystem implements Listenable<Event>
 	 */
 	@Override
 	protected void processEntity(Entity entity, float deltaTime) {
-		MovementComponent mov = mm.get(entity);
-		Direction direction = mov.getDirection();
-		if(direction != null) {
-			PositionComponent pos = Mappers.position.get(entity);
-			Coord target = pos.getPosition()
-					.translate(direction.deltaX, direction.deltaY);
-			if(worldSystem.isBounds(target)) {
-				if(worldSystem.isFloor(target)) {
-					pos.setPosition(target);
-				} else {
-					initCombat(target, entity);
-				}
-			}
-			mov.removeDirection();
-		}
+		processMovement(entity);
+		Mappers.movement.get(entity)
+		.removeDirection();
 	}
 	
 	/**
@@ -145,6 +133,25 @@ public class MovementSystem extends IteratingSystem implements Listenable<Event>
 			combat.setAttacker((Creature) attacker);
 			combat.setDefender(Mappers.dungeon.get(world).getCreature(target));
 			engine.addEntity(combat);
+		}
+	}
+	
+	void processMovement(Entity entity) {
+		MovementComponent mov = mm.get(entity);
+		Direction dir = mov.getDirection();
+		if(dir == null) {
+			return;
+		}
+		PositionComponent pos = Mappers.position.get(entity);
+		Coord target = pos.getPosition()
+				.translate(dir.deltaX, dir.deltaY);
+		if(!worldSystem.isBounds(target)) {
+			return;
+		}
+		if(worldSystem.isFloor(target)) {
+			pos.setPosition(target);
+		} else {
+			initCombat(target, entity);
 		}
 	}
 }
