@@ -5,7 +5,6 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.signals.Listener;
-import com.badlogic.ashley.signals.Signal;
 import com.badlogic.ashley.systems.IteratingSystem;
 
 import io.github.izdwuut.yarl.model.components.PositionComponent;
@@ -36,7 +35,7 @@ public class MovementSystem extends IteratingSystem implements Listenable<Event>
 	/** 
 	 * An {@link io.github.izdwuut.yarl.model.systems.Event Event} dispatcher. 
 	 */
-	Signal<Event> dispatcher;
+	Signals dispatcher;
 	
 	/** 
 	 * An Ashley engine needed to retrieve {@link io.github.izdwuut.yarl.model.systems.WorldSystem WorldSystem}. 
@@ -68,7 +67,7 @@ public class MovementSystem extends IteratingSystem implements Listenable<Event>
 		
 		this.engine = engine;
 		this.mm = Mappers.movement;
-		this.dispatcher = new Signal<Event>();
+		this.dispatcher = new Signals();
 		this.world = world;
 		this.worldSystem = engine.getSystem(WorldSystem.class);
 	}
@@ -116,8 +115,8 @@ public class MovementSystem extends IteratingSystem implements Listenable<Event>
 	}
 
 	@Override
-	public void addListener(Listener<Event> listener) {
-		dispatcher.add(listener);
+	public void addListener(Listener<Event> listener, Event event) {
+		dispatcher.addListener(listener, event);
 	}
 	
 	/**

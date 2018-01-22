@@ -4,7 +4,6 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.signals.Listener;
-import com.badlogic.ashley.signals.Signal;
 import com.badlogic.ashley.systems.IteratingSystem;
 
 import io.github.izdwuut.yarl.model.components.CreatureComponent;
@@ -33,13 +32,13 @@ public class LevelingSystem extends IteratingSystem implements Listenable<Event>
 	/** 
 	 * An {@link io.github.izdwuut.yarl.model.systems.Event Event} dispatcher. 
 	 */
-	Signal<Event> dispatcher;
+	Signals dispatcher;
 	
 	public LevelingSystem(Engine engine) {
 		super(Family.all(CreatureComponent.class, ExpComponent.class).get());
 		
 		this.engine = engine;
-		this.dispatcher = new Signal<Event>();
+		this.dispatcher = new Signals();
 	}
 	
 	/**
@@ -111,7 +110,7 @@ public class LevelingSystem extends IteratingSystem implements Listenable<Event>
 	}
 	
 	@Override
-	public void addListener(Listener<Event> listener) {
-		dispatcher.add(listener);
+	public void addListener(Listener<Event> listener, Event event) {
+		dispatcher.addListener(listener, event);
 	}
 }

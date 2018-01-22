@@ -3,7 +3,8 @@ package io.github.izdwuut.yarl.model.components.creatures;
 import com.badlogic.ashley.core.Component;
 
 /**
- * An experience level component. Denotes a Creature experience level.
+ * An experience level component. Denotes 
+ * {@link io.github.izdwuut.yarl.model.entities.Creature a Creature} experience level.
  * 
  * @author Bartosz "izdwuut" Konikiewicz
  * @since  2018-01-17

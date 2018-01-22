@@ -14,5 +14,21 @@ public interface Listenable<T> {
 	 * 
 	 * @param listener a listener to register
 	 */
-	void addListener(Listener<T> listener);
+	public void addListener(Listener<T> listener, T event);
+	
+	
+	/**
+	 * Registers {@link com.badlogic.ashley.signals.Listener a Listener} to multiple events.
+	 * 
+	 * @param listener a listener to register
+	 * 
+	 * @param events events to register
+	 */
+	//TODO: temporary. when every system will have it's own dispatcher, 
+	//it should be replaced with registering to to all signals a system issues
+	default public void addListener(Listener<T> listener, T...events) {
+		for(int i = 0; i < events.length; i++) {			
+			addListener(listener, events[i]);
+		}
+	}
 }

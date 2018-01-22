@@ -3,7 +3,6 @@ package io.github.izdwuut.yarl.model.systems;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.signals.Listener;
-import com.badlogic.ashley.signals.Signal;
 
 import io.github.izdwuut.yarl.model.components.Families;
 
@@ -18,7 +17,7 @@ public class WinSystem extends EntitySystem implements Listenable<Event> {
 	/** 
 	 * An {@link io.github.izdwuut.yarl.model.systems.Event Event} dispatcher. 
 	 */
-	Signal<Event> dispatcher;
+	Signals dispatcher;
 	
 	/** 
 	 * An Ashley engine needed to retrieve {@link io.github.izdwuut.yarl.model.systems.WorldSystem WorldSystem}. 
@@ -27,9 +26,10 @@ public class WinSystem extends EntitySystem implements Listenable<Event> {
 	
 	public WinSystem(Engine engine) {
 		this.engine = engine;
-		this.dispatcher = new Signal<Event>();
+		this.dispatcher = new Signals();
 	}
 	
+	//TODO: refator families
 	@Override
 	public void update(float deltaTime) {
 		if(engine.getEntitiesFor(new Families().getCreatures()).size() == 0) {
@@ -38,7 +38,7 @@ public class WinSystem extends EntitySystem implements Listenable<Event> {
 	}
 	
 	@Override
-	public void addListener(Listener<Event> listener) {
-		dispatcher.add(listener);
+	public void addListener(Listener<Event> listener, Event event) {
+		dispatcher.addListener(listener, event);
 	}
 }
