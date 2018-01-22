@@ -77,16 +77,17 @@ public class LevelingSystem extends IteratingSystem implements Listenable<Event>
 	
 	/**
 	 * Gets experience points needed for a certain level.
+	 * Uses a {@link http://fallout.wikia.com/wiki/Level#Fallout_3 Fallout 3} formula.
 	 * 
 	 * @param lvl an examined experience level
 	 * 
 	 * @return an experience breakpoint for a given level
 	 */
 	public int getBreakpoint(int lvl) {
-		int breakpoint = 100;
+		int breakpoint = 0;
 
-		for(int i = 1; i < lvl; i++) {
-			breakpoint += Math.round((double) breakpoint / 2);
+		for(int i = 0; i < lvl; i++) {
+			breakpoint += 50 + 150 * (i + 1);
 		}
 		
 		return breakpoint;
