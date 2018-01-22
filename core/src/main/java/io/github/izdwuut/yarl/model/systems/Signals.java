@@ -7,9 +7,11 @@ import com.badlogic.ashley.signals.Listener;
 import com.badlogic.ashley.signals.Signal;
 
 /**
+ * A class that aggregates event dispatchers.
+ * Implements a simplified strategy pattern.
  * 
  * @author Bartosz "izdwuut" Konikiewicz
- *
+ * @since  2018-01-12
  */
 //TODO: unit testing
 //TODO: implement dispatcher interface (maybe rename to Dispatcher. it declares a dispatch method)
