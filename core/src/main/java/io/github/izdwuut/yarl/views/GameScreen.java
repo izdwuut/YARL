@@ -12,6 +12,7 @@ import io.github.izdwuut.yarl.model.components.world.DungeonComponent;
 import io.github.izdwuut.yarl.model.entities.Creature;
 import io.github.izdwuut.yarl.model.entities.World;
 import io.github.izdwuut.yarl.model.systems.Event;
+import io.github.izdwuut.yarl.model.systems.HpSystem;
 import io.github.izdwuut.yarl.model.systems.InitSystem;
 import io.github.izdwuut.yarl.model.systems.LevelingSystem;
 import io.github.izdwuut.yarl.model.systems.WorldSystem;
@@ -105,6 +106,11 @@ public class GameScreen extends Screen implements Listener<Event> {
 	 * A system that provides player stats.
 	 */
 	LevelingSystem levelingSystem;
+	
+	/**
+	 * A system needed to query {@link io.github.izdwuut.yarl.model.entities.Creature a Creature} HP.
+	 */
+	HpSystem hpSystem;
 
 	/**
 	 * Constructs a game screen using provided parameters. Sets a {@link com.badlogic.gdx.utils.viewport.Viewport Viewport}, 
@@ -113,15 +119,18 @@ public class GameScreen extends Screen implements Listener<Event> {
 	 * 
 	 * @param initSystem an initialization system
 	 * @param worldSystem a world system
+	 * @param levelingSystem a leveling system
+	 * @param hpSystem a hp system
 	 */
 	//TODO: init()
-	public GameScreen(InitSystem initSystem, WorldSystem worldSystem, LevelingSystem levelingSystem) {
+	public GameScreen(InitSystem initSystem, WorldSystem worldSystem, LevelingSystem levelingSystem, HpSystem hpSystem) {
 		super(initSystem.getSettings());
 		
 		this.player = initSystem.getPlayer();
 		this.world = initSystem.getWorld();
 		this.worldSystem = worldSystem;
 		this.levelingSystem = levelingSystem;
+		this.hpSystem = hpSystem;
 		
 		SizeComponent size = Mappers.size.get(world);
 		displayHeight = size.getHeight();
@@ -172,7 +181,8 @@ public class GameScreen extends Screen implements Listener<Event> {
 		float bg = SColor.BLACK.toFloatBits();
 		for (int x = 0; x < displayWidth; x++) {
             for (int y = 0; y < displayHeight; y++) {
-                display.put(x, y, getGlyph(Coord.get(x, y)), SColor.FLOAT_WHITE, bg);
+            	Coord pos = Coord.get(x, y);
+                display.put(x, y, getGlyph(pos), getColor(pos), bg);
             }
 		}	
 	}
@@ -201,6 +211,7 @@ public class GameScreen extends Screen implements Listener<Event> {
 	 * <ul>
 	 * <li>MOVEMENT_END - dispatched by {@link io.github.izdwuut.yarl.model.systems.MovementSystem a MovementSystem} when entities stop to move</li>
 	 * <li>CREATURE_KILL - dispatched by {@link io.github.izdwuut.yarl.model.systems.CombatSystem a CombatSystem} when a creature is killed</li>
+	 * <li>DEAL_DMG - dispatched by {@link io.github.izdwuut.yarl.model.systems.CombatSystem a CombatSystem} when a damage is dealt</li>
 	 * <li>LEVEL_UP - dispatched by {@link io.github.izdwuut.yarl.model.systems.LevelingSystem a LevelingSystem} when a player levels up</li>
 	 * <li>GAIN_EXP - dispatched by {@link io.github.izdwuut.yarl.model.systems.LevelingSystem a LevelingSystem} when a player gains experience points</li>
 	 * </ul>
@@ -211,6 +222,7 @@ public class GameScreen extends Screen implements Listener<Event> {
 		case MOVEMENT_END:
 			slide();
 		case CREATURE_KILL:
+		case DEAL_DMG:
 			putMap();
 		break;
 		case LEVEL_UP:
@@ -280,5 +292,27 @@ public class GameScreen extends Screen implements Listener<Event> {
         stage.getViewport().update(width, height, false);
         stage.getViewport().setScreenBounds(0, (int)currentHeight,
                 width, height - (int)currentHeight);
+	}
+	
+	//TODO: refactor (toFloatBits), maybe move hp check to a separate method
+	/**
+	 * Gets a color of a glyph on a given position.
+	 * 
+	 * @param pos a queried position
+	 * 
+	 * @return a glyph color
+	 */
+	float getColor(Coord pos) {
+    	if(worldSystem.isCreature(pos)) {
+    		Creature creature = dungComp.getCreature(pos);
+    		if(hpSystem.isHpCritical(creature)) {
+        		return SColor.RED.toFloatBits();
+        	}
+        	if(hpSystem.isHpLow(creature)) {
+        		return SColor.YELLOW.toFloatBits();
+        	}
+    	}
+    	
+    	return SColor.WHITE.toFloatBits();
 	}
 }		

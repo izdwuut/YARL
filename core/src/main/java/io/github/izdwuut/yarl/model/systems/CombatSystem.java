@@ -43,7 +43,7 @@ public class CombatSystem extends IteratingSystem implements Listenable<Event> {
 		Creature attacker = Mappers.attacker.get(combat).getAttacker(), 
 				defender = Mappers.defender.get(combat)
 				.getDefender();
-		Creature defeated = resolve(attacker, defender);
+		Creature defeated = resolveCombat(attacker, defender);
 		
 		if(defeated != null) {
 			addExp(attacker, Mappers.exp.get(defender).getExp());
@@ -60,12 +60,13 @@ public class CombatSystem extends IteratingSystem implements Listenable<Event> {
 	 * 
 	 * @return null if hit points are above 0, a defender creature otherwise
 	 */
-	Creature resolve(Creature attacker, Creature defender) {
+	Creature resolveCombat(Creature attacker, Creature defender) {
 		HpComponent hp = Mappers.hp.get(defender);
 		int dmg = Mappers.weapon.get(Mappers.arms.get(attacker).getWeapon()).getDmg(); 
 		
 		if(hp.getHP() - dmg > 0) {
 			hp.addHP(-dmg);
+			dispatcher.dispatch(Event.DEAL_DMG);
 		} else {
 			return defender;
 		}

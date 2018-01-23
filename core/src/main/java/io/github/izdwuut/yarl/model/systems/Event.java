@@ -26,7 +26,7 @@ public enum Event {
 	
 	/**
 	 * Dispatched by {@link io.github.izdwuut.yarl.model.systems.CombatSystem CombatSystem}'s 
-	 * {@link io.github.izdwuut.yarl.model.systems.CombatSystem CombatSystem#isClear()} method 
+	 * {@link io.github.izdwuut.yarl.model.systems.CombatSystem CombatSystem#isClear() isClear} method 
 	 * after every creature on a floor was killed.
 	 */
 	FLOOR_CLEAR,
@@ -43,5 +43,12 @@ public enum Event {
 	 * {@link io.github.izdwuut.yarl.model.systems.LevelingSystem#addExp(Creature, int) addExp} method
 	 * when a player gains experience points.
 	 */
-	GAIN_EXP;
+	GAIN_EXP,
+	
+	/**
+	 * Dispatched by {@link io.github.izdwuut.yarl.model.systems.CombatSystem CombatSystem}'s 
+	 * {@link io.github.izdwuut.yarl.model.systems.CombatSystem CombatSystem#resolveCombat(Creature, Creature) resolveCombat} method 
+	 * when an attacker deals damage and a defender is not killed.
+	 */
+	DEAL_DMG;
 }

@@ -78,12 +78,12 @@ public class GameController extends Controller implements Listener<Event> {
 		worldSys = engine.getSystem(WorldSystem.class);
 		player = initSys.getPlayer();
 		screen = new GameScreen(initSys, worldSys, engine.getSystem(LevelingSystem.class), engine.getSystem(HpSystem.class));
-		//TODO: listeners are set in screens
+		//TODO: listeners are set in screens. or not.
 		engine.getSystem(MovementSystem.class)
 			.addListener(screen, Event.MOVEMENT_END);	
 		game.setScreen(screen);
 		engine.getSystem(CombatSystem.class)
-		.addListener(screen, Event.CREATURE_KILL);
+		.addListener(screen, Event.CREATURE_KILL, Event.DEAL_DMG);
 		engine.getSystem(WinSystem.class)
 		.addListener(this, Event.FLOOR_CLEAR);
 		engine.getSystem(LevelingSystem.class)

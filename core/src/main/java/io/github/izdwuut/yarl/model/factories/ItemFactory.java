@@ -21,7 +21,7 @@ public class ItemFactory extends FlyweightFactory<String, Item> {
 	 * @return *drumroll* a sword
 	 */
 	public Item sword() {
-		return getWeapon("Sword", 20, new Item());
+		return getWeapon("Sword", 3, new Item());
 	}
 	
 	Item getWeapon(String name, int dmg, Item weapon) {
