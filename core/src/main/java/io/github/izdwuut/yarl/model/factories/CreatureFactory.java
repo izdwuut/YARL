@@ -3,6 +3,7 @@ package io.github.izdwuut.yarl.model.factories;
 import io.github.izdwuut.yarl.model.components.GlyphComponent;
 import io.github.izdwuut.yarl.model.components.NameComponent;
 import io.github.izdwuut.yarl.model.components.creatures.ExpComponent;
+import io.github.izdwuut.yarl.model.components.creatures.MaxHpComponent;
 import io.github.izdwuut.yarl.model.entities.Creature;
 import squidpony.squidmath.Coord;
 
@@ -40,7 +41,8 @@ public class CreatureFactory extends FlyweightFactory<String, Creature> {
 				.setExp(0)
 				.setName(name)
 				.setGlyph('@')
-				.setLvl();
+				.setLvl()
+				.setMaxHp(40);
 	}
 	
 	/**
@@ -53,7 +55,7 @@ public class CreatureFactory extends FlyweightFactory<String, Creature> {
 	public Creature sloth() {
 		Creature sloth = new Creature().setHP(20);
 		
-		return getCreature("Sloth", 'S', 100, sloth);
+		return getCreature("Sloth", 'S', 100, 20, sloth);
 	}
 	
 	/**
@@ -74,15 +76,16 @@ public class CreatureFactory extends FlyweightFactory<String, Creature> {
 	 * @param name {@code #creature a creature}'s name
 	 * @param glyph {@code #creature a creature}'s display character
 	 * @param exp number of experience points yielded from {@code #creature a creature}
+	 * @param maxHp max health points
 	 * @param creature {@code #creature a creature} with custom components
 	 * 
 	 * @return {@code #creature a creature} with flyweight components
 	 */
-	Creature getCreature(String name, char glyph, int exp, Creature creature) {
+	Creature getCreature(String name, char glyph, int exp, int maxHp, Creature creature) {
 		if(hasFlyweight(name)) {
 			return getEntity(name, creature);
 		}
 		
-		return getEntity(name, creature, new NameComponent(name), new GlyphComponent(glyph), new ExpComponent(exp));
+		return getEntity(name, creature, new NameComponent(name), new GlyphComponent(glyph), new ExpComponent(exp), new MaxHpComponent(maxHp));
 	}
 }

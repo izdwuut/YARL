@@ -10,8 +10,9 @@ import io.github.izdwuut.yarl.model.components.combat.AttackerComponent;
 import io.github.izdwuut.yarl.model.components.combat.DefenderComponent;
 import io.github.izdwuut.yarl.model.components.creatures.ArmsComponent;
 import io.github.izdwuut.yarl.model.components.creatures.ExpComponent;
-import io.github.izdwuut.yarl.model.components.creatures.HPComponent;
+import io.github.izdwuut.yarl.model.components.creatures.HpComponent;
 import io.github.izdwuut.yarl.model.components.creatures.LvlComponent;
+import io.github.izdwuut.yarl.model.components.creatures.MaxHpComponent;
 import io.github.izdwuut.yarl.model.components.creatures.MovementComponent;
 import io.github.izdwuut.yarl.model.components.items.WeaponComponent;
 import io.github.izdwuut.yarl.model.components.settings.RNGComponent;
@@ -65,9 +66,9 @@ public class Mappers {
 	public static final ComponentMapper<DefenderComponent> defender = ComponentMapper.getFor(DefenderComponent.class);
 	
 	/** 
-	 * {@link io.github.izdwuut.yarl.model.components.creatures.HPComponent An HP} mapper. 
+	 * {@link io.github.izdwuut.yarl.model.components.creatures.HpComponent An HP} mapper. 
 	 */
-	public static final ComponentMapper<HPComponent> hp = ComponentMapper.getFor(HPComponent.class);
+	public static final ComponentMapper<HpComponent> hp = ComponentMapper.getFor(HpComponent.class);
 	
 	/** 
 	 * {@link io.github.izdwuut.yarl.model.components.creatures.ArmsComponent An Arms} mapper. 
@@ -93,4 +94,10 @@ public class Mappers {
 	 * {@link io.github.izdwuut.yarl.model.components.creatures.LvlComponent An LvlComponent} mapper. 
 	 */
 	public static final ComponentMapper<LvlComponent> lvl = ComponentMapper.getFor(LvlComponent.class);
+	
+	
+	/** 
+	 * {@link io.github.izdwuut.yarl.model.components.creatures.MaxHpComponent A MaxHpComponent} mapper. 
+	 */
+	public static final ComponentMapper<MaxHpComponent> maxHp = ComponentMapper.getFor(MaxHpComponent.class);
 }

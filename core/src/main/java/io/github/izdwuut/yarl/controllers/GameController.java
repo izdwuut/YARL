@@ -9,6 +9,7 @@ import com.badlogic.gdx.Gdx;
 import io.github.izdwuut.yarl.model.entities.Creature;
 import io.github.izdwuut.yarl.model.systems.CombatSystem;
 import io.github.izdwuut.yarl.model.systems.Event;
+import io.github.izdwuut.yarl.model.systems.HpSystem;
 import io.github.izdwuut.yarl.model.systems.InitSystem;
 import io.github.izdwuut.yarl.model.systems.LevelingSystem;
 import io.github.izdwuut.yarl.model.systems.MovementSystem;
@@ -76,7 +77,7 @@ public class GameController extends Controller implements Listener<Event> {
 		initSys = new InitSystem(engine);
 		worldSys = engine.getSystem(WorldSystem.class);
 		player = initSys.getPlayer();
-		screen = new GameScreen(initSys, worldSys, engine.getSystem(LevelingSystem.class));
+		screen = new GameScreen(initSys, worldSys, engine.getSystem(LevelingSystem.class), engine.getSystem(HpSystem.class));
 		//TODO: listeners are set in screens
 		engine.getSystem(MovementSystem.class)
 			.addListener(screen, Event.MOVEMENT_END);	

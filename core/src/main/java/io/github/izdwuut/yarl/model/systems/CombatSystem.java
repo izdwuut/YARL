@@ -8,7 +8,7 @@ import com.badlogic.ashley.systems.IteratingSystem;
 
 import io.github.izdwuut.yarl.model.components.combat.AttackerComponent;
 import io.github.izdwuut.yarl.model.components.combat.DefenderComponent;
-import io.github.izdwuut.yarl.model.components.creatures.HPComponent;
+import io.github.izdwuut.yarl.model.components.creatures.HpComponent;
 import io.github.izdwuut.yarl.model.entities.Creature;
 import io.github.izdwuut.yarl.model.entities.Exp;
 import io.github.izdwuut.yarl.model.utils.Mappers;
@@ -60,7 +60,7 @@ public class CombatSystem extends IteratingSystem implements Listenable<Event> {
 	 * @return null if hit points are above 0, a defender creature otherwise
 	 */
 	Creature resolve(Creature attacker, Creature defender) {
-		HPComponent hp = Mappers.hp.get(defender);
+		HpComponent hp = Mappers.hp.get(defender);
 		int dmg = Mappers.weapon.get(Mappers.arms.get(attacker).getWeapon()).getDmg(); 
 		
 		if(hp.getHP() - dmg > 0) {

@@ -8,8 +8,9 @@ import io.github.izdwuut.yarl.model.components.NameComponent;
 import io.github.izdwuut.yarl.model.components.PositionComponent;
 import io.github.izdwuut.yarl.model.components.creatures.ArmsComponent;
 import io.github.izdwuut.yarl.model.components.creatures.ExpComponent;
-import io.github.izdwuut.yarl.model.components.creatures.HPComponent;
+import io.github.izdwuut.yarl.model.components.creatures.HpComponent;
 import io.github.izdwuut.yarl.model.components.creatures.LvlComponent;
+import io.github.izdwuut.yarl.model.components.creatures.MaxHpComponent;
 import io.github.izdwuut.yarl.model.components.creatures.MovementComponent;
 import io.github.izdwuut.yarl.model.components.creatures.PlayerComponent;
 import squidpony.squidmath.Coord;
@@ -87,7 +88,7 @@ public class Creature extends Entity {
 	 * @return a current instance of an object (chaining)
 	 */
 	public Creature setHP(int hp) {
-		add(new HPComponent(hp));
+		add(new HpComponent(hp));
 		
 		return this;
 	}
@@ -166,5 +167,16 @@ public class Creature extends Entity {
 	 */
 	public Creature setLvl() {
 		return setLvl(1);
+	}
+	
+	/**
+	 * Sets max hp points.
+	 * 
+	 * @return a current instance of an object (chaining)
+	 */
+	public Creature setMaxHp(int hp) {
+		add(new MaxHpComponent(hp));
+		
+		return this;
 	}
 }

@@ -2,7 +2,7 @@ package io.github.izdwuut.yarl.model.components;
 
 import com.badlogic.ashley.core.Family;
 
-import io.github.izdwuut.yarl.model.components.creatures.HPComponent;
+import io.github.izdwuut.yarl.model.components.creatures.HpComponent;
 import io.github.izdwuut.yarl.model.components.creatures.PlayerComponent;
 
 /**
@@ -16,7 +16,7 @@ public class Families {
 	
 	public Family getCreatures() {
 		if(creatures == null) {
-			creatures = Family.all(NameComponent.class, HPComponent.class).exclude(PlayerComponent.class).get();
+			creatures = Family.all(NameComponent.class, HpComponent.class).exclude(PlayerComponent.class).get();
 		}
 		
 		return creatures;

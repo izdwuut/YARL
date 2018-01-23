@@ -8,18 +8,13 @@ import com.badlogic.ashley.core.Component;
  * @author Bartosz "izdwuut" Konikiewicz
  * @since  2017-11-18
  */
-public class HpComponent implements Component {
+public class MaxHpComponent implements Component {
 	/** 
-	 * Hit points. 
+	 * Max hit points. 
 	 */
 	int hp;
 	
-	/**
-	 * Max hit points.
-	 */
-	int maxHp;
-
-	public HpComponent(int hp) {
+	public MaxHpComponent(int hp) {
 		this.hp = hp;
 	}
 	
@@ -33,7 +28,7 @@ public class HpComponent implements Component {
 	}
 	
 	/**
-	 * Sets {@link #hp hp} to a provided value.
+	 * Sets {@link #hp max hp} to a provided value.
 	 * 
 	 * @param hp hit points to set
 	 */
@@ -42,7 +37,7 @@ public class HpComponent implements Component {
 	}
 	
 	/**
-	 * Modifies {@link #hp hit points}.
+	 * Modifies {@link #hp max hit points}.
 	 * 
 	 * @param hp an amount of hit points to add
 	 */

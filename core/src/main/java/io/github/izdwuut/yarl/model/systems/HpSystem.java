@@ -1,0 +1,52 @@
+package io.github.izdwuut.yarl.model.systems;
+
+import com.badlogic.ashley.core.EntitySystem;
+
+import io.github.izdwuut.yarl.model.entities.Creature;
+import io.github.izdwuut.yarl.model.utils.Mappers;
+
+/**
+ * A health points system. 
+ * It can be used to query [@link io.github.izdwuut.yarl.model.entities.Creature a Creature} HP.
+ * It doesn't process entities in an Ashley engine loop.
+ * 
+ * @author Bartosz "izdwuut" Konikiewicz
+ * @since  2018-01-22
+ */
+public class HpSystem extends EntitySystem {
+	/**
+	 * Gets a percentage of {@code #creature} creature's} HP left. 
+	 * 
+	 * @param creature a queried creature
+	 * 
+	 * @return a percentage of HP left
+	 */
+	double getHpRatio(Creature creature) {
+		int hp = Mappers.hp.get(creature).getHP();
+		int maxHp = Mappers.maxHp.get(creature).getHP();
+		
+		return (double) hp / maxHp;
+	}
+	
+	/**
+	 * Checks if a {@code creature's} HP is low.
+	 * 
+	 * @param creature a queried creature
+	 * 
+	 * @return true if HP is low, false otherwise
+	 */
+	public boolean isHpLow(Creature creature) {
+		return getHpRatio(creature) <= 0.5;
+	}
+	
+	/**
+	 * Checks if a {@code creature's} HP is critical.
+	 * 
+	 * @param creature a queried creature
+	 * 
+	 * @return true if HP is critical, false otherwise
+	 */
+	public boolean isHpCritical(Creature creature) {
+		return getHpRatio(creature) <= 0.2;
+	}
+}
