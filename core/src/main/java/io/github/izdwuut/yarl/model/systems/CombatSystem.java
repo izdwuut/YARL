@@ -47,8 +47,9 @@ public class CombatSystem extends IteratingSystem implements Listenable<Event> {
 		
 		if(defeated != null) {
 			addExp(attacker, Mappers.exp.get(defender).getExp());
-			cleanUp(defeated, combat);
 		}
+		
+		cleanUp(defeated, combat);
 	}
 	
 	/**
@@ -79,10 +80,11 @@ public class CombatSystem extends IteratingSystem implements Listenable<Event> {
 	 * @param combat {@link io.github.izdwuut.yarl.model.entities.Combat a Combat} {@link com.badlogic.ashley.core.Entity Entity}
 	 */
 	void cleanUp(Creature creature, Entity combat) {
-		engine.getSystem(WorldSystem.class)
-		.removeCreature(creature);
-		dispatcher.dispatch(Event.CREATURE_KILL);
-		
+		if(creature != null) {
+			engine.getSystem(WorldSystem.class)
+			.removeCreature(creature);
+			dispatcher.dispatch(Event.CREATURE_KILL);
+		}
 		engine.removeEntity(combat);
 	}
 	
