@@ -10,11 +10,11 @@ import com.badlogic.ashley.core.Component;
  */
 public class WeaponComponent implements Component {
 	/**
-	 * Weapon damage.
+	 * Weapon damage as dice rolls (1d4 etc).
 	 */
-	int dmg;
-
-	public WeaponComponent(int dmg) {
+	String dmg;
+	
+	public WeaponComponent(String dmg) {
 		this.dmg = dmg;
 	}
 	
@@ -23,7 +23,7 @@ public class WeaponComponent implements Component {
 	 * 
 	 * @return weapon {@link #dmg damage}
 	 */
-	public int getDmg() {
+	public String getDmg() {
 		return dmg;
 	}
 
@@ -32,7 +32,7 @@ public class WeaponComponent implements Component {
 	 * 
 	 * @param dmg a damage to set
 	 */
-	public void setDmg(int dmg) {
+	public void setDmg(String dmg) {
 		this.dmg = dmg;
 	}
 }

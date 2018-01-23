@@ -11,7 +11,9 @@ import io.github.izdwuut.yarl.model.components.combat.DefenderComponent;
 import io.github.izdwuut.yarl.model.components.creatures.HpComponent;
 import io.github.izdwuut.yarl.model.entities.Creature;
 import io.github.izdwuut.yarl.model.entities.Exp;
+import io.github.izdwuut.yarl.model.entities.Settings;
 import io.github.izdwuut.yarl.model.utils.Mappers;
+import squidpony.squidmath.Dice;
 
 /**
  * A system that process {@link io.github.izdwuut.yarl.model.entities.Combat Combat} {@link com.badlogic.ashley.core.Entity Entities},
@@ -31,11 +33,17 @@ public class CombatSystem extends IteratingSystem implements Listenable<Event> {
 	 */
 	Signals dispatcher;
 	
-	public CombatSystem(Engine engine) {
+	/**
+	 * A dice that rolls a weapon damage.
+	 */
+	Dice dice;
+	
+	public CombatSystem(Engine engine, Settings settings) {
 		super(Family.all(AttackerComponent.class, DefenderComponent.class).get());
 		
 		this.engine = engine;
 		this.dispatcher = new Signals();
+		this.dice = new Dice(Mappers.rng.get(settings).getRng());
 	}
 	
 	@Override
@@ -62,7 +70,7 @@ public class CombatSystem extends IteratingSystem implements Listenable<Event> {
 	 */
 	Creature resolveCombat(Creature attacker, Creature defender) {
 		HpComponent hp = Mappers.hp.get(defender);
-		int dmg = Mappers.weapon.get(Mappers.arms.get(attacker).getWeapon()).getDmg(); 
+		int dmg = getDmg(attacker);
 		
 		if(hp.getHP() - dmg > 0) {
 			hp.addHP(-dmg);
@@ -103,5 +111,18 @@ public class CombatSystem extends IteratingSystem implements Listenable<Event> {
 	 */
 	void addExp(Creature creature, int exp) {
 		engine.addEntity(new Exp(creature, exp));
+	}
+	
+	/**
+	 * Gets {@code a creature} damage.
+	 * 
+	 * @param creature a queried creature
+	 * 
+	 * @return a creature damage
+	 */
+	int getDmg(Creature creature) {
+		String dmg = Mappers.weapon.get(Mappers.arms.get(creature).getWeapon()).getDmg();
+
+		return dice.rollGroup(dmg); 
 	}
 }

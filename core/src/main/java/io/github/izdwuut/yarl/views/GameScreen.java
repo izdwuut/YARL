@@ -294,7 +294,6 @@ public class GameScreen extends Screen implements Listener<Event> {
                 width, height - (int)currentHeight);
 	}
 	
-	//TODO: refactor (toFloatBits), maybe move hp check to a separate method
 	/**
 	 * Gets a color of a glyph on a given position.
 	 * 
@@ -302,6 +301,7 @@ public class GameScreen extends Screen implements Listener<Event> {
 	 * 
 	 * @return a glyph color
 	 */
+	//TODO: refactor (toFloatBits), maybe move hp check to a separate method
 	float getColor(Coord pos) {
     	if(worldSystem.isCreature(pos)) {
     		Creature creature = dungComp.getCreature(pos);

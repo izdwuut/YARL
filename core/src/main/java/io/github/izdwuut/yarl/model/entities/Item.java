@@ -23,11 +23,11 @@ public class Item extends Entity {
 	/**
 	 * Tags an item as a weapon and sets it's damage.
 	 * 
-	 * @param dmg weapon's damage
+	 * @param dmg weapon's damage as dice rolls
 	 * 
 	 * @return a current instance of an object (chaining)
 	 */
-	public Item setWeapon(int dmg) {
+	public Item setWeapon(String dmg) {
 		add(new WeaponComponent(dmg));
 		
 		return this;
