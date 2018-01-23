@@ -8,7 +8,6 @@ import com.badlogic.ashley.systems.IteratingSystem;
 
 import io.github.izdwuut.yarl.model.components.combat.AttackerComponent;
 import io.github.izdwuut.yarl.model.components.combat.DefenderComponent;
-import io.github.izdwuut.yarl.model.components.creatures.HpComponent;
 import io.github.izdwuut.yarl.model.entities.Creature;
 import io.github.izdwuut.yarl.model.entities.Exp;
 import io.github.izdwuut.yarl.model.entities.Settings;
@@ -38,12 +37,15 @@ public class CombatSystem extends IteratingSystem implements Listenable<Event> {
 	 */
 	Dice dice;
 	
-	public CombatSystem(Engine engine, Settings settings) {
+	HpSystem hpSystem;
+	
+	public CombatSystem(Engine engine, Settings settings, HpSystem hpSystem) {
 		super(Family.all(AttackerComponent.class, DefenderComponent.class).get());
 		
 		this.engine = engine;
 		this.dispatcher = new Signals();
 		this.dice = new Dice(Mappers.rng.get(settings).getRng());
+		this.hpSystem = hpSystem;
 	}
 	
 	@Override
@@ -69,17 +71,14 @@ public class CombatSystem extends IteratingSystem implements Listenable<Event> {
 	 * @return null if hit points are above 0, a defender creature otherwise
 	 */
 	Creature resolveCombat(Creature attacker, Creature defender) {
-		HpComponent hp = Mappers.hp.get(defender);
 		int dmg = getDmg(attacker);
-		
-		if(hp.getHP() - dmg > 0) {
-			hp.addHP(-dmg);
-			dispatcher.dispatch(Event.DEAL_DMG);
-		} else {
-			return defender;
+		if(hpSystem.getHp(defender) - dmg > 0) {
+			dealDmg(defender, dmg);
+			
+			return null;
 		}
 		
-		return null;
+		return defender;
 	}
 	
 	/**
@@ -124,5 +123,17 @@ public class CombatSystem extends IteratingSystem implements Listenable<Event> {
 		String dmg = Mappers.weapon.get(Mappers.arms.get(creature).getWeapon()).getDmg();
 
 		return dice.rollGroup(dmg); 
+	}
+	
+	/**
+	 * Deals {@code dmg damage} to a {@code #creature creature}.
+	 * 
+	 * @param creature a creature that was attacked
+	 * 
+	 * @param dmg damage that was dealt
+	 */
+	void dealDmg(Creature creature, int dmg) {
+		hpSystem.addHp(creature, -dmg);
+		dispatcher.dispatch(Event.DEAL_DMG);
 	}
 }

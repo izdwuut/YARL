@@ -69,7 +69,10 @@ public class InitSystem extends EntitySystem {
 		movementSystem.priority = 1;
 		engine.addSystem(movementSystem);
 
-		CombatSystem combatSystem = new CombatSystem(engine, settings);
+		HpSystem hpSys = new HpSystem();
+		engine.addSystem(hpSys);
+		
+		CombatSystem combatSystem = new CombatSystem(engine, settings, hpSys);
 		engine.addSystem(combatSystem);
 		
 		LevelingSystem levelSys = new LevelingSystem(engine);
@@ -77,9 +80,6 @@ public class InitSystem extends EntitySystem {
 
 		WinSystem winSys = new WinSystem(engine);
 		engine.addSystem(winSys);
-		
-		HpSystem hpSys = new HpSystem();
-		engine.addSystem(hpSys);
 		
 		engine.removeSystem(this);
 		pause();

@@ -22,7 +22,7 @@ public class HpSystem extends EntitySystem {
 	 * @return a percentage of HP left
 	 */
 	double getHpRatio(Creature creature) {
-		int hp = Mappers.hp.get(creature).getHP();
+		int hp = Mappers.hp.get(creature).getHp();
 		int maxHp = Mappers.maxHp.get(creature).getHP();
 		
 		return (double) hp / maxHp;
@@ -48,5 +48,27 @@ public class HpSystem extends EntitySystem {
 	 */
 	public boolean isHpCritical(Creature creature) {
 		return getHpRatio(creature) <= 0.2;
+	}
+	
+	/**
+	 * Gets a {@code #creature creature} HP.
+	 * 
+	 * @param creature a queried creature
+	 * 
+	 * @return creature HP
+	 */
+	public int getHp(Creature creature) {
+		return Mappers.hp.get(creature).getHp();
+	}
+	
+	/**
+	 * Adds {@code #hp} HP to a {@code #creature creature}.
+	 * 
+	 * @param creature a creature that gains hp
+	 * 
+	 * @param hp added HP
+	 */
+	public void addHp(Creature creature, int hp) {
+		Mappers.hp.get(creature).addHP(hp);
 	}
 }

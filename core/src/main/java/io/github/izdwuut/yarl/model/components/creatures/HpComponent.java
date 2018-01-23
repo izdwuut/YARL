@@ -28,7 +28,7 @@ public class HpComponent implements Component {
 	 * 
 	 * @return hit points
 	 */
-	public int getHP() {
+	public int getHp() {
 		return hp;
 	}
 	
