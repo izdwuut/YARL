@@ -73,15 +73,15 @@ class LevelingSystemTest {
 	 */
 	@Test 
 	void getRemainingExpTest() {
-		assertEquals(100, levelingSystem.getRemainingExp(attacker));
+		assertEquals(200, levelingSystem.getRemainingExp(attacker));
 		
-		engine.addEntity(new Exp(attacker, 99));
+		engine.addEntity(new Exp(attacker, 199));
 		engine.update(0);
 		assertEquals(1, levelingSystem.getRemainingExp(attacker));
 		
 		engine.addEntity(new Exp(attacker, 1));
 		engine.update(0);
-		assertEquals(50, levelingSystem.getRemainingExp(attacker));
+		assertEquals(350, levelingSystem.getRemainingExp(attacker));
 		
 		assertEquals(0, engine.getEntities().size());
 	}
@@ -92,9 +92,8 @@ class LevelingSystemTest {
 	 */
 	@Test
 	void getBreakpointTest() {
-		int[] breakpoints = {100, 150, 225, 338, 507, 761, 1142, 1713, 2570, 3855,
-			5783, 8675, 13013, 19520, 29280, 43920, 65880, 98820, 148230, 222345
-		};
+		int[] breakpoints = {200, 550, 1050, 1700, 2500, 3450, 4550, 5800, 7200, 8750,
+				10450, 12300, 14300, 16450, 18750, 21200, 23800, 26550, 29450};
 
 		for(int i = 0; i < breakpoints.length; i++) {
 			assertEquals(breakpoints[i], levelingSystem.getBreakpoint(i + 1));
@@ -110,7 +109,7 @@ class LevelingSystemTest {
 		LvlComponent lvl = Mappers.lvl.get(attacker);
 		
 		assertEquals(1, lvl.getLvl());
-		engine.addEntity(new Exp(attacker, 99));
+		engine.addEntity(new Exp(attacker, 199));
 		engine.update(0);
 		assertEquals(1, lvl.getLvl());
 		
@@ -118,7 +117,7 @@ class LevelingSystemTest {
 		engine.update(0);
 		assertEquals(2, lvl.getLvl());
 		
-		engine.addEntity(new Exp(attacker, 125));
+		engine.addEntity(new Exp(attacker, 850));
 		engine.update(0);
 		assertEquals(4, lvl.getLvl());
 		

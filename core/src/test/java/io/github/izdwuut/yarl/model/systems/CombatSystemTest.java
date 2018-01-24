@@ -17,13 +17,14 @@ import com.badlogic.ashley.core.Entity;
 
 import io.github.izdwuut.yarl.model.components.creatures.ArmsComponent;
 import io.github.izdwuut.yarl.model.components.creatures.ExpComponent;
+import io.github.izdwuut.yarl.model.components.items.WeaponComponent;
 import io.github.izdwuut.yarl.model.entities.Combat;
 import io.github.izdwuut.yarl.model.entities.Creature;
 import io.github.izdwuut.yarl.model.entities.Exp;
+import io.github.izdwuut.yarl.model.entities.Item;
 import io.github.izdwuut.yarl.model.entities.Settings;
 import io.github.izdwuut.yarl.model.entities.World;
 import io.github.izdwuut.yarl.model.factories.CreatureFactory;
-import io.github.izdwuut.yarl.model.factories.ItemFactory;
 import io.github.izdwuut.yarl.model.factories.SettingsFactory;
 import io.github.izdwuut.yarl.model.factories.WorldFactory;
 import io.github.izdwuut.yarl.model.utils.Mappers;
@@ -74,15 +75,17 @@ class CombatSystemTest {
 	@BeforeAll
 	static void initAll() {
 		engine = new Engine();
+		creatureFactory = new CreatureFactory();
 		Settings settings = new SettingsFactory().getSettings();
 		world = new WorldFactory(settings).getWorld();
 		worldSystem = new WorldSystem(world, settings, engine);
 		engine.addSystem(worldSystem);
-		combatSystem = new CombatSystem(engine);
+		combatSystem = new CombatSystem(engine, settings, new HpSystem());
 		engine.addSystem(combatSystem);
-		creatureFactory = new CreatureFactory();
 		attacker = new Creature("Test creature");
-		attacker.add(new ArmsComponent(new ItemFactory().sword()));
+		Item weapon = new Item();
+		weapon.add(new WeaponComponent("20"));
+		attacker.add(new ArmsComponent(weapon));
 		positions = Arrays.asList(Coord.get(71, 10),  
 				Coord.get(77, 12),  
 				Coord.get(58, 21),  
@@ -146,5 +149,19 @@ class CombatSystemTest {
 			assertEquals(Mappers.creature.get(exp).getCreature(), attacker);
 			assertEquals(Mappers.exp.get(entity).getExp(), Mappers.exp.get(exp).getExp());
 		}
+	}
+	
+	/**
+	 * Tests that damage was dealt.
+	 * Covers {@link io.github.izdwuut.yarl.model.systems.CombatSystem#dealDmg(Creature, int) dealDmg}.
+	 */
+	@Test
+	void dealDmgTest() {
+		int hp = 20, dmg = 5;
+		Creature defender = new Creature().setHP(hp),
+				attacker = new Creature().setArms(new Item().setWeapon(String.valueOf(dmg)));
+		engine.addEntity(new Combat(attacker, defender));
+		engine.update(0);
+		assertEquals(hp - dmg, Mappers.hp.get(defender).getHp());
 	}
 }
