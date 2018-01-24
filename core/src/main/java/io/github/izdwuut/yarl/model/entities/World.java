@@ -3,6 +3,7 @@ package io.github.izdwuut.yarl.model.entities;
 import com.badlogic.ashley.core.Entity;
 
 import io.github.izdwuut.yarl.model.components.SizeComponent;
+import io.github.izdwuut.yarl.model.components.world.FloorComponent;
 import io.github.izdwuut.yarl.model.components.world.DungeonComponent;
 
 /**
@@ -22,5 +23,8 @@ public class World extends Entity {
 		int width = dungeon.length, height = dungeon[0].length;
 		add(new DungeonComponent(dungeon, width, height));
 		add(new SizeComponent(width, height));
+		FloorComponent floorComp = new FloorComponent();
+		floorComp.setFloor();
+		add(floorComp);
 	}
 }

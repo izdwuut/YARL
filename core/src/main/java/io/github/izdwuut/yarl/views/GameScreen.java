@@ -251,7 +251,7 @@ public class GameScreen extends Screen implements Listener<Event> {
 	 */
 	void putStats() {
 		stats.clear();
-		putExp(putLevel());
+		putFloor(putExp(putLevel()) + 1);
 	}
 	
 	/**
@@ -260,7 +260,7 @@ public class GameScreen extends Screen implements Listener<Event> {
 	 * @return a current panel position
 	 */
 	int putLevel() {
-		String s = "Level: " + String.format("%2d", Mappers.lvl.get(player).getLvl());
+		String s = "Exp: " + String.format("%2d", Mappers.lvl.get(player).getLvl());
 		int pos = 1;
 		stats.put(pos, 0, s, Color.WHITE);
 		
@@ -268,7 +268,7 @@ public class GameScreen extends Screen implements Listener<Event> {
 	}
 	
 	/**
-	 * Puts a player experience points remaining to a next level.
+	 * Puts a player experience points remaining to a next level on a stats panel.
 	 * 
 	 * @param pos x offset
 	 * 
@@ -314,5 +314,19 @@ public class GameScreen extends Screen implements Listener<Event> {
     	}
     	
     	return SColor.WHITE.toFloatBits();
+	}
+	
+	/**
+	 * Puts a current dungeon floor on a stats panel.
+	 * 
+	 * @param pos x offset
+	 * 
+	 * @return a current panel position
+	 */
+	int putFloor(int pos) {
+		String s = "Floor: " + String.format("%2d", worldSystem.getFloor());
+		stats.put(pos, 0, s, Color.WHITE);
+
+		return s.length() + pos;
 	}
 }		

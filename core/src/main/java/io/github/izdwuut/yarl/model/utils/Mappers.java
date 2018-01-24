@@ -17,6 +17,7 @@ import io.github.izdwuut.yarl.model.components.creatures.MovementComponent;
 import io.github.izdwuut.yarl.model.components.items.WeaponComponent;
 import io.github.izdwuut.yarl.model.components.settings.RNGComponent;
 import io.github.izdwuut.yarl.model.components.world.DungeonComponent;
+import io.github.izdwuut.yarl.model.components.world.FloorComponent;
 
 /**
  * Component mappers. A static utility class.
@@ -100,4 +101,9 @@ public class Mappers {
 	 * {@link io.github.izdwuut.yarl.model.components.creatures.MaxHpComponent A MaxHpComponent} mapper. 
 	 */
 	public static final ComponentMapper<MaxHpComponent> maxHp = ComponentMapper.getFor(MaxHpComponent.class);
+	
+	/**
+	 * {@link io.github.izdwuut.yarl.model.components.world.FloorComponent A FloorComponent} mapper. 
+	 */
+	public static final ComponentMapper<FloorComponent> floor = ComponentMapper.getFor(FloorComponent.class);
 }

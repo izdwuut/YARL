@@ -154,4 +154,14 @@ public class WorldSystem extends EntitySystem {
 				.getPosition());
 		engine.removeEntity(creature);
 	}
+	
+	/**
+	 * Gets a current dungeon floor.
+	 * 
+	 * @return a current dungeon floor
+	 */
+	//TODO: a world entity shouldn't store a current floor
+	public int getFloor() {
+		return Mappers.floor.get(world).getLvl();
+	}
 }
