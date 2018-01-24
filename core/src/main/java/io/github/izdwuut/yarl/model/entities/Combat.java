@@ -12,6 +12,15 @@ import io.github.izdwuut.yarl.model.components.combat.DefenderComponent;
  * @since  2017-12-25
  */
 public class Combat extends Entity {
+	public Combat() {
+		
+	}
+	
+	public Combat(Creature attacker, Creature defender) {
+		setAttacker(attacker);
+		setDefender(defender);
+	}
+	
 	/**
 	 * Sets an active side.
 	 * 

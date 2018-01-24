@@ -32,4 +32,11 @@ public class LvlComponent implements Component {
 	public void setLvl(int lvl) {
 		this.lvl = lvl;
 	}
+	
+	/**
+	 * Sets a default {@link #lvl experience level} of 1.
+	 */
+	public void setLvl() {
+		setLvl(1);
+	}
 }

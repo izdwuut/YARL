@@ -108,6 +108,7 @@ public class CombatSystem extends IteratingSystem implements Listenable<Event> {
 	 * 
 	 * @param exp gained experience points
 	 */
+	//TODO: move to a levelingSystem. remove an exp entity.
 	void addExp(Creature creature, int exp) {
 		engine.addEntity(new Exp(creature, exp));
 	}
