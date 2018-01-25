@@ -56,7 +56,6 @@ class HpSystemTest {
 	 */
 	@Test
 	void isHpLowTest() {
-		System.out.println(hpComp.getHp());
 		assertFalse(hpSystem.isHpLow(creature));
 		hpComp.addHP(-4);
 		assertFalse(hpSystem.isHpLow(creature));
