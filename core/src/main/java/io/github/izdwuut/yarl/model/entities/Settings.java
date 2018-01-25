@@ -14,7 +14,7 @@ import squidpony.squidmath.RNG;
  */
 public class Settings extends Entity {
 	/**
-	 * Sets {@link io.github.izdwuut.yarl.model.components.settings.SizeComponent cell size} 
+	 * Sets {@link io.github.izdwuut.yarl.model.components.SizeComponent a cell size} 
 	 * using provided width and height.
 	 * 
 	 * @param width cell width (in pixels)

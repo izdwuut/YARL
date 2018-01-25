@@ -172,6 +172,8 @@ public class Creature extends Entity {
 	/**
 	 * Sets max hp points.
 	 * 
+	 * @param hp a desired hp value
+	 * 
 	 * @return a current instance of an object (chaining)
 	 */
 	public Creature setMaxHp(int hp) {

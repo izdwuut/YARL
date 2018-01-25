@@ -13,6 +13,7 @@ public interface Listenable<T> {
 	 * Registers {@link com.badlogic.ashley.signals.Listener a Listener}.
 	 * 
 	 * @param listener a listener to register
+	 * @param event an event that you want to listen to
 	 */
 	public void addListener(Listener<T> listener, T event);
 	

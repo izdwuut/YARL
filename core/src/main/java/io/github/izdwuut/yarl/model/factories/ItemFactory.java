@@ -24,7 +24,15 @@ public class ItemFactory extends FlyweightFactory<String, Item> {
 		return getWeapon("Sword", "1d4", new Item());
 	}
 	
-	
+	/**
+	 * Gets a weapon with flyweight components.
+	 * 
+	 * @param name a weapon name
+	 * @param dmg a weapon damage
+	 * @param weapon an item with custom components
+	 * 
+	 * @return a weapon entity with both custom and common components
+	 */
 	Item getWeapon(String name, String dmg, Item weapon) {
 		if(hasFlyweight(name)) {
 			return getEntity(name, weapon);

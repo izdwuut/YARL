@@ -37,6 +37,9 @@ public class CombatSystem extends IteratingSystem implements Listenable<Event> {
 	 */
 	Dice dice;
 	
+	/**
+	 * A system that is needed to query creature HP.
+	 */
 	HpSystem hpSystem;
 	
 	public CombatSystem(Engine engine, Settings settings, HpSystem hpSystem) {

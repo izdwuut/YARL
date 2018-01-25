@@ -15,8 +15,8 @@ import io.github.izdwuut.yarl.model.utils.Mappers;
  * A leveling system. It handles gaining experience points and 
  * leveling to higher experience levels. It process 
  * {@link io.github.izdwuut.yarl.model.entities.Exp Exp} entities that are
- * added to an entity engine by a 
- * {@link io.github.izdwuut.yarl.model.systems.Combat} system. In future 
+ * added to an entity engine by
+ * {@link io.github.izdwuut.yarl.model.systems.CombatSystem a CombatSystem}. In future 
  * it might be possible to gain experience for other activities than killing monsters.
  * 
  * @author Bartosz "izdwuut" Konikiewicz
@@ -77,11 +77,13 @@ public class LevelingSystem extends IteratingSystem implements Listenable<Event>
 	
 	/**
 	 * Gets experience points needed for a certain level.
-	 * Uses a {@link http://fallout.wikia.com/wiki/Level#Fallout_3 Fallout 3} formula.
+	 * Uses a Fallout 3 formula.
 	 * 
 	 * @param lvl an examined experience level
 	 * 
 	 * @return an experience breakpoint for a given level
+	 * 
+	 * @see <a href="http://fallout.wikia.com/wiki/Level#Fallout_3">Fallout 3 experience breakpoints</a>
 	 */
 	public int getBreakpoint(int lvl) {
 		int breakpoint = 0;

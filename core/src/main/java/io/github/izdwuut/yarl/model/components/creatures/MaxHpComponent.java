@@ -3,7 +3,7 @@ package io.github.izdwuut.yarl.model.components.creatures;
 import com.badlogic.ashley.core.Component;
 
 /**
- * Hit points component.
+ * Max hit points component.
  * 
  * @author Bartosz "izdwuut" Konikiewicz
  * @since  2017-11-18

@@ -37,7 +37,7 @@ public class GameController extends Controller implements Listener<Event> {
 	 * A screen that is used by {@link io.github.izdwuut.yarl.YARL YARL} to 
 	 * {@link io.github.izdwuut.yarl.YARL#render() render} stuff. 
 	 * GameController is only responsible for 
-	 * {@link io.github.izdwuut.yarl.views.GameScreen#GameScreen(InitSystem initSystem, WorldSystem worldSystem) constructing} it. 
+	 * {@link io.github.izdwuut.yarl.views.GameScreen#GameScreen(InitSystem, WorldSystem, LevelingSystem, HpSystem) constructing} it. 
 	 * */
 	GameScreen screen;
 	

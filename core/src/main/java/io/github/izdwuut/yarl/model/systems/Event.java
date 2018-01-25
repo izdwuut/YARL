@@ -20,7 +20,7 @@ public enum Event {
 	
 	/**
 	 * Dispatched by {@link io.github.izdwuut.yarl.model.systems.CombatSystem CombatSystem}'s 
-	 * {@link io.github.izdwuut.yarl.model.systems.CombatSystem#cleanup(Creature creature, Entity combat) cleanup} method.
+	 * {@link io.github.izdwuut.yarl.model.systems.CombatSystem#cleanUp(Creature creature, Entity combat) cleanUp} method.
 	 */
 	CREATURE_KILL,
 	

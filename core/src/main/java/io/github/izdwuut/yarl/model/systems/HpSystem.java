@@ -7,7 +7,7 @@ import io.github.izdwuut.yarl.model.utils.Mappers;
 
 /**
  * A health points system. 
- * It can be used to query [@link io.github.izdwuut.yarl.model.entities.Creature a Creature} HP.
+ * It can be used to query {@link io.github.izdwuut.yarl.model.entities.Creature a Creature} HP.
  * It doesn't process entities in an Ashley engine loop.
  * 
  * @author Bartosz "izdwuut" Konikiewicz
@@ -15,7 +15,7 @@ import io.github.izdwuut.yarl.model.utils.Mappers;
  */
 public class HpSystem extends EntitySystem {
 	/**
-	 * Gets a percentage of {@code #creature} creature's} HP left. 
+	 * Gets a percentage of creature's HP left. 
 	 * 
 	 * @param creature a queried creature
 	 * 
@@ -29,7 +29,7 @@ public class HpSystem extends EntitySystem {
 	}
 	
 	/**
-	 * Checks if a {@code creature's} HP is low.
+	 * Checks if a creature's HP is low.
 	 * 
 	 * @param creature a queried creature
 	 * 
@@ -40,7 +40,7 @@ public class HpSystem extends EntitySystem {
 	}
 	
 	/**
-	 * Checks if a {@code creature's} HP is critical.
+	 * Checks if a creature's HP is critical.
 	 * 
 	 * @param creature a queried creature
 	 * 
@@ -62,9 +62,9 @@ public class HpSystem extends EntitySystem {
 	}
 	
 	/**
-	 * Adds {@code #hp} HP to a {@code #creature creature}.
+	 * Adds HP to a creature.
 	 * 
-	 * @param creature a creature that gains hp
+	 * @param creature a creature that gains HP
 	 * 
 	 * @param hp added HP
 	 */
