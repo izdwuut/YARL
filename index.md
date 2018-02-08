@@ -18,7 +18,7 @@ Source: [zip]({{ release.source_zip }}), [tar]({{ release.source_tar }}).
 
 I organise my work using [a public Trello task board](https://trello.com/b/D2fDQmGj/yarl). To a degree I try to implement [Scrum](https://www.scrum.org/). It works pretty well. I just have to comprehend [an official guide](https://www.scrum.org/resources/scrum-guide) a litle more with every sprint. I don't really stick to fixed sprint length or capacity. I run other (rather small) [side projects](https://github.com/izdwuut?tab=repositories) and have some fun with my uni. The closer I am to graduate, the greater the fun. I don't feel compelled to strictly follow the guide. The worst that can happen is my result not being Scrum. 
 
-I am a member of a [/r/roguelikedev](https://www.reddit.com/r/roguelikedev/) community. While I mostly lurk and upvote, I take the opportunity to participate in weekly Sharing Saturday threads. It's a great place for holding myself accountable. It's insane what these guys are capable to come up with in just a week!
+I am a member of a [/r/roguelikedev](https://www.reddit.com/r/roguelikedev/) community. While I mostly lurk and upvote, I take the opportunity to participate in weekly [Sharing Saturday](sharing-saturday) threads. It's a great place for holding myself accountable. It's insane what these guys are capable to come up with in just a week!
 
 Oh, I also run [a dev blog](blog). There's nothing in there yet, but I'm going to use it extensively once I have some relevant stuff to write about.
 
