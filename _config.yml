@@ -18,7 +18,7 @@ title_short: YARL
 email: izdwuut@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   A totally unique roguelike with gameplay so dense that 255 character limit woul
-baseurl: "/YARL" # the subpath of your site, e.g. /blog
+baseurl: "/yarl" # the subpath of your site, e.g. /blog
 url: "http://izdwuut.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 author: izdwuut
 github_username: izdwuut
