@@ -6,7 +6,7 @@ title: YARL
 {{ site.title_short }} is going to be an epic roguelike adventure to once and forever fight off a Lich that invades your home village. You are designated to descend to a dungeon filled by filthy monsters and destroy his phylactery. It seems that your folks don't like you anyways. But {{ site.title_short }} is not there yet. Now you just kill those poor Sloths.
 
 {% assign release = site.data.releases.first %}
-[Download v{{ release.version }}]({{ release.binary }}). Requires [JRE 8](http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html) and will run on your toaster. I've just checked it - [IoT](https://en.wikipedia.org/wiki/Internet_of_things) toasters are oficially a thing. Still better than [IoD](https://www.sec-consult.com/en/blog/2018/02/internet-of-dildos-a-long-way-to-a-vibrant-future-from-iot-to-iod/index.html).
+[Download v{{ release.version }}]({{ release.binary }}). Requires [JRE 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html) and will run on your toaster. I've just checked it - [IoT](https://en.wikipedia.org/wiki/Internet_of_things) toasters are oficially a thing. Still better than [IoD](https://www.sec-consult.com/en/blog/2018/02/internet-of-dildos-a-long-way-to-a-vibrant-future-from-iot-to-iod/index.html).
 
 [Release notes]({{ release.notes }}).
 
