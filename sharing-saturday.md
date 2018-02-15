@@ -7,8 +7,8 @@ Sharing Saturday is a weekly event taking place on a [/r/roguelikedev](https://w
 <ul>
 {% assign saturdays =  site.sharing_saturdays|group_by:"title"|reverse %}
 {% for saturday in saturdays %}
-{% for item in saturday.items %}
-<li><a href="{{ item.link }}">Sharing Saturday #{{ item.title }}</a></li>
+{% for saturday in saturday.items %}
+<li><a href="{{ saturday.link }}">Sharing Saturday #{{ saturday.title }}</a></li>
 {% endfor %}
 
 
