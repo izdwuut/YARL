@@ -1,0 +1,29 @@
+---
+layout: default
+---
+<article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Sprint #{{ page.title }}</h1>
+    <p class="post-meta">
+	  {% if page.goal %}
+			Goal: {{ page.goal }}
+	  {% endif %}
+	</p>
+  </header>
+
+  <div class="post-content">
+    {{ content }}
+				
+	{% assign notes = site.notes|where:"sprint",page.title|reverse %}
+	<ul>
+		{% for note in notes %}
+			<li>
+				<a href="{{ note.url | relative_url }}">
+					{{ note.date | date: "%Y-%m-%d" }}
+				</a>
+			</li>
+		{% endfor %}
+	</ul>
+  </div>
+</article>

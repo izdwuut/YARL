@@ -1,0 +1,17 @@
+---
+layout: default
+---
+<article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Daily Scrum</h1>
+    <p class="post-meta">
+	  {% assign sprint_url='sprints/' | append: page.sprint | append: '.html' | relative_url %}
+      <a href="{{ sprint_url }}">Sprint #{{ page.sprint }}</a> • {{ page.date | date: "%Y-%m-%d" }}
+	</p>
+  </header>
+
+  <div class="post-content">
+    {{ content }}
+  </div>
+</article>

@@ -32,8 +32,14 @@ plugins:
 show_excerpts: true
 header_pages: 
   - blog.md
+  - sprints.md
 collections:
-  - sharing_saturdays
+  notes:
+    output: true
+  sharing_saturdays:
+  sprints:
+    output: true
+  
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
 # to override the default setting.
