@@ -1,0 +1,35 @@
+<header class="post-header">
+	{% if page.url=="/sprints.html" %}
+		<a class="post-link" href="{{ item.url | relative_url }}">
+			<h3 class="post-title" itemprop="name headline">
+				Sprint #{{ include.title }}
+			</h3>
+		</a>
+	{% else %}
+		<h1 class="post-title" itemprop="name headline">
+			Sprint #{{ include.title }}
+		</h1>
+	{% endif %}
+	{% if include.goal %}
+	<p class="post-meta">
+		Goal: {{ include.goal }}
+	   </p>
+	{% endif %}
+</header>
+
+<div class="post-content">
+	{% if include.content %}
+	  {{ include.content }}
+	{% endif %}
+
+	{% assign notes = site.notes|where:"sprint",include.title|reverse %}
+	<ul>
+		{% for note in notes %}
+			<li>
+				<a href="{{ note.url | relative_url }}">
+					{{ note.date | date: "%Y-%m-%d" }}
+				</a>
+			</li>
+		{% endfor %}
+	</ul>
+</div>
